@@ -1,5 +1,4 @@
-
-//Probably make this a multitype besides Jolteon. Implement priority moves here? Held Items?
+//Implement priority moves here? Held Items?
 import java.util.ArrayList;
 import java.util.List;
 
