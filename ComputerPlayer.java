@@ -1,5 +1,4 @@
 //This file needs large changes: AI implementation?(Computer always targets weaknesses or does the highest amount of damage), Same changes as HumanPlayer too.
-
 import java.util.Random;
 
 public class ComputerPlayer extends Player{
