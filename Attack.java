@@ -89,7 +89,7 @@ public class Attack {
 	public double getDamageMultiplier(String at, Pokemon other) {
 		//Reads in the type flowchart from a file
 		try {
-			input = new Scanner(new File("C:\\Users\\miro1\\eclipse-workspace\\PokemonLab\\src\\TypeInfo.txt"));
+			input = new Scanner(new File("C:\\Users\\miro1\\eclipse-workspace\\Pokemon_World_Champion_Edition\\src\\TypeInfo.txt"));
 		} catch(Exception e) {
 			//code to deal with this exception
 			e.printStackTrace();
