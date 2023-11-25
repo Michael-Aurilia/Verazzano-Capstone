@@ -9,7 +9,7 @@ public class Garchomp extends Pokemon{
 		setInfo("How did you find this?");
 	}
 	
-	//Takes info from the abstract Pokemon class to define Blastois;
+	//Takes info from the abstract Pokemon class to define Garchomp;
 	public Garchomp(int hp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
 		super(hp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
