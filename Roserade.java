@@ -9,7 +9,7 @@ public class Roserade extends Pokemon{
 		setInfo("How did you find this?");
 	}
 	
-	//Takes info from the abstract Pokemon class to define Roserade;
+	//Takes info from the abstract Pokemon class to define Roserade
 	public Roserade(int hp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
 		super(hp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
@@ -67,11 +67,11 @@ public class Roserade extends Pokemon{
 					if (EnergyBall.getDamageMultiplier(attackTypes4.get(0), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (EnergyBall.getDamageMultiplier(attackTypes4.get(0), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (EnergyBall.getDamageMultiplier(attackTypes4.get(0), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (EnergyBall.getDamageMultiplier(attackTypes4.get(0), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -83,11 +83,11 @@ public class Roserade extends Pokemon{
 					if (SludgeBomb.getDamageMultiplier(attackTypes4.get(1), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (SludgeBomb.getDamageMultiplier(attackTypes4.get(1), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (SludgeBomb.getDamageMultiplier(attackTypes4.get(1), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (SludgeBomb.getDamageMultiplier(attackTypes4.get(1), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -99,11 +99,11 @@ public class Roserade extends Pokemon{
 					if (DazzlingGleam.getDamageMultiplier(attackTypes4.get(2), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (DazzlingGleam.getDamageMultiplier(attackTypes4.get(2), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (DazzlingGleam.getDamageMultiplier(attackTypes4.get(2), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (DazzlingGleam.getDamageMultiplier(attackTypes4.get(2), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -115,11 +115,11 @@ public class Roserade extends Pokemon{
 					if (Extrasensory.getDamageMultiplier(attackTypes4.get(3), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (Extrasensory.getDamageMultiplier(attackTypes4.get(3), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (Extrasensory.getDamageMultiplier(attackTypes4.get(3), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (Extrasensory.getDamageMultiplier(attackTypes4.get(3), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -151,6 +151,9 @@ public class Roserade extends Pokemon{
 		s+= "HP: " + getHitPoints() + "\n";
 		s+= "Attack stat: " + getAttackStat() + "\n";
 		s+= "Defense stat: " + getDefenseStat() + "\n";
+		s+= "Special Attack stat: " + getSpecialAttackStat() + "\n";
+		s+= "Special Defense stat: " + getSpecialDefenseStat() + "\n";
+		s+= "Speed stat: " + getSpeedStat() + "\n";
 		s+= "Known moves: " + getAttacks() + "\n";
 		s+= "Info: " + info + "\n";
 		return s;
