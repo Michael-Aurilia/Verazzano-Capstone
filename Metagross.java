@@ -67,11 +67,11 @@ public class Metagross extends Pokemon{
 					if (Psychic.getDamageMultiplier(attackTypes12.get(0), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (Psychic.getDamageMultiplier(attackTypes12.get(0), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (Psychic.getDamageMultiplier(attackTypes12.get(0), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (Psychic.getDamageMultiplier(attackTypes12.get(0), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -83,11 +83,11 @@ public class Metagross extends Pokemon{
 					if (FlashCannon.getDamageMultiplier(attackTypes12.get(1), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (FlashCannon.getDamageMultiplier(attackTypes12.get(1), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (FlashCannon.getDamageMultiplier(attackTypes12.get(1), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (FlashCannon.getDamageMultiplier(attackTypes12.get(1), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -99,11 +99,11 @@ public class Metagross extends Pokemon{
 					if (ZenHeadbutt.getDamageMultiplier(attackTypes12.get(2), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (ZenHeadbutt.getDamageMultiplier(attackTypes12.get(2), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (ZenHeadbutt.getDamageMultiplier(attackTypes12.get(2), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (ZenHeadbutt.getDamageMultiplier(attackTypes12.get(2), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -115,11 +115,11 @@ public class Metagross extends Pokemon{
 					if (MeteorMash.getDamageMultiplier(attackTypes12.get(3), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (MeteorMash.getDamageMultiplier(attackTypes12.get(3), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (MeteorMash.getDamageMultiplier(attackTypes12.get(3), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (MeteorMash.getDamageMultiplier(attackTypes12.get(3), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -151,6 +151,9 @@ public class Metagross extends Pokemon{
 		s+= "HP: " + getHitPoints() + "\n";
 		s+= "Attack stat: " + getAttackStat() + "\n";
 		s+= "Defense stat: " + getDefenseStat() + "\n";
+		s+= "Special Attack stat: " + getSpecialAttackStat() + "\n";
+		s+= "Special Defense stat: " + getSpecialDefenseStat() + "\n";
+		s+= "Speed stat: " + getSpeedStat() + "\n";
 		s+= "Known moves: " + getAttacks() + "\n";
 		s+= "Info: " + info + "\n";
 		return s;
