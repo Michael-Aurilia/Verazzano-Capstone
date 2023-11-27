@@ -43,6 +43,7 @@ public class Staraptor extends Pokemon{
 				moveDescriptions9.add("Fighting Type, Physical: Staraptor fights the foe in close without guarding itself!");
 				Attack CloseCombat = new Attack(moveDescriptions9.get(2), 1, 5, attackTypes9.get(2), basePowers9.get(2), "Physical");
 				
+				//Codee this attack specifically
 				moves9.add("Endeavor");
 				attackTypes9.add("Normal");
 				basePowers9.add(0);
@@ -67,11 +68,11 @@ public class Staraptor extends Pokemon{
 					if (BraveBird.getDamageMultiplier(attackTypes9.get(0), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (BraveBird.getDamageMultiplier(attackTypes9.get(0), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (BraveBird.getDamageMultiplier(attackTypes9.get(0), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (BraveBird.getDamageMultiplier(attackTypes9.get(0), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -83,11 +84,11 @@ public class Staraptor extends Pokemon{
 					if (Facade.getDamageMultiplier(attackTypes9.get(1), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (Facade.getDamageMultiplier(attackTypes9.get(1), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (Facade.getDamageMultiplier(attackTypes9.get(1), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (Facade.getDamageMultiplier(attackTypes9.get(1), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -99,11 +100,11 @@ public class Staraptor extends Pokemon{
 					if (CloseCombat.getDamageMultiplier(attackTypes9.get(2), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (CloseCombat.getDamageMultiplier(attackTypes9.get(2), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (CloseCombat.getDamageMultiplier(attackTypes9.get(2), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (CloseCombat.getDamageMultiplier(attackTypes9.get(2), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -112,13 +113,7 @@ public class Staraptor extends Pokemon{
 					damageDealt = Endeavor.getDamage(Endeavor, Star, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
-					if (Endeavor.getDamageMultiplier(attackTypes9.get(3), other) >= 2) {
-						System.out.println("It's super effective!");
-					}
-					else if (Endeavor.getDamageMultiplier(attackTypes9.get(3), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
-					else if (Endeavor.getDamageMultiplier(attackTypes9.get(3), other) == 0) {
+					if (Endeavor.getDamageMultiplier(attackTypes9.get(3), other) == 0) {
 						System.out.println("The move had no effect.");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
@@ -151,6 +146,9 @@ public class Staraptor extends Pokemon{
 		s+= "HP: " + getHitPoints() + "\n";
 		s+= "Attack stat: " + getAttackStat() + "\n";
 		s+= "Defense stat: " + getDefenseStat() + "\n";
+		s+= "Special Attack stat: " + getSpecialAttackStat() + "\n";
+		s+= "Special Defense stat: " + getSpecialDefenseStat() + "\n";
+		s+= "Speed stat: " + getSpeedStat() + "\n";
 		s+= "Known moves: " + getAttacks() + "\n";
 		s+= "Info: " + info + "\n";
 		return s;
