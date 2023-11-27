@@ -29,7 +29,7 @@ public class Spiritomb extends Pokemon{
 				attackTypes8.add("Ghost");
 				basePowers8.add(80);
 				moveDescriptions8.add("Ghost Type, Special: Spiritomb hurls a shadowy blob at the opposing Pokemon!");
-				Attack ShadowBall = new Attack(moveDescriptions8.get(2), 1, 15, attackTypes8.get(2), basePowers8.get(2), "Special");
+				Attack ShadowBall = new Attack(moveDescriptions8.get(0), 1, 15, attackTypes8.get(0), basePowers8.get(0), "Special");
 				
 				moves8.add("Dark Pulse");
 				attackTypes8.add("Dark");
@@ -68,11 +68,11 @@ public class Spiritomb extends Pokemon{
 					if (ShadowBall.getDamageMultiplier(attackTypes8.get(0), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (ShadowBall.getDamageMultiplier(attackTypes8.get(0), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (ShadowBall.getDamageMultiplier(attackTypes8.get(0), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (ShadowBall.getDamageMultiplier(attackTypes8.get(0), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -84,11 +84,11 @@ public class Spiritomb extends Pokemon{
 					if (DarkPulse.getDamageMultiplier(attackTypes8.get(1), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (DarkPulse.getDamageMultiplier(attackTypes8.get(1), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (DarkPulse.getDamageMultiplier(attackTypes8.get(1), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (DarkPulse.getDamageMultiplier(attackTypes8.get(1), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -100,11 +100,11 @@ public class Spiritomb extends Pokemon{
 					if (IcyWind.getDamageMultiplier(attackTypes8.get(2), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (IcyWind.getDamageMultiplier(attackTypes8.get(2), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (IcyWind.getDamageMultiplier(attackTypes8.get(2), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (IcyWind.getDamageMultiplier(attackTypes8.get(2), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -116,11 +116,11 @@ public class Spiritomb extends Pokemon{
 					if (Hex.getDamageMultiplier(attackTypes8.get(3), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (Hex.getDamageMultiplier(attackTypes8.get(3), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (Hex.getDamageMultiplier(attackTypes8.get(3), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (Hex.getDamageMultiplier(attackTypes8.get(3), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -152,6 +152,9 @@ public class Spiritomb extends Pokemon{
 		s+= "HP: " + getHitPoints() + "\n";
 		s+= "Attack stat: " + getAttackStat() + "\n";
 		s+= "Defense stat: " + getDefenseStat() + "\n";
+		s+= "Special Attack stat: " + getSpecialAttackStat() + "\n";
+		s+= "Special Defense stat: " + getSpecialDefenseStat() + "\n";
+		s+= "Speed stat: " + getSpeedStat() + "\n";
 		s+= "Known moves: " + getAttacks() + "\n";
 		s+= "Info: " + info + "\n";
 		return s;
