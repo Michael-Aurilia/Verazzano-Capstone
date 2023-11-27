@@ -1,4 +1,3 @@
-//Implement priority moves here? Held Items?
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,7 @@ public class Jolteon extends Pokemon{
 		setInfo("How did you find this?");
 	}
 	
-	//Takes info from the abstract Pokemon class to define Jolteon;
+	//Takes info from the abstract Pokemon class to define Jolteon
 	public Jolteon(int hp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
 		super(hp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
@@ -41,13 +40,13 @@ public class Jolteon extends Pokemon{
 		moves2.add("Shadow Ball");
 		attackTypes2.add("Ghost");
 		basePowers2.add(80);
-		moveDescriptions2.add("Jolteon hurls a shadowy blob at the opposing Pokemon!");
+		moveDescriptions2.add("Ghost Type, Special: Jolteon hurls a shadowy blob at the opposing Pokemon!");
 		Attack ShadowBall = new Attack(moveDescriptions2.get(2), 1, 15, attackTypes2.get(2), basePowers2.get(2), "Special");
 		
 		moves2.add("Double Kick");
 		attackTypes2.add("Fighting");
 		basePowers2.add(60);
-		moveDescriptions2.add("The opposing Pokemon is quickly kicked twice in succession by Jolteon!");
+		moveDescriptions2.add("Fighting Type, Physical: The opposing Pokemon is quickly kicked twice in succession by Jolteon!");
 		Attack DoubleKick = new Attack(moveDescriptions2.get(3), 1, 30, attackTypes2.get(3), basePowers2.get(3), "Physical");
 		
 		PokemonInfo2 = "It accumulates negative ions in the atmosphere to blast out 10000-volt lightning bolts.";
@@ -68,11 +67,11 @@ public class Jolteon extends Pokemon{
 			if (Thunderbolt.getDamageMultiplier(attackTypes2.get(0), other) >= 2) {
 				System.out.println("It's super effective!");
 			}
-			else if (Thunderbolt.getDamageMultiplier(attackTypes2.get(0), other) <= 0.5) {
-				System.out.println("It's not very effective...");
-			}
 			else if (Thunderbolt.getDamageMultiplier(attackTypes2.get(0), other) == 0) {
 				System.out.println("The move had no effect.");
+			}
+			else if (Thunderbolt.getDamageMultiplier(attackTypes2.get(0), other) <= 0.5) {
+				System.out.println("It's not very effective...");
 			}
 			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 		}
@@ -84,11 +83,11 @@ public class Jolteon extends Pokemon{
 			if (HyperVoice.getDamageMultiplier(attackTypes2.get(1), other) >= 2) {
 				System.out.println("It's super effective!");
 			}
-			else if (HyperVoice.getDamageMultiplier(attackTypes2.get(1), other) <= 0.5) {
-				System.out.println("It's not very effective...");
-			}
 			else if (HyperVoice.getDamageMultiplier(attackTypes2.get(1), other) == 0) {
 				System.out.println("The move had no effect.");
+			}
+			else if (HyperVoice.getDamageMultiplier(attackTypes2.get(1), other) <= 0.5) {
+				System.out.println("It's not very effective...");
 			}
 			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 		}
@@ -100,11 +99,11 @@ public class Jolteon extends Pokemon{
 			if (ShadowBall.getDamageMultiplier(attackTypes2.get(2), other) >= 2) {
 				System.out.println("It's super effective!");
 			}
-			else if (ShadowBall.getDamageMultiplier(attackTypes2.get(2), other) <= 0.5) {
-				System.out.println("It's not very effective...");
-			}
 			else if (ShadowBall.getDamageMultiplier(attackTypes2.get(2), other) == 0) {
 				System.out.println("The move had no effect.");
+			}
+			else if (ShadowBall.getDamageMultiplier(attackTypes2.get(2), other) <= 0.5) {
+				System.out.println("It's not very effective...");
 			}
 			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 		}
@@ -116,11 +115,11 @@ public class Jolteon extends Pokemon{
 			if (DoubleKick.getDamageMultiplier(attackTypes2.get(3), other) >= 2) {
 				System.out.println("It's super effective!");
 			}
-			else if (DoubleKick.getDamageMultiplier(attackTypes2.get(3), other) <= 0.5) {
-				System.out.println("It's not very effective...");
-			}
 			else if (DoubleKick.getDamageMultiplier(attackTypes2.get(3), other) == 0) {
 				System.out.println("The move had no effect.");
+			}
+			else if (DoubleKick.getDamageMultiplier(attackTypes2.get(3), other) <= 0.5) {
+				System.out.println("It's not very effective...");
 			}
 			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 		}
@@ -156,9 +155,11 @@ public class Jolteon extends Pokemon{
 		s+= "HP: " + getHitPoints() + "\n";
 		s+= "Attack stat: " + getAttackStat() + "\n";
 		s+= "Defense stat: " + getDefenseStat() + "\n";
+		s+= "Special Attack stat: " + getSpecialAttackStat() + "\n";
+		s+= "Special Defense stat: " + getSpecialDefenseStat() + "\n";
+		s+= "Speed stat: " + getSpeedStat() + "\n";
 		s+= "Known moves: " + getAttacks() + "\n";
 		s+= "Info: " + info + "\n";
 		return s;
 	}
-
 }
