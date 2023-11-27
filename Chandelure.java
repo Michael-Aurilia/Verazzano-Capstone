@@ -68,11 +68,11 @@ public class Chandelure extends Pokemon{
 					if (ShadowBall.getDamageMultiplier(attackTypes11.get(0), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (ShadowBall.getDamageMultiplier(attackTypes11.get(0), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (ShadowBall.getDamageMultiplier(attackTypes11.get(0), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (ShadowBall.getDamageMultiplier(attackTypes11.get(0), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -84,11 +84,11 @@ public class Chandelure extends Pokemon{
 					if (Overheat.getDamageMultiplier(attackTypes11.get(1), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (Overheat.getDamageMultiplier(attackTypes11.get(1), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (Overheat.getDamageMultiplier(attackTypes11.get(1), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (Overheat.getDamageMultiplier(attackTypes11.get(1), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -100,11 +100,11 @@ public class Chandelure extends Pokemon{
 					if (Psychic.getDamageMultiplier(attackTypes11.get(2), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (Psychic.getDamageMultiplier(attackTypes11.get(2), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (Psychic.getDamageMultiplier(attackTypes11.get(2), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (Psychic.getDamageMultiplier(attackTypes11.get(2), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -116,11 +116,11 @@ public class Chandelure extends Pokemon{
 					if (Flamethrower.getDamageMultiplier(attackTypes11.get(3), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (Flamethrower.getDamageMultiplier(attackTypes11.get(3), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
 					else if (Flamethrower.getDamageMultiplier(attackTypes11.get(3), other) == 0) {
 						System.out.println("The move had no effect.");
+					}
+					else if (Flamethrower.getDamageMultiplier(attackTypes11.get(3), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
@@ -152,6 +152,9 @@ public class Chandelure extends Pokemon{
 		s+= "HP: " + getHitPoints() + "\n";
 		s+= "Attack stat: " + getAttackStat() + "\n";
 		s+= "Defense stat: " + getDefenseStat() + "\n";
+		s+= "Special Attack stat: " + getSpecialAttackStat() + "\n";
+		s+= "Special Defense stat: " + getSpecialDefenseStat() + "\n";
+		s+= "Speed stat: " + getSpeedStat() + "\n";
 		s+= "Known moves: " + getAttacks() + "\n";
 		s+= "Info: " + info + "\n";
 		return s;
