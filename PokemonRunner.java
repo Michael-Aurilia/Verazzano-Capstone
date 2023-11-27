@@ -12,7 +12,7 @@ public class PokemonRunner {
 		List<String> moves2 = new ArrayList<>();
 		
 		//Creating Blastoise object
-		moves1.add("Surf");
+		moves1.add("Liquidation");
 		moves1.add("Ice Beam");
 		moves1.add("Earthquake");
 		moves1.add("Rock Slide");
@@ -20,17 +20,18 @@ public class PokemonRunner {
 		battleCry1 = "Blastoooise!";
 		
 		//Values are passed in the order of: HP, Name, Type, moves known, battle cry, Attack, Defense, special attack, special defense, speed, info.
-		Blastoise B = new Blastoise(186, "Blastoise", "Water", "Null", moves1, battleCry1, 148, 172, 1, 1, 1, PokemonInfo1);
+		Swampert B = new Swampert(207, "Swampert", "Water", "Ground", moves1, battleCry1, 178, 156, 150, 172, 143, PokemonInfo1);
+		//Placeholder
 		
 		//Creating Jolteon object
 		moves2.add("Thunderbolt");
-		moves2.add("Quick Attack");
+		moves2.add("Hyper Voice");
 		moves2.add("Shadow Ball");
 		moves2.add("Double Kick");
 		PokemonInfo2 = "It accumulates negative ions in the atmosphere to blast out 10000-volt lightning bolts.";
 		battleCry2 = "Jolteeee!";
 		
-		Jolteon J = new Jolteon(145, "Jolteon", "Electric", "Null",moves2, battleCry2, 172, 152, 1, 1, 1, PokemonInfo2);
+		Jolteon J = new Jolteon(172, "Jolteon", "Electric", "Null", moves2, battleCry2, 128, 152, 178, 161, 200, PokemonInfo2);
 		
 		//Start of program
 		System.out.println("Welcome To The Pokemon battle simulator!");
@@ -43,7 +44,7 @@ public class PokemonRunner {
 
 		//User chooses which Pokemon to use while the CPU picks the remaining Pokemon.
 		Scanner pokemonChoice = new Scanner(System.in);
-		System.out.print("Which Pokemon Would you like to battle with?(1 for Blastoise, 2 for Jolteon): ");
+		System.out.print("Which Pokemon Would you like to battle with?(1 for Swampert, 2 for Jolteon): ");
 		int choice = pokemonChoice.nextInt();
 		System.out.println("-----------------------------------------");
 		
@@ -56,13 +57,13 @@ public class PokemonRunner {
 			HumanPlayer Red = new HumanPlayer(B, humanPotion);
 			ComputerPlayer Blue = new ComputerPlayer(J, computerPotion);
 			
-			System.out.println("You sent out Blastoise!");
+			System.out.println("You sent out Swampert!");
 			B.speak();
 			
 			System.out.println("Blue sent out Jolteon!");
 			J.speak();
 			
-			System.out.println("Blastoise: " + B.getHitPoints() + "/" + B.getHitPoints() + " HP");
+			System.out.println("Swampert: " + B.getHitPoints() + "/" + B.getHitPoints() + " HP");
 			System.out.println("Jolteon: " + J.getHitPoints() + "/" + J.getHitPoints() + " HP");
 			int BlastoiseFullHP = B.getHitPoints();
 			int JolteonFullHP = J.getHitPoints();
@@ -97,15 +98,15 @@ public class PokemonRunner {
 					if (B.getHitPoints() < 0) {
 						B.setHitPoints(B.getHitPoints() + -B.getHitPoints());
 					}
-					System.out.println("Blastoise: " + B.getHitPoints() + "/" + BlastoiseFullHP + " HP");
-					System.out.println("Blastoise fainted!");
+					System.out.println("Swampert: " + B.getHitPoints() + "/" + BlastoiseFullHP + " HP");
+					System.out.println("Swampert fainted!");
 					System.out.println("The battle is over! Blue is the winner!");
 					System.out.println("Thanks for playing!");
 					break;
 				}
 				
 				//To keep track of the health they are displayed to the screen if both players get a turn but the game doesn't end.
-				System.out.println("Blastoise: " + B.getHitPoints() + "/" + BlastoiseFullHP + " HP");
+				System.out.println("Swampert: " + B.getHitPoints() + "/" + BlastoiseFullHP + " HP");
 				System.out.println("Jolteon: " + J.getHitPoints() + "/" + JolteonFullHP + " HP");
 				System.out.println("-----------------------------------------");
 				System.out.println("Next turn!");
@@ -124,11 +125,11 @@ public class PokemonRunner {
 			System.out.println("You sent out Jolteon!");
 			J.speak();
 			
-			System.out.println("Blue sent out Blastoise!");
+			System.out.println("Blue sent out Swampert!");
 			B.speak();
 			
 			System.out.println("Jolteon: " + J.getHitPoints() + "/" + J.getHitPoints() + " HP");
-			System.out.println("Blastoise: " + B.getHitPoints() + "/" + B.getHitPoints() + " HP");
+			System.out.println("Swampert: " + B.getHitPoints() + "/" + B.getHitPoints() + " HP");
 			int BlastoiseFullHP = B.getHitPoints();
 			int JolteonFullHP = J.getHitPoints();
 			
@@ -151,8 +152,8 @@ public class PokemonRunner {
 					if (B.getHitPoints() <= 0) {
 						B.setHitPoints(B.getHitPoints() + -B.getHitPoints());
 					}
-					System.out.println("Blastoise: " + B.getHitPoints() + "/" + BlastoiseFullHP + " HP");
-					System.out.println("Blastoise fainted!");
+					System.out.println("Swampert: " + B.getHitPoints() + "/" + BlastoiseFullHP + " HP");
+					System.out.println("Swampert fainted!");
 					System.out.println("The battle is over! Red is the winner!");
 					System.out.println("Thanks for playing!");
 					break;
@@ -173,7 +174,7 @@ public class PokemonRunner {
 				
 				//To keep track of the health they are displayed to the screen if both players get a turn but the game doesn't end.
 				System.out.println("Jolteon: " + J.getHitPoints() + "/" + JolteonFullHP + " HP");
-				System.out.println("Blastoise: " + B.getHitPoints() + "/" + BlastoiseFullHP + " HP");
+				System.out.println("Swampert: " + B.getHitPoints() + "/" + BlastoiseFullHP + " HP");
 				System.out.println("-----------------------------------------");
 				System.out.println("Next turn!");
 			}
