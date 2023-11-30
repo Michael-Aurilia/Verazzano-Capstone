@@ -139,7 +139,7 @@ public class Lucario extends Pokemon{
 		return info;
 	}
 	
-	private void setInfo(String string) {
+	private void setInfo(String info) {
 		this.info = info;
 	}
 	
