@@ -202,6 +202,7 @@ public class PokemonRunner {
 			if (computerTeam.get(computerCurrentPokemon).getHitPoints() <= 0 && computerCurrentPokemon != 5) {
 				computerCurrentPokemon++;
 				computerPlayer.setMyPokemon(computerTeam.get(computerCurrentPokemon));
+				System.out.println("Blue has switched to " + computerPlayer.getMyPokemon().getName() + "!");
 			}
 			
 			
