@@ -10,8 +10,8 @@ public class Lucario extends Pokemon{
 	}
 	
 	//Takes info from the abstract Pokemon class to define Lucario
-	public Lucario(int hp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
-		super(hp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
+	public Lucario(int hp, int mhp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+		super(hp, mhp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
 	
@@ -53,7 +53,7 @@ public class Lucario extends Pokemon{
 				battleCry6 = "Roar!";
 				
 				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Lucario LUC = new Lucario(177, "Lucario", "Fighting", "Steel", moves6, battleCry6, 178, 134, 183, 134, 156, PokemonInfo6);
+				Lucario LUC = new Lucario(177, 177, "Lucario", "Fighting", "Steel", moves6, battleCry6, 178, 134, 183, 134, 156, PokemonInfo6);
 				
 				int damageDealt;
 				int remainingHP;
