@@ -10,8 +10,8 @@ public class Roserade extends Pokemon{
 	}
 	
 	//Takes info from the abstract Pokemon class to define Roserade
-	public Roserade(int hp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
-		super(hp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
+	public Roserade(int hp, int mhp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+		super(hp, mhp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
 	
@@ -53,7 +53,7 @@ public class Roserade extends Pokemon{
 				battleCry4 = "Rose!";
 				
 				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Roserade Rose = new Roserade(167, "Roserade", "Grass", "Poison", moves4, battleCry4, 134, 128, 194, 172, 156, PokemonInfo4);
+				Roserade Rose = new Roserade(167, 167, "Roserade", "Grass", "Poison", moves4, battleCry4, 134, 128, 194, 172, 156, PokemonInfo4);
 				
 				int damageDealt;
 				int remainingHP;
