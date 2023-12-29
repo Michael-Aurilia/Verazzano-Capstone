@@ -10,8 +10,8 @@ public class Garchomp extends Pokemon{
 	}
 	
 	//Takes info from the abstract Pokemon class to define Garchomp
-	public Garchomp(int hp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
-		super(hp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
+	public Garchomp(int hp, int mhp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+		super(hp, mhp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
 	
@@ -53,7 +53,7 @@ public class Garchomp extends Pokemon{
 				battleCry3 = "Roar!";
 				
 				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Garchomp GRCMP = new Garchomp(215, "Garchomp", "Dragon", "Ground", moves3, battleCry3, 200, 161, 145, 150, 169, PokemonInfo3);
+				Garchomp GRCMP = new Garchomp(215, 215, "Garchomp", "Dragon", "Ground", moves3, battleCry3, 200, 161, 145, 150, 169, PokemonInfo3);
 				
 				int damageDealt;
 				int remainingHP;
