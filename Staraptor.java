@@ -10,8 +10,8 @@ public class Staraptor extends Pokemon{
 	}
 	
 	//Takes info from the abstract Pokemon class to define Staraptor
-	public Staraptor(int hp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
-		super(hp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
+	public Staraptor(int hp, int mhp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+		super(hp, mhp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
 	
@@ -43,7 +43,7 @@ public class Staraptor extends Pokemon{
 				moveDescriptions9.add("Fighting Type, Physical: Staraptor fights the foe in close without guarding itself!");
 				Attack CloseCombat = new Attack(moveDescriptions9.get(2), 1, 5, attackTypes9.get(2), basePowers9.get(2), "Physical");
 				
-				//Codee this attack specifically
+				//Code this attack specifically
 				moves9.add("Endeavor");
 				attackTypes9.add("Normal");
 				basePowers9.add(0);
@@ -54,7 +54,7 @@ public class Staraptor extends Pokemon{
 				battleCry9 = "Bird Up!";
 				
 				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Staraptor Star = new Staraptor(192, "Staraptor", "Normal", "Flying", moves9, battleCry9, 189, 134, 112, 123, 167, PokemonInfo9);
+				Staraptor Star = new Staraptor(192, 192, "Staraptor", "Normal", "Flying", moves9, battleCry9, 189, 134, 112, 123, 167, PokemonInfo9);
 				
 				int damageDealt;
 				int remainingHP;
@@ -110,13 +110,20 @@ public class Staraptor extends Pokemon{
 				}
 				else if (attackIndex == 4) {
 					System.out.println(moveDescriptions9.get(3));
-					damageDealt = Endeavor.getDamage(Endeavor, Star, other);
-					remainingHP = other.getHitPoints() - damageDealt;
-					other.setHitPoints(remainingHP);
+					
 					if (Endeavor.getDamageMultiplier(attackTypes9.get(3), other) == 0) {
 						System.out.println("The move had no effect.");
+						System.out.println(other.getName() + " takes 0 damage!");
 					}
-					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+					
+					else if (Star.getHitPoints() > other.getHitPoints()) {
+						other.setHitPoints(Star.getHitPoints());
+						System.out.println("Staraptor and the target now have the same hp!");
+					}
+					
+					else if (Star.getHitPoints() <= other.getHitPoints()) {
+						System.out.println("The move failed since the target had more hp!");
+					}	
 				}
 	}
 
