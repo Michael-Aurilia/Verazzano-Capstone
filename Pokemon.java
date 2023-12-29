@@ -4,6 +4,7 @@ import java.util.List;
 public abstract class Pokemon implements Comparable<Pokemon>{
 	//Variables.
 	private int hitPoints;
+	private int maxHitPoints;
 	private double attackStat, specialAttackStat;
 	private double defenseStat, specialDefenseStat;
 	private double speedStat;
@@ -27,9 +28,10 @@ public abstract class Pokemon implements Comparable<Pokemon>{
 	}
 	
 	//This constructor gives each Pokemon it's stats.
-	public Pokemon(int hp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe) {
+	public Pokemon(int hp, int mhp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe) {
 		super();
 		setHitPoints(hp);
+		setMaxHitPoints(mhp);
 		setName(name);
 		setType1(type1);
 		setType2(type2);
@@ -43,6 +45,15 @@ public abstract class Pokemon implements Comparable<Pokemon>{
 	}
 	
 	//Mutators.
+	public void setMaxHitPoints(int maxHitPoints) {
+		this.maxHitPoints = maxHitPoints;
+	}
+	
+	public int getMaxHitPoints() {
+		return maxHitPoints;
+	}
+	
+
 	public int getHitPoints() {
 		return hitPoints;
 	}
