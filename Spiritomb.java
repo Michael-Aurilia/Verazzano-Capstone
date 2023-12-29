@@ -10,8 +10,8 @@ public class Spiritomb extends Pokemon{
 	}
 	
 	//Takes info from the abstract Pokemon class to define Spiritomb
-	public Spiritomb(int hp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
-		super(hp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
+	public Spiritomb(int hp, int mhp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+		super(hp, mhp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
 	
@@ -54,7 +54,7 @@ public class Spiritomb extends Pokemon{
 				battleCry8 = "OOOOOO!";
 				
 				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Spiritomb Tomb = new Spiritomb(157, "Spiritomb", "Ghost", "Dark", moves8, battleCry8, 158, 176, 158, 176, 95, PokemonInfo8);
+				Spiritomb Tomb = new Spiritomb(157, 157, "Spiritomb", "Ghost", "Dark", moves8, battleCry8, 158, 176, 158, 176, 95, PokemonInfo8);
 				
 				int damageDealt;
 				int remainingHP;
