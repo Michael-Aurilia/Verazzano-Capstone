@@ -2,80 +2,88 @@
 import java.util.Random;
 
 public class ComputerPlayer extends Player{
-	private boolean run;
-	private int itemCount;
+	private int potionCount;
+	private Pokemon myPokemon;
 	
-	public ComputerPlayer(Pokemon myPokemon, Item potion) {
-		super(myPokemon, potion);
+	public ComputerPlayer(Pokemon myPokemon) {
+		super(myPokemon);
+		this.myPokemon = myPokemon;
 	}
 	
-	public void computerTurn(Pokemon myPokemon, Pokemon other, Item potion, int maxHP) {
-		//Using a random number generator, the computer chooses what actions it will take
+	public int computerChoice(Pokemon myPokemon, Pokemon other) {
+		//Change this to the proper logic
 		Random rand = new Random();
-		int int_random = rand.nextInt(3);
+		int int_random = rand.nextInt(2);
 		
 		//Attack.
 		if (int_random == 0) {
 			int attack_random = rand.nextInt(4);
 			
 			if (attack_random == 0) {
-				myPokemon.attack(other, 1);
+				return 2;
 			}
 			else if (attack_random == 1) {
-				myPokemon.attack(other, 2);
+				return 3;
 			}
 			else if (attack_random == 2) {
-				myPokemon.attack(other, 3);
+				return 4;
 			}
 			else if (attack_random == 3) {
-				myPokemon.attack(other, 4);
+				return 5;
 			}
 		}
 		
 		//Item.
 		else if (int_random == 1) {
-			//Uses item but prevents further use by the computer.
-			potion.useItem(myPokemon, maxHP, itemCount);
-			setItemCount(1);
+			if (getPotionCount() == 0) {
+	        	System.out.println("You have no potions left!");
+	        	return computerChoice(myPokemon, other);
+	        }
+			return 1;
 		}
 		
-		//Run.
-		else if (int_random == 2) {
-			int run_random = rand.nextInt(2);
-			if (run_random == 0) {
-				run();
-			}
-			else {
-				System.out.println("Blue tried to run away but failed!");
-			}
+		//Base case that the computer shouldn't reach.
+		return 2;
+	}
+	
+	public void computerAction(int choice, Pokemon myPokemon, Pokemon other, Item potion) {
+		if (choice == 1) {
+			potion.useItem(myPokemon, myPokemon.getMaxHitPoints());
+			setPotionCount(getPotionCount() - 1);
+		}
+		
+		else if (choice == 2) {
+			myPokemon.attack(other, 1);
+		}
+		
+		else if (choice == 3) {
+			myPokemon.attack(other, 2);
+		}
+		
+		else if (choice == 4) {
+			myPokemon.attack(other, 3);
+		}
+		
+		else if (choice == 5) {
+			myPokemon.attack(other, 4);
 		}
 	}
 
-	//Function that allows the computer to run if the random number is selected, but it also has a 50% chance of failing.
-	@Override
-	public void run() {
-		System.out.println("Blue ran away!");
-		System.out.println("You win by Default! Thanks for playing!");
-		run = true;
-		setRun(run);
-		
-	}
-
+	
 	//Mutators.
-	public boolean isRun() {
-		return run;
+	public Pokemon getMyPokemon() {
+		return myPokemon;
 	}
 
-	public void setRun(boolean run) {
-		this.run = run;
+	public void setMyPokemon(Pokemon myPokemon) {
+		this.myPokemon = myPokemon;
 	}
-	
-	public void setItemCount(int itemCount) {
-		this.itemCount = itemCount;
+
+	public int getPotionCount() {
+		return potionCount;
 	}
-	
-	public int getItemCount() {
-		return itemCount;
+
+	public void setPotionCount(int potionCount) {
+		this.potionCount = potionCount;
 	}
-	
 }
