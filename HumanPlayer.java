@@ -14,9 +14,10 @@ public class HumanPlayer extends Player{
 		this.myPokemon = myPokemon;
 	}
 
-	public int humanChoice(Pokemon myPokemon, Pokemon other) {
+	public int humanChoice(Pokemon myPokemon, Pokemon other, List<Pokemon> team) {
 	    // Creates scanners to ask the player what they want to do and performs it based on their input.
-	    System.out.println("What would you like to do?");
+	    int faintedCounter = 0;
+		System.out.println("What would you like to do?");
 	    System.out.println("1. Attack");
 	    System.out.println("2. Item");
 	    System.out.println("3. Switch Pokemon");
@@ -31,22 +32,35 @@ public class HumanPlayer extends Player{
 	    else if (answerForTurnChoice == 2) {
 	        if (getPotionCount() == 0) {
 	        	System.out.println("You have no potions left!");
-	        	return humanChoice(myPokemon, other);
+	        	return humanChoice(myPokemon, other, team);
 	        }
 	    	return 1;
 	    }
 
 	    // Switch
 	    else if (answerForTurnChoice == 3) {
-	        //Check if at least two Pokemon have health remaining else invalid
-	    	return 2;
+	    	for (int i = 0; i < 6; i++) {
+				if (team.get(i).getStatus() == "Fainted") {
+					faintedCounter++;
+				}
+			}
+	    	
+	    	if (faintedCounter == 5) {
+	    		System.out.println("You don't have any other party members to switch to!");
+	    		return humanChoice(myPokemon, other, team);
+	    	}
+	    	
+	    	else {
+	    		faintedCounter = 0;
+	    		return 2;
+	    	}
 	    }
 
 	    // Throws an error if an invalid input is given.
 	    else {
 	        System.out.println("Invalid Input. Please enter 1, 2, or 3");
 	        // Recursive call
-	        return humanChoice(myPokemon, other);
+	        return humanChoice(myPokemon, other, team);
 	    }
 	}
 
@@ -75,7 +89,7 @@ public class HumanPlayer extends Player{
 		}
 		
 		else if (choice == 2) {
-			switchPokemon(team);
+			System.out.print("");
 		}
 		
 		else if (choice == 3) {
@@ -93,38 +107,6 @@ public class HumanPlayer extends Player{
 		else if (choice == 6) {
 			myPokemon.attack(other, 4);
 		}
-	}
-	
-	//Function that allows the player to switch Pokemon.
-	private void switchPokemon(List<Pokemon> team) {
-	    System.out.println("Choose a Pokemon to switch to:");
-	    for (int i = 0; i < team.size(); i++) {
-	        Pokemon pokemon = team.get(i);
-	        System.out.println((i + 1) + ". " + pokemon.getName() + " (HP: " + pokemon.getHitPoints() + ")");
-	    }
-
-	    int switchChoice = moveChoice.nextInt();
-	    if (switchChoice >= 1 && switchChoice <= team.size()) {
-	        Pokemon selectedPokemon = team.get(switchChoice - 1);
-	        if (selectedPokemon.getHitPoints() > 0 && selectedPokemon != getMyPokemon()) {
-	            setMyPokemon(selectedPokemon);
-	            System.out.println("You switched to " + getMyPokemon().getName());
-	        } 
-	        
-	        else if (selectedPokemon == getMyPokemon()) {
-	            System.out.println("You can't switch to the same Pokemon. Choose a different one.");
-	            switchPokemon(team); // Recursive call to ensure a valid choice
-	        } 
-	        
-	        else {
-	            System.out.println(selectedPokemon.getName() + " has no HP remaining. Choose a different Pokemon.");
-	            switchPokemon(team); // Recursive call to ensure a valid choice
-	        }
-	        } 
-	    else {
-	        System.out.println("Invalid choice. Please choose a number between 1 and " + team.size());
-	        switchPokemon(team); // Recursive call to ensure a valid choice
-	    }
 	}
 
 	//Mutators.
