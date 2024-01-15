@@ -9,8 +9,8 @@ public class Milotic extends Pokemon{
 		setInfo("How did you find this?");
 	}
 	
-	public Milotic(int hp, int mhp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
-		super(hp, mhp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
+	public Milotic(int hp, int mhp, String status, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+		super(hp, mhp, status, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
 	
@@ -52,7 +52,7 @@ public class Milotic extends Pokemon{
 				battleCry5 = "Roar!";
 				
 				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Milotic MLTC = new Milotic(202, 202, "Milotic", "Water", "Null", moves5, battleCry5, 123, 144, 167, 194, 146, PokemonInfo5);
+				Milotic MLTC = new Milotic(202, 202, "Healthy", "Milotic", "Water", "Null", moves5, battleCry5, 123, 144, 167, 194, 146, PokemonInfo5);
 				
 				int damageDealt;
 				int remainingHP;
