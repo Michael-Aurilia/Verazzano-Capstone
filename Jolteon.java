@@ -10,8 +10,8 @@ public class Jolteon extends Pokemon{
 	}
 	
 	//Takes info from the abstract Pokemon class to define Jolteon
-	public Jolteon(int hp, int mhp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
-		super(hp, mhp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
+	public Jolteon(int hp, int mhp, String status, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+		super(hp, mhp, status, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
 	
@@ -54,7 +54,7 @@ public class Jolteon extends Pokemon{
 		
 		//Creates a seperate jolteon object that really is only needed for the attack stat and type of Jolteon.
 		//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, Info
-		Jolteon J1 = new Jolteon(172, 172, "Jolteon", "Electric", "Null", moves2, battleCry2, 128, 152, 178, 161, 200, PokemonInfo2);
+		Jolteon J1 = new Jolteon(172, 172, "Healthy", "Jolteon", "Electric", "Null", moves2, battleCry2, 128, 152, 178, 161, 200, PokemonInfo2);
 		
 		int damageDealt;
 		int remainingHP;
@@ -162,5 +162,4 @@ public class Jolteon extends Pokemon{
 		s+= "Info: " + info + "\n";
 		return s;
 	}
-
 }
