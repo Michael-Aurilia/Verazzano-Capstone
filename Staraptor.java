@@ -10,8 +10,8 @@ public class Staraptor extends Pokemon{
 	}
 	
 	//Takes info from the abstract Pokemon class to define Staraptor
-	public Staraptor(int hp, int mhp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
-		super(hp, mhp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
+	public Staraptor(int hp, int mhp, String status, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+		super(hp, mhp, status, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
 	
@@ -54,7 +54,7 @@ public class Staraptor extends Pokemon{
 				battleCry9 = "Bird Up!";
 				
 				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Staraptor Star = new Staraptor(192, 192, "Staraptor", "Normal", "Flying", moves9, battleCry9, 189, 134, 112, 123, 167, PokemonInfo9);
+				Staraptor Star = new Staraptor(192, 192, "Healthy", "Staraptor", "Normal", "Flying", moves9, battleCry9, 189, 134, 112, 123, 167, PokemonInfo9);
 				
 				int damageDealt;
 				int remainingHP;
@@ -116,13 +116,13 @@ public class Staraptor extends Pokemon{
 						System.out.println(other.getName() + " takes 0 damage!");
 					}
 					
-					else if (Star.getHitPoints() > other.getHitPoints()) {
+					else if (Star.getHitPoints() < other.getHitPoints()) {
 						other.setHitPoints(Star.getHitPoints());
 						System.out.println("Staraptor and the target now have the same hp!");
 					}
 					
-					else if (Star.getHitPoints() <= other.getHitPoints()) {
-						System.out.println("The move failed since the target had more hp!");
+					else if (Star.getHitPoints() >= other.getHitPoints()) {
+						System.out.println("The move failed since the target had less hp!");
 					}	
 				}
 	}
