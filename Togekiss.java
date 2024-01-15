@@ -10,8 +10,8 @@ public class Togekiss extends Pokemon{
 	}
 	
 	//Takes info from the abstract Pokemon class to define Togekiss
-	public Togekiss(int hp, int mhp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
-		super(hp, mhp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
+	public Togekiss(int hp, int mhp, String status, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+		super(hp, mhp, status, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
 	
@@ -53,7 +53,7 @@ public class Togekiss extends Pokemon{
 				battleCry7 = "Kisss!";
 				
 				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Togekiss Kiss = new Togekiss(192, 192, "Togekiss", "Fairy", "Flying", moves7, battleCry7, 112, 161, 189, 183, 145, PokemonInfo7);
+				Togekiss Kiss = new Togekiss(192, 192, "Healthy", "Togekiss", "Fairy", "Flying", moves7, battleCry7, 112, 161, 189, 183, 145, PokemonInfo7);
 				
 				int damageDealt;
 				int remainingHP;
