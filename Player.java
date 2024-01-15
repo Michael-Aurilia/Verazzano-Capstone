@@ -17,6 +17,7 @@ public abstract class Player{
 		myPokemon.getType1();
 		myPokemon.getType2();
 		myPokemon.getName();
+		myPokemon.getStatus();
 	}
 
 	public Pokemon getMyPokemon() {
