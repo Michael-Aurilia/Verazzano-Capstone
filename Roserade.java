@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Staraptor extends Pokemon{
+public class Roserade extends Pokemon{
 	//Extra variable.
 	private String info;
 	
-	public Staraptor() {
+	public Roserade() {
 		setInfo("How did you find this?");
 	}
 	
-	//Takes info from the abstract Pokemon class to define Staraptor
-	public Staraptor(int hp, int mhp, String status, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+	//Takes info from the abstract Pokemon class to define Roserade
+	public Roserade(int hp, int mhp, String status, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
 		super(hp, mhp, status, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
@@ -18,112 +18,110 @@ public class Staraptor extends Pokemon{
 	//Performs the attack on the opposing Pokemon based on the index.
 	@Override
 	public void attack(Pokemon other, int attackIndex) {
-		String battleCry9, PokemonInfo9;
-		List<String> moves9 = new ArrayList<>();
-		List<String> attackTypes9 = new ArrayList<>();
-		List<Integer> basePowers9 = new ArrayList<>();
-		List<String> moveDescriptions9 = new ArrayList<>();
+		String battleCry4, PokemonInfo4;
+		List<String> moves4 = new ArrayList<>();
+		List<String> attackTypes4 = new ArrayList<>();
+		List<Integer> basePowers4 = new ArrayList<>();
+		List<String> moveDescriptions4 = new ArrayList<>();
 	
 		//Creates attacks for this Pokemon to use.
-				moves9.add("Brave Bird");
-				attackTypes9.add("Flying");
-				basePowers9.add(120);
-				moveDescriptions9.add("Flying Type, Physical: Staraptor tucks in its wings and charges from a low altitude!");
-				Attack BraveBird = new Attack(moveDescriptions9.get(0), 1, 15, attackTypes9.get(0), basePowers9.get(0), "Physical");
+				moves4.add("Energy Ball");
+				attackTypes4.add("Grass");
+				basePowers4.add(80);
+				moveDescriptions4.add("Grass Type, Special: Roserade draws power from nature and fires it at the foe!");
+				Attack EnergyBall = new Attack(moveDescriptions4.get(0), 1, 10, attackTypes4.get(0), basePowers4.get(0), "Special");
 				
-				moves9.add("Facade");
-				attackTypes9.add("Normal");
-				basePowers9.add(70);
-				moveDescriptions9.add("Normal Type, Physical: Staraptor attacks by bashing the target!");
-				Attack Facade = new Attack(moveDescriptions9.get(1), 1, 20, attackTypes9.get(1), basePowers9.get(1), "Physical");
+				moves4.add("Sludge Bomb");
+				attackTypes4.add("Poison");
+				basePowers4.add(90);
+				moveDescriptions4.add("Poison Type, Special: Roserade attacks by hurling filthy sludge at the foe!");
+				Attack SludgeBomb = new Attack(moveDescriptions4.get(1), 1, 10, attackTypes4.get(1), basePowers4.get(1), "Special");
 				
-				moves9.add("Close Combat");
-				attackTypes9.add("Fighting");
-				basePowers9.add(120);
-				moveDescriptions9.add("Fighting Type, Physical: Staraptor fights the foe in close without guarding itself!");
-				Attack CloseCombat = new Attack(moveDescriptions9.get(2), 1, 5, attackTypes9.get(2), basePowers9.get(2), "Physical");
+				moves4.add("Dazzling Gleam");
+				attackTypes4.add("Fairy");
+				basePowers4.add(80);
+				moveDescriptions4.add("Fairy Type, Special: Roserade damages opposing Pokémon by emitting a powerful flash!");
+				Attack DazzlingGleam = new Attack(moveDescriptions4.get(2), 1, 10, attackTypes4.get(2), basePowers4.get(2), "Special");
 				
-				//Code this attack specifically
-				moves9.add("Endeavor");
-				attackTypes9.add("Normal");
-				basePowers9.add(0);
-				moveDescriptions9.add("Normal Type, Physical: Staraptor attacks by cutting down the foe's HP to equal the user's HP!");
-				Attack Endeavor = new Attack(moveDescriptions9.get(3), 1, 15, attackTypes9.get(3), basePowers9.get(3), "Physical");
+				moves4.add("Extasensory");
+				attackTypes4.add("Psychic");
+				basePowers4.add(80);
+				moveDescriptions4.add("Psychic type, Special: Roserade attacks with an odd, unseeable power!");
+				Attack Extrasensory = new Attack(moveDescriptions4.get(3), 1, 20, attackTypes4.get(3), basePowers4.get(3), "Special");
 				
-				PokemonInfo9 = "Staraptor never stops attacking even if it is injured. It fusses over the shape of its comb.";
-				battleCry9 = "Bird Up!";
+				PokemonInfo4 = "With the movements of a dancer, Roserade strikes with whips that are densely lined with poison thorns.";
+				battleCry4 = "Rose!";
 				
 				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Staraptor Star = new Staraptor(192, 192, "Healthy", "Staraptor", "Normal", "Flying", moves9, battleCry9, 189, 134, 112, 123, 167, PokemonInfo9);
+				Roserade Rose = new Roserade(167, 167, "Healthy", "Roserade", "Grass", "Poison", moves4, battleCry4, 134, 128, 194, 172, 156, PokemonInfo4);
 				
 				int damageDealt;
 				int remainingHP;
 				
 				if (attackIndex == 1) {
-					System.out.println(moveDescriptions9.get(0));
+					System.out.println(moveDescriptions4.get(0));
 					//This could be the key to the computer calculating damage before the turn starts. Check if this works in the runner maybe
-					damageDealt = BraveBird.getDamage(BraveBird, Star, other);
+					damageDealt = EnergyBall.getDamage(EnergyBall, Rose, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
-					if (BraveBird.getDamageMultiplier(attackTypes9.get(0), other) >= 2) {
+					if (EnergyBall.getDamageMultiplier(attackTypes4.get(0), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (BraveBird.getDamageMultiplier(attackTypes9.get(0), other) == 0) {
+					else if (EnergyBall.getDamageMultiplier(attackTypes4.get(0), other) == 0) {
 						System.out.println("The move had no effect.");
 					}
-					else if (BraveBird.getDamageMultiplier(attackTypes9.get(0), other) <= 0.5) {
+					else if (EnergyBall.getDamageMultiplier(attackTypes4.get(0), other) <= 0.5) {
 						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
 				else if (attackIndex == 2) {
-					System.out.println(moveDescriptions9.get(1));
-					damageDealt = Facade.getDamage(Facade, Star, other);
+					System.out.println(moveDescriptions4.get(1));
+					damageDealt = SludgeBomb.getDamage(SludgeBomb, Rose, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
-					if (Facade.getDamageMultiplier(attackTypes9.get(1), other) >= 2) {
+					if (SludgeBomb.getDamageMultiplier(attackTypes4.get(1), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (Facade.getDamageMultiplier(attackTypes9.get(1), other) == 0) {
+					else if (SludgeBomb.getDamageMultiplier(attackTypes4.get(1), other) == 0) {
 						System.out.println("The move had no effect.");
 					}
-					else if (Facade.getDamageMultiplier(attackTypes9.get(1), other) <= 0.5) {
+					else if (SludgeBomb.getDamageMultiplier(attackTypes4.get(1), other) <= 0.5) {
 						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
 				else if (attackIndex == 3) {
-					System.out.println(moveDescriptions9.get(2));
-					damageDealt = CloseCombat.getDamage(CloseCombat, Star, other);
+					System.out.println(moveDescriptions4.get(2));
+					damageDealt = DazzlingGleam.getDamage(DazzlingGleam, Rose, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
-					if (CloseCombat.getDamageMultiplier(attackTypes9.get(2), other) >= 2) {
+					if (DazzlingGleam.getDamageMultiplier(attackTypes4.get(2), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
-					else if (CloseCombat.getDamageMultiplier(attackTypes9.get(2), other) == 0) {
+					else if (DazzlingGleam.getDamageMultiplier(attackTypes4.get(2), other) == 0) {
 						System.out.println("The move had no effect.");
 					}
-					else if (CloseCombat.getDamageMultiplier(attackTypes9.get(2), other) <= 0.5) {
+					else if (DazzlingGleam.getDamageMultiplier(attackTypes4.get(2), other) <= 0.5) {
 						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
 				else if (attackIndex == 4) {
-					System.out.println(moveDescriptions9.get(3));
-					
-					if (Endeavor.getDamageMultiplier(attackTypes9.get(3), other) == 0) {
+					System.out.println(moveDescriptions4.get(3));
+					damageDealt = Extrasensory.getDamage(Extrasensory, Rose, other);
+					remainingHP = other.getHitPoints() - damageDealt;
+					other.setHitPoints(remainingHP);
+					if (Extrasensory.getDamageMultiplier(attackTypes4.get(3), other) >= 2) {
+						System.out.println("It's super effective!");
+					}
+					else if (Extrasensory.getDamageMultiplier(attackTypes4.get(3), other) == 0) {
 						System.out.println("The move had no effect.");
-						System.out.println(other.getName() + " takes 0 damage!");
 					}
-					
-					else if (Star.getHitPoints() < other.getHitPoints()) {
-						other.setHitPoints(Star.getHitPoints());
-						System.out.println("Staraptor and the target now have the same hp!");
+					else if (Extrasensory.getDamageMultiplier(attackTypes4.get(3), other) <= 0.5) {
+						System.out.println("It's not very effective...");
 					}
-					
-					else if (Star.getHitPoints() >= other.getHitPoints()) {
-						System.out.println("The move failed since the target had less hp!");
-					}	
+					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
 	}
 
