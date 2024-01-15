@@ -10,8 +10,8 @@ public class Abomasnow extends Pokemon{
 	}
 	
 	//Takes info from the abstract Pokemon class to define Lucario
-	public Abomasnow(int hp, int mhp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
-		super(hp, mhp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
+	public Abomasnow(int hp, int mhp, String status, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+		super(hp, mhp, status, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
 	
@@ -53,7 +53,7 @@ public class Abomasnow extends Pokemon{
 				battleCry10 = "Roar!";
 				
 				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Abomasnow Snow = new Abomasnow(167, 167, "Abomasnow", "Grass", "Ice", moves10, battleCry10, 117, 156, 216, 156, 145, PokemonInfo10);
+				Abomasnow Snow = new Abomasnow(167, 167, "Healthy", "Abomasnow", "Grass", "Ice", moves10, battleCry10, 117, 156, 216, 156, 145, PokemonInfo10);
 				
 				int damageDealt;
 				int remainingHP;
