@@ -8,7 +8,7 @@ public class Potion implements Item{
 	}
 	@Override
 	public void useItem(Pokemon myPokemon, int maxHP) {
-		System.out.println(myPokemon.getName() + " was given a  Max Potion!");
+		System.out.println(myPokemon.getName() + " was given a Max Potion!");
 		//If the users Pokemon HP is already full, the potion will be wasted and have no effect.
 		if (myPokemon.getHitPoints() == maxHP) {
 			System.out.println("But their HP was already full! It has no effect!");
