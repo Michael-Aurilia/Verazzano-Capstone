@@ -11,8 +11,8 @@ public class Swampert extends Pokemon{
 	}
 	
 	//Takes info from the abstract Pokemon class to define Swampert
-	public Swampert(int hp, int mhp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
-		super(hp, mhp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
+	public Swampert(int hp, int mhp, String status, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+		super(hp, mhp, status, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
 	
@@ -54,7 +54,7 @@ public class Swampert extends Pokemon{
 		battleCry1 = "Swaaamp!";
 		
 		//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-		Swampert SWPRT = new Swampert(207, 207, "Swampert", "Water", "Ground", moves1, battleCry1, 178, 156, 150, 172, 143, PokemonInfo1);
+		Swampert SWPRT = new Swampert(207, 207, "Healthy", "Swampert", "Water", "Ground", moves1, battleCry1, 178, 156, 150, 172, 143, PokemonInfo1);
 		
 		int damageDealt;
 		int remainingHP;
@@ -162,5 +162,4 @@ public class Swampert extends Pokemon{
 		s+= "Info: " + info + "\n";
 		return s;
 	}
-
 }
