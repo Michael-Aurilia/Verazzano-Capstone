@@ -10,8 +10,8 @@ public class Chandelure extends Pokemon{
 	}
 	
 	//Takes info from the abstract Pokemon class to define Togekiss
-	public Chandelure(int hp, int mhp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
-		super(hp, mhp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
+	public Chandelure(int hp, int mhp, String status, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+		super(hp, mhp, status, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
 	
@@ -54,7 +54,7 @@ public class Chandelure extends Pokemon{
 				battleCry11 = "Ssss!";
 				
 				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Chandelure Candle = new Chandelure(192, 192, "Chandelure", "Ghost", "Fire", moves11, battleCry11, 112, 161, 189, 183, 145, PokemonInfo11);
+				Chandelure Candle = new Chandelure(192, 192, "Healthy", "Chandelure", "Ghost", "Fire", moves11, battleCry11, 112, 161, 189, 183, 145, PokemonInfo11);
 				
 				int damageDealt;
 				int remainingHP;
