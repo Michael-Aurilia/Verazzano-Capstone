@@ -36,13 +36,14 @@ public class ComputerPlayer extends Player{
 		//Item.
 		else if (int_random == 1) {
 			if (getPotionCount() == 0) {
-	        	System.out.println("You have no potions left!");
+	        	//Just temporary
+				System.out.println("CPU tried to use a potion but has no potions left!");
 	        	return computerChoice(myPokemon, other);
 	        }
 			return 1;
 		}
 		
-		//Base case that the computer shouldn't reach.
+		//Base case that the computer shouldn't reach. Just prevents errors
 		return 2;
 	}
 	
