@@ -8,6 +8,7 @@ public abstract class Pokemon implements Comparable<Pokemon>{
 	private double attackStat, specialAttackStat;
 	private double defenseStat, specialDefenseStat;
 	private double speedStat;
+	private String status;
 	private String name;
 	private String type1;
 	private String type2;
@@ -28,10 +29,11 @@ public abstract class Pokemon implements Comparable<Pokemon>{
 	}
 	
 	//This constructor gives each Pokemon it's stats.
-	public Pokemon(int hp, int mhp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe) {
+	public Pokemon(int hp, int mhp, String status, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe) {
 		super();
 		setHitPoints(hp);
 		setMaxHitPoints(mhp);
+		setStatus(status);
 		setName(name);
 		setType1(type1);
 		setType2(type2);
@@ -140,6 +142,14 @@ public abstract class Pokemon implements Comparable<Pokemon>{
 	
 	public void setSpeedStat(double speedStat) {
 		this.speedStat = speedStat;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	//Method to print out Pokemon.
