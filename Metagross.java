@@ -10,8 +10,8 @@ public class Metagross extends Pokemon{
 	}
 	
 	//Takes info from the abstract Pokemon class to define Lucario
-	public Metagross(int hp, int mhp, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
-		super(hp, mhp, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
+	public Metagross(int hp, int mhp, String status, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+		super(hp, mhp, status, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
 	
@@ -53,7 +53,7 @@ public class Metagross extends Pokemon{
 				battleCry12 = "Roar!";
 				
 				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Metagross Meta = new Metagross(187, 187, "Metagross", "Steel", "Psychic", moves12, battleCry12, 205, 200, 161, 156, 134, PokemonInfo12);
+				Metagross Meta = new Metagross(187, 187, "Healthy", "Metagross", "Steel", "Psychic", moves12, battleCry12, 205, 200, 161, 156, 134, PokemonInfo12);
 				
 				int damageDealt;
 				int remainingHP;
