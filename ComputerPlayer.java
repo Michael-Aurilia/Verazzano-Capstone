@@ -11,32 +11,34 @@ public class ComputerPlayer extends Player{
 	}
 	
 	public int computerChoice(Pokemon myPokemon, Pokemon other) {
+		//Add conditions for Pokemon Specific moves such as burn if target is healthy, use recover if low on hp, etc
+		
 		if (myPokemon.getMaxHitPoints() * 0.25 > myPokemon.getHitPoints() && getPotionCount() > 0) {
 			return 1;
 		}
 		
-		int highestDamage = 0;
+		int highestDamageIndex = 0;
 		List<Integer> damageList = myPokemon.getDamages(myPokemon, other);
-		for (int i = 0; i < 3; i++) {
-			if (damageList.get(i) <= damageList.get(i+1)) {
-				highestDamage = i+1;
-			}
-			else {
-				highestDamage = i;
-			}
-		}
+		int max = damageList.get(0);
+		
+        for (int i = 1; i < damageList.size(); i++) {
+            if (damageList.get(i) > max) {
+                max = damageList.get(i);
+                highestDamageIndex = i;
+            }
+        }
 		
 		//Attack.
-		if (highestDamage == 0) {
+		if (highestDamageIndex == 0) {
 			return 2;
 		}
-		else if (highestDamage == 1) {
+		else if (highestDamageIndex == 1) {
 			return 3;
 		}
-		else if (highestDamage == 2) {
+		else if (highestDamageIndex == 2) {
 			return 4;
 		}
-		else if (highestDamage == 3) {
+		else if (highestDamageIndex == 3) {
 			return 5;
 		}
 		
