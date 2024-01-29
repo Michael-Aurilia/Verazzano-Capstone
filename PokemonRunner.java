@@ -124,7 +124,7 @@ public class PokemonRunner {
 					System.out.println("Choose a Pokemon to switch to:");
 				    for (int i = 0; i < humanTeam.size(); i++) {
 				        Pokemon pokemon = humanTeam.get(i);
-				        System.out.println((i + 1) + ". " + pokemon.getName() + " (HP: " + pokemon.getHitPoints() + ")");
+				        System.out.println((i + 1) + ". " + pokemon.getName() + " (HP: " + pokemon.getHitPoints() + "/" + pokemon.getMaxHitPoints() + ")");
 				    }
 
 				    int ansSwitchChoice = switchChoice.nextInt();
@@ -314,7 +314,7 @@ public class PokemonRunner {
 					System.out.println("Choose a Pokemon to switch to:");
 				    for (int i = 0; i < humanTeam.size(); i++) {
 				        Pokemon pokemon = humanTeam.get(i);
-				        System.out.println((i + 1) + ". " + pokemon.getName() + " (HP: " + pokemon.getHitPoints() + ")");
+				        System.out.println((i + 1) + ". " + pokemon.getName() + " (HP: " + pokemon.getHitPoints() + "/" + pokemon.getMaxHitPoints() + ")");
 				    }
 
 				    int ansSwitchChoice = switchChoice.nextInt();
