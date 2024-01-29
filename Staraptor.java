@@ -126,6 +126,59 @@ public class Staraptor extends Pokemon{
 					}	
 				}
 	}
+	
+	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
+		String battleCry9, PokemonInfo9;
+		List<String> moves9 = new ArrayList<>();
+		List<String> attackTypes9 = new ArrayList<>();
+		List<Integer> basePowers9 = new ArrayList<>();
+		List<String> moveDescriptions9 = new ArrayList<>();
+	
+		//Creates attacks for this Pokemon to use.
+				moves9.add("Brave Bird");
+				attackTypes9.add("Flying");
+				basePowers9.add(120);
+				moveDescriptions9.add("Flying Type, Physical: Staraptor tucks in its wings and charges from a low altitude!");
+				Attack BraveBird = new Attack(moveDescriptions9.get(0), 1, 15, attackTypes9.get(0), basePowers9.get(0), "Physical");
+				
+				moves9.add("Facade");
+				attackTypes9.add("Normal");
+				basePowers9.add(70);
+				moveDescriptions9.add("Normal Type, Physical: Staraptor attacks by bashing the target!");
+				Attack Facade = new Attack(moveDescriptions9.get(1), 1, 20, attackTypes9.get(1), basePowers9.get(1), "Physical");
+				
+				moves9.add("Close Combat");
+				attackTypes9.add("Fighting");
+				basePowers9.add(120);
+				moveDescriptions9.add("Fighting Type, Physical: Staraptor fights the foe in close without guarding itself!");
+				Attack CloseCombat = new Attack(moveDescriptions9.get(2), 1, 5, attackTypes9.get(2), basePowers9.get(2), "Physical");
+				
+				//Code this attack specifically
+				moves9.add("Endeavor");
+				attackTypes9.add("Normal");
+				basePowers9.add(0);
+				moveDescriptions9.add("Normal Type, Physical: Staraptor attacks by cutting down the foe's HP to equal the user's HP!");
+				Attack Endeavor = new Attack(moveDescriptions9.get(3), 1, 15, attackTypes9.get(3), basePowers9.get(3), "Physical");
+				
+				PokemonInfo9 = "Staraptor never stops attacking even if it is injured. It fusses over the shape of its comb.";
+				battleCry9 = "Bird Up!";
+				
+				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
+				Staraptor Star = new Staraptor(192, 192, "Healthy", "Staraptor", "Normal", "Flying", moves9, battleCry9, 189, 134, 112, 123, 167, PokemonInfo9);
+				
+				int damageDealt1 = BraveBird.getDamage(BraveBird, Star, other);
+				int damageDealt2 = Facade.getDamage(Facade, Star, other);
+				int damageDealt3 = CloseCombat.getDamage(CloseCombat, Star, other);
+				int damageDealt4 = Endeavor.getDamage(Endeavor, Star, other);
+				
+				List<Integer> damageList = new ArrayList<>();
+				damageList.add(damageDealt1);
+				damageList.add(damageDealt2);
+				damageList.add(damageDealt3);
+				damageList.add(damageDealt4);
+				
+				return damageList;
+	}
 
 	@Override
 	public int compareTo(Pokemon o) {
