@@ -125,6 +125,59 @@ public class Chandelure extends Pokemon{
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
 	}
+	
+	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
+		String battleCry11, PokemonInfo11;
+		List<String> moves11 = new ArrayList<>();
+		List<String> attackTypes11 = new ArrayList<>();
+		List<Integer> basePowers11 = new ArrayList<>();
+		List<String> moveDescriptions11 = new ArrayList<>();
+	
+		//Creates attacks for this Pokemon to use.
+				moves11.add("Shadow Ball");
+				attackTypes11.add("Ghost");
+				basePowers11.add(80);
+				moveDescriptions11.add("Ghost Type, Special: Chandelure hurls a shadowy blob at the opposing Pokemon!");
+				Attack ShadowBall = new Attack(moveDescriptions11.get(0), 1, 15, attackTypes11.get(0), basePowers11.get(0), "Special");
+				
+				//Remember to implement stat changes
+				moves11.add("Overheat");
+				attackTypes11.add("Fire");
+				basePowers11.add(130);
+				moveDescriptions11.add("Fire Type, Special: Chandelure attacks the foe at full power! The attack's recoil sharply reduces the user's Sp. Atk stat.");
+				Attack Overheat = new Attack(moveDescriptions11.get(1), 1, 5, attackTypes11.get(1), basePowers11.get(1), "Special");
+				
+				moves11.add("Psychic");
+				attackTypes11.add("Psychic");
+				basePowers11.add(90);
+				moveDescriptions11.add("Psychic Type, Special: Chandelure's foe is hit by a strong telekinetic force!");
+				Attack Psychic = new Attack(moveDescriptions11.get(2), 1, 10, attackTypes11.get(2), basePowers11.get(2), "Special");
+				
+				moves11.add("Flamethrower");
+				attackTypes11.add("Fire");
+				basePowers11.add(90);
+				moveDescriptions11.add("Fire type, Special: Chandelure foe is scorched with an intense blast of fire!");
+				Attack Flamethrower = new Attack(moveDescriptions11.get(3), 1, 15, attackTypes11.get(3), basePowers11.get(3), "Special");
+				
+				PokemonInfo11 = "Being consumed in Chandelure's flame burns up the spirit, leaving the body behind.";
+				battleCry11 = "Ssss!";
+				
+				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
+				Chandelure Candle = new Chandelure(192, 192, "Healthy", "Chandelure", "Ghost", "Fire", moves11, battleCry11, 112, 161, 189, 183, 145, PokemonInfo11);
+				
+				int damageDealt1 = ShadowBall.getDamage(ShadowBall, Candle, other);
+				int damageDealt2 = Overheat.getDamage(Overheat, Candle, other);
+				int damageDealt3 = Psychic.getDamage(Psychic, Candle, other);
+				int damageDealt4 = Flamethrower.getDamage(Flamethrower, Candle, other);
+				
+				List<Integer> damageList = new ArrayList<>();
+				damageList.add(damageDealt1);
+				damageList.add(damageDealt2);
+				damageList.add(damageDealt3);
+				damageList.add(damageDealt4);
+				
+				return damageList;
+	}
 
 	@Override
 	public int compareTo(Pokemon o) {
