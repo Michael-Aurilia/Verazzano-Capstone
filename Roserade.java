@@ -124,6 +124,58 @@ public class Roserade extends Pokemon{
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
 	}
+	
+	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
+		String battleCry4, PokemonInfo4;
+		List<String> moves4 = new ArrayList<>();
+		List<String> attackTypes4 = new ArrayList<>();
+		List<Integer> basePowers4 = new ArrayList<>();
+		List<String> moveDescriptions4 = new ArrayList<>();
+	
+		//Creates attacks for this Pokemon to use.
+				moves4.add("Energy Ball");
+				attackTypes4.add("Grass");
+				basePowers4.add(80);
+				moveDescriptions4.add("Grass Type, Special: Roserade draws power from nature and fires it at the foe!");
+				Attack EnergyBall = new Attack(moveDescriptions4.get(0), 1, 10, attackTypes4.get(0), basePowers4.get(0), "Special");
+				
+				moves4.add("Sludge Bomb");
+				attackTypes4.add("Poison");
+				basePowers4.add(90);
+				moveDescriptions4.add("Poison Type, Special: Roserade attacks by hurling filthy sludge at the foe!");
+				Attack SludgeBomb = new Attack(moveDescriptions4.get(1), 1, 10, attackTypes4.get(1), basePowers4.get(1), "Special");
+				
+				moves4.add("Dazzling Gleam");
+				attackTypes4.add("Fairy");
+				basePowers4.add(80);
+				moveDescriptions4.add("Fairy Type, Special: Roserade damages opposing Pokémon by emitting a powerful flash!");
+				Attack DazzlingGleam = new Attack(moveDescriptions4.get(2), 1, 10, attackTypes4.get(2), basePowers4.get(2), "Special");
+				
+				moves4.add("Extasensory");
+				attackTypes4.add("Psychic");
+				basePowers4.add(80);
+				moveDescriptions4.add("Psychic type, Special: Roserade attacks with an odd, unseeable power!");
+				Attack Extrasensory = new Attack(moveDescriptions4.get(3), 1, 20, attackTypes4.get(3), basePowers4.get(3), "Special");
+				
+				PokemonInfo4 = "With the movements of a dancer, Roserade strikes with whips that are densely lined with poison thorns.";
+				battleCry4 = "Rose!";
+				
+				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
+				Roserade Rose = new Roserade(167, 167, "Healthy", "Roserade", "Grass", "Poison", moves4, battleCry4, 134, 128, 194, 172, 156, PokemonInfo4);
+				
+				int damageDealt1 = EnergyBall.getDamage(EnergyBall, Rose, other);
+				int damageDealt2 = SludgeBomb.getDamage(SludgeBomb, Rose, other);
+				int damageDealt3 = DazzlingGleam.getDamage(DazzlingGleam, Rose, other);
+				int damageDealt4 = Extrasensory.getDamage(Extrasensory, Rose, other);
+				
+				List<Integer> damageList = new ArrayList<>();
+				damageList.add(damageDealt1);
+				damageList.add(damageDealt2);
+				damageList.add(damageDealt3);
+				damageList.add(damageDealt4);
+				
+				return damageList;
+	}
 
 	@Override
 	public int compareTo(Pokemon o) {
