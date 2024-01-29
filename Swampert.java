@@ -1,4 +1,3 @@
-//Priority implementation? Held items?
 import java.util.ArrayList;
 import java.util.List;
 
@@ -125,6 +124,58 @@ public class Swampert extends Pokemon{
 			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 		}
 	}
+	
+	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
+		String battleCry1, PokemonInfo1;
+		List<String> moves1 = new ArrayList<>();
+		List<String> attackTypes1 = new ArrayList<>();
+		List<Integer> basePowers1 = new ArrayList<>();
+		List<String> moveDescriptions1 = new ArrayList<>();
+		
+		//Creates attacks for this Pokemon to use.
+		moves1.add("Liquidation");
+		attackTypes1.add("Water");
+		basePowers1.add(85);
+		moveDescriptions1.add("Water Type, Physical: Swampert slams into the target using a full-force blast of water!");
+		Attack Liquidation = new Attack(moveDescriptions1.get(0), 1, 15, attackTypes1.get(0), basePowers1.get(0), "Physical");
+		
+		moves1.add("Ice Beam");
+		attackTypes1.add("Ice");
+		basePowers1.add(90);
+		moveDescriptions1.add("Ice Type, Special: Swampert fires a freezing beam of ice at the opposing Pokemon!");
+		Attack IceBeam = new Attack(moveDescriptions1.get(1), 1, 15, attackTypes1.get(1), basePowers1.get(1), "Special");
+		
+		moves1.add("Earthquake");
+		attackTypes1.add("Ground");
+		basePowers1.add(100);
+		moveDescriptions1.add("Ground Type, Physical: Swampert causes a massive earthquake to damage the opposing Pokemon!");
+		Attack Earthquake = new Attack(moveDescriptions1.get(2), 1, 10, attackTypes1.get(2), basePowers1.get(2), "Physical");
+		
+		moves1.add("Rock Slide");
+		attackTypes1.add("Rock");
+		basePowers1.add(75);
+		moveDescriptions1.add("Rock Type, Physical: Swampert hurls Large boulders at the opposing Pokemon!");
+		Attack RockSlide = new Attack(moveDescriptions1.get(3), 1, 15, attackTypes1.get(3), basePowers1.get(3), "Physical");
+		
+		PokemonInfo1 = "Swampert is very strong. It has enough power to easily drag a boulder weighing more than a ton. This Pokémon also has powerful vision that lets it see even in murky water.";
+		battleCry1 = "Swaaamp!";
+		
+		//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
+		Swampert SWPRT = new Swampert(207, 207, "Healthy", "Swampert", "Water", "Ground", moves1, battleCry1, 178, 156, 150, 172, 143, PokemonInfo1);
+		
+		int damageDealt1 = Liquidation.getDamage(Liquidation, SWPRT, other);
+		int damageDealt2 = IceBeam.getDamage(IceBeam, SWPRT, other);
+		int damageDealt3 = Earthquake.getDamage(Earthquake, SWPRT, other);
+		int damageDealt4 = RockSlide.getDamage(RockSlide, SWPRT, other);
+		
+		List<Integer> damageList = new ArrayList<>();
+		damageList.add(damageDealt1);
+		damageList.add(damageDealt2);
+		damageList.add(damageDealt3);
+		damageList.add(damageDealt4);
+		
+		return damageList;
+	}
 
 	//Creates the speak function from the abstract class.
 	@Override
@@ -162,4 +213,5 @@ public class Swampert extends Pokemon{
 		s+= "Info: " + info + "\n";
 		return s;
 	}
+
 }
