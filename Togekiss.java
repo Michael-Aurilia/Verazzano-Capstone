@@ -124,6 +124,58 @@ public class Togekiss extends Pokemon{
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
 	}
+	
+	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
+		String battleCry7, PokemonInfo7;
+		List<String> moves7 = new ArrayList<>();
+		List<String> attackTypes7 = new ArrayList<>();
+		List<Integer> basePowers7 = new ArrayList<>();
+		List<String> moveDescriptions7 = new ArrayList<>();
+	
+		//Creates attacks for this Pokemon to use.
+				moves7.add("Air Slash");
+				attackTypes7.add("Flying");
+				basePowers7.add(75);
+				moveDescriptions7.add("Flying Type, Special: Togekiss attacks with a blade of air that slices even the sky!");
+				Attack AirSlash = new Attack(moveDescriptions7.get(0), 1, 15, attackTypes7.get(0), basePowers7.get(0), "Special");
+				
+				moves7.add("Tri Attack");
+				attackTypes7.add("Normal");
+				basePowers7.add(80);
+				moveDescriptions7.add("Normal Type, Special: Togekiss strikes with a simultaneous three-beam attack!");
+				Attack TriAttack = new Attack(moveDescriptions7.get(1), 1, 10, attackTypes7.get(1), basePowers7.get(1), "Special");
+				
+				moves7.add("Dazzling Gleam");
+				attackTypes7.add("Fairy");
+				basePowers7.add(80);
+				moveDescriptions7.add("Fairy Type, Special: Togekiss damages opposing Pokémon by emitting a powerful flash!");
+				Attack DazzlingGleam = new Attack(moveDescriptions7.get(2), 1, 10, attackTypes7.get(2), basePowers7.get(2), "Special");
+				
+				moves7.add("Flamethrower");
+				attackTypes7.add("Fire");
+				basePowers7.add(90);
+				moveDescriptions7.add("Fire type, Special: Togekiss' foe is scorched with an intense blast of fire!");
+				Attack Flamethrower = new Attack(moveDescriptions7.get(3), 1, 15, attackTypes7.get(3), basePowers7.get(3), "Special");
+				
+				PokemonInfo7 = "Togekiss shares many blessings with people who respect one another's rights and avoid needless strife.";
+				battleCry7 = "Kisss!";
+				
+				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
+				Togekiss Kiss = new Togekiss(192, 192, "Healthy", "Togekiss", "Fairy", "Flying", moves7, battleCry7, 112, 161, 189, 183, 145, PokemonInfo7);
+				
+				int damageDealt1 = AirSlash.getDamage(AirSlash, Kiss, other);
+				int damageDealt2 = TriAttack.getDamage(TriAttack, Kiss, other);
+				int damageDealt3 = DazzlingGleam.getDamage(DazzlingGleam, Kiss, other);
+				int damageDealt4 = Flamethrower.getDamage(Flamethrower, Kiss, other);
+				
+				List<Integer> damageList = new ArrayList<>();
+				damageList.add(damageDealt1);
+				damageList.add(damageDealt2);
+				damageList.add(damageDealt3);
+				damageList.add(damageDealt4);
+				
+				return damageList;
+	}
 
 	@Override
 	public int compareTo(Pokemon o) {
