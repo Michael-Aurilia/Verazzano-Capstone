@@ -1,5 +1,5 @@
 //This file needs large changes: AI implementation?(Computer always targets weaknesses or does the highest amount of damage), Same changes as HumanPlayer too.
-import java.util.Random;
+import java.util.List;
 
 public class ComputerPlayer extends Player{
 	private int potionCount;
@@ -11,36 +11,33 @@ public class ComputerPlayer extends Player{
 	}
 	
 	public int computerChoice(Pokemon myPokemon, Pokemon other) {
-		//Change this to the proper logic
-		Random rand = new Random();
-		int int_random = rand.nextInt(2);
+		if (myPokemon.getMaxHitPoints() * 0.25 > myPokemon.getHitPoints() && getPotionCount() > 0) {
+			return 1;
+		}
 		
-		//Attack.
-		if (int_random == 0) {
-			int attack_random = rand.nextInt(4);
-			
-			if (attack_random == 0) {
-				return 2;
+		int highestDamage = 0;
+		List<Integer> damageList = myPokemon.getDamages(myPokemon, other);
+		for (int i = 0; i < 3; i++) {
+			if (damageList.get(i) <= damageList.get(i+1)) {
+				highestDamage = i+1;
 			}
-			else if (attack_random == 1) {
-				return 3;
-			}
-			else if (attack_random == 2) {
-				return 4;
-			}
-			else if (attack_random == 3) {
-				return 5;
+			else {
+				highestDamage = i;
 			}
 		}
 		
-		//Item.
-		else if (int_random == 1) {
-			if (getPotionCount() == 0) {
-	        	//Just temporary
-				System.out.println("CPU tried to use a potion but has no potions left!");
-	        	return computerChoice(myPokemon, other);
-	        }
-			return 1;
+		//Attack.
+		if (highestDamage == 0) {
+			return 2;
+		}
+		else if (highestDamage == 1) {
+			return 3;
+		}
+		else if (highestDamage == 2) {
+			return 4;
+		}
+		else if (highestDamage == 3) {
+			return 5;
 		}
 		
 		//Base case that the computer shouldn't reach. Just prevents errors
