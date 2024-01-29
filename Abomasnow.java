@@ -124,6 +124,58 @@ public class Abomasnow extends Pokemon{
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 				}
 	}
+	
+	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
+		String battleCry10, PokemonInfo10;
+		List<String> moves10 = new ArrayList<>();
+		List<String> attackTypes10 = new ArrayList<>();
+		List<Integer> basePowers10 = new ArrayList<>();
+		List<String> moveDescriptions10 = new ArrayList<>();
+	
+		//Creates attacks for this Pokemon to use.
+				moves10.add("Energy Ball");
+				attackTypes10.add("Grass");
+				basePowers10.add(80);
+				moveDescriptions10.add("Grass Type, Special: Abomasnow draws power from nature and fires it at the foe!");
+				Attack EnergyBall = new Attack(moveDescriptions10.get(0), 1, 10, attackTypes10.get(0), basePowers10.get(0), "Special");
+				
+				moves10.add("Blizzard");
+				attackTypes10.add("Ice");
+				basePowers10.add(110);
+				moveDescriptions10.add("Ice Type, Special: Abomasnow summons howling blizzard to strike the foe!");
+				Attack Blizzard = new Attack(moveDescriptions10.get(1), 1, 5, attackTypes10.get(1), basePowers10.get(1), "Special");
+				
+				moves10.add("Wood Hammer");
+				attackTypes10.add("Grass");
+				basePowers10.add(120);
+				moveDescriptions10.add("Grass Type, Physical: Abomasnow slams its rugged body into the foe to attack!");
+				Attack WoodHammer = new Attack(moveDescriptions10.get(2), 1, 15, attackTypes10.get(2), basePowers10.get(2), "Physical");
+				
+				moves10.add("Ice Punch");
+				attackTypes10.add("Ice");
+				basePowers10.add(75);
+				moveDescriptions10.add("Dark Type, Physical: Abomasnow punches the foe with an icy fist!");
+				Attack IcePunch = new Attack(moveDescriptions10.get(3), 1, 15, attackTypes10.get(3), basePowers10.get(3), "Physical");
+				
+				PokemonInfo10 = "Abomasnow lives a quiet life on mountains that are perpetually covered in snow. It hides itself by whipping up blizzards.";
+				battleCry10 = "Roar!";
+				
+				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
+				Abomasnow Snow = new Abomasnow(167, 167, "Healthy", "Abomasnow", "Grass", "Ice", moves10, battleCry10, 117, 156, 216, 156, 145, PokemonInfo10);
+				
+				int damageDealt1 = EnergyBall.getDamage(EnergyBall, Snow, other);
+				int damageDealt2 = Blizzard.getDamage(Blizzard, Snow, other);
+				int damageDealt3 = WoodHammer.getDamage(WoodHammer, Snow, other);
+				int damageDealt4 = IcePunch.getDamage(IcePunch, Snow, other);
+				
+				List<Integer> damageList = new ArrayList<>();
+				damageList.add(damageDealt1);
+				damageList.add(damageDealt2);
+				damageList.add(damageDealt3);
+				damageList.add(damageDealt4);
+				
+				return damageList;
+	}
 
 	@Override
 	public int compareTo(Pokemon o) {
