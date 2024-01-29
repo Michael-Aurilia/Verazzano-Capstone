@@ -29,7 +29,7 @@ public class Metagross extends Pokemon{
 				attackTypes12.add("Psychic");
 				basePowers12.add(90);
 				moveDescriptions12.add("Psychic Type, Special: Metagross' foe is hit by a strong telekinetic force!");
-				Attack Psychic = new Attack(moveDescriptions12.get(2), 1, 10, attackTypes12.get(2), basePowers12.get(2), "Special");
+				Attack Psychic = new Attack(moveDescriptions12.get(0), 1, 10, attackTypes12.get(0), basePowers12.get(0), "Special");
 				
 				moves12.add("Flash Cannon");
 				attackTypes12.add("Steel");
