@@ -1,5 +1,3 @@
-//This file needs the most changes: Implement speed for turn order, JavaFX, Highest priority on switching Pokemon or using items, User and computer having six Pokemon,
-//Battle only ends once a whole team has fainted, Only not fainted Pokemon can battle, Status moves?(Probably not)
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -228,7 +226,7 @@ public class PokemonRunner {
 						computerPlayer.computerAction(computerChoice, computerTeam.get(computerCurrentPokemon), humanTeam.get(humanCurrentPokemon), computerPotions);
 						
 						//Checks if opposing Pokemon is still alive before readying their attack
-						if (humanTeam.get(computerCurrentPokemon).getHitPoints() <= 0) {
+						if (humanTeam.get(humanCurrentPokemon).getHitPoints() <= 0) {
 							System.out.println(humanTeam.get(humanCurrentPokemon).getName() + " has fainted!");
 							humanTeam.get(humanCurrentPokemon).setStatus("Fainted");
 						}
