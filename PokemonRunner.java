@@ -250,11 +250,11 @@ public class PokemonRunner {
 				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(CBaseSPE);
 				        	}
 				        	else if (humanCurrentPokemon == 5) {
-				        		humanTeam.get(humanCurrentPokemon).setAttackStat(CBaseATK);
-				        		humanTeam.get(humanCurrentPokemon).setSpecialAttackStat(CBaseSPATK);
-				        		humanTeam.get(humanCurrentPokemon).setDefenseStat(CBaseDEF);
-				        		humanTeam.get(humanCurrentPokemon).setSpecialDefenseStat(CBaseSPDEF);
-				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(CBaseSPE);
+				        		humanTeam.get(humanCurrentPokemon).setAttackStat(MEBaseATK);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialAttackStat(MEBaseSPATK);
+				        		humanTeam.get(humanCurrentPokemon).setDefenseStat(MEBaseDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialDefenseStat(MEBaseSPDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(MEBaseSPE);
 				        	}
 				        	
 				        	System.out.println("Enough " + humanTeam.get(humanCurrentPokemon).getName() + " come back!");
@@ -524,11 +524,11 @@ public class PokemonRunner {
 				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(CBaseSPE);
 				        	}
 				        	else if (humanCurrentPokemon == 5) {
-				        		humanTeam.get(humanCurrentPokemon).setAttackStat(CBaseATK);
-				        		humanTeam.get(humanCurrentPokemon).setSpecialAttackStat(CBaseSPATK);
-				        		humanTeam.get(humanCurrentPokemon).setDefenseStat(CBaseDEF);
-				        		humanTeam.get(humanCurrentPokemon).setSpecialDefenseStat(CBaseSPDEF);
-				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(CBaseSPE);
+				        		humanTeam.get(humanCurrentPokemon).setAttackStat(MEBaseATK);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialAttackStat(MEBaseSPATK);
+				        		humanTeam.get(humanCurrentPokemon).setDefenseStat(MEBaseDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialDefenseStat(MEBaseSPDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(MEBaseSPE);
 				        	}
 				        	
 				        	humanCurrentPokemon = ansSwitchChoice - 1;
