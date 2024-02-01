@@ -394,6 +394,42 @@ public class PokemonRunner {
 			
 			//CPU switches to next Pokemon if current Pokemon has fainted
 			if (computerTeam.get(computerCurrentPokemon).getHitPoints() <= 0 && computerCurrentPokemon != 5) {
+				if (computerCurrentPokemon == 0) {
+					computerTeam.get(computerCurrentPokemon).setAttackStat(SPBaseATK);
+	        		computerTeam.get(computerCurrentPokemon).setSpecialAttackStat(SPBaseSPATK);
+	        		computerTeam.get(computerCurrentPokemon).setDefenseStat(SPBaseDEF);
+	        		computerTeam.get(computerCurrentPokemon).setSpecialDefenseStat(SPBaseSPDEF);
+	        		computerTeam.get(computerCurrentPokemon).setSpeedStat(SPBaseSPE);
+				}
+				else if (computerCurrentPokemon == 1) {
+					computerTeam.get(computerCurrentPokemon).setAttackStat(MIBaseATK);
+	        		computerTeam.get(computerCurrentPokemon).setSpecialAttackStat(MIBaseSPATK);
+	        		computerTeam.get(computerCurrentPokemon).setDefenseStat(MIBaseDEF);
+	        		computerTeam.get(computerCurrentPokemon).setSpecialDefenseStat(MIBaseSPDEF);
+	        		computerTeam.get(computerCurrentPokemon).setSpeedStat(MIBaseSPE);
+				}
+				else if (computerCurrentPokemon == 2) {
+					computerTeam.get(computerCurrentPokemon).setAttackStat(LBaseATK);
+	        		computerTeam.get(computerCurrentPokemon).setSpecialAttackStat(LBaseSPATK);
+	        		computerTeam.get(computerCurrentPokemon).setDefenseStat(LBaseDEF);
+	        		computerTeam.get(computerCurrentPokemon).setSpecialDefenseStat(LBaseSPDEF);
+	        		computerTeam.get(computerCurrentPokemon).setSpeedStat(LBaseSPE);
+				}
+				else if (computerCurrentPokemon == 3) {
+					computerTeam.get(computerCurrentPokemon).setAttackStat(TBaseATK);
+	        		computerTeam.get(computerCurrentPokemon).setSpecialAttackStat(TBaseSPATK);
+	        		computerTeam.get(computerCurrentPokemon).setDefenseStat(TBaseDEF);
+	        		computerTeam.get(computerCurrentPokemon).setSpecialDefenseStat(TBaseSPDEF);
+	        		computerTeam.get(computerCurrentPokemon).setSpeedStat(TBaseSPE);
+				}
+				else if (computerCurrentPokemon == 4) {
+					computerTeam.get(computerCurrentPokemon).setAttackStat(RBaseATK);
+	        		computerTeam.get(computerCurrentPokemon).setSpecialAttackStat(RBaseSPATK);
+	        		computerTeam.get(computerCurrentPokemon).setDefenseStat(RBaseDEF);
+	        		computerTeam.get(computerCurrentPokemon).setSpecialDefenseStat(RBaseSPDEF);
+	        		computerTeam.get(computerCurrentPokemon).setSpeedStat(RBaseSPE);
+				}
+				
 				computerCurrentPokemon++;
 				computerPlayer.setMyPokemon(computerTeam.get(computerCurrentPokemon));
 				System.out.println(CPUName + " has switched to " + computerPlayer.getMyPokemon().getName() + "!");
@@ -424,6 +460,11 @@ public class PokemonRunner {
 			}
 			
 			if (computerFaintedCounter == 6) {
+				computerTeam.get(computerCurrentPokemon).setAttackStat(GBaseATK);
+        		computerTeam.get(computerCurrentPokemon).setSpecialAttackStat(GBaseSPATK);
+        		computerTeam.get(computerCurrentPokemon).setDefenseStat(GBaseDEF);
+        		computerTeam.get(computerCurrentPokemon).setSpecialDefenseStat(GBaseSPDEF);
+        		computerTeam.get(computerCurrentPokemon).setSpeedStat(GBaseSPE);
 				//If the entire computer team has fainted then the human player wins and is congratulated.
 				System.out.println(CPUName + ": You have defeated me. Well done " + playerName + "!");
 				break;
