@@ -11,17 +11,88 @@ public class PokemonRunner {
 		Scanner switchChoice = new Scanner(System.in);
 		
 		Swampert SW = PokemonFactory.createSwampert();
+		double SWBaseATK = SW.getAttackStat();
+		double SWBaseSPATK = SW.getSpecialAttackStat();
+		double SWBaseDEF = SW.getDefenseStat();
+		double SWBaseSPDEF = SW.getSpecialDefenseStat();
+		double SWBaseSPE = SW.getSpeedStat();
+		
 		Jolteon J = PokemonFactory.createJolteon();
+		double JBaseATK = J.getAttackStat();
+		double JBaseSPATK = J.getSpecialAttackStat();
+		double JBaseDEF = J.getDefenseStat();
+		double JBaseSPDEF = J.getSpecialDefenseStat();
+		double JBaseSPE = J.getSpeedStat();
+		
 		Garchomp G = PokemonFactory.createGarchomp();
+		double GBaseATK = G.getAttackStat();
+		double GBaseSPATK = G.getSpecialAttackStat();
+		double GBaseDEF = G.getDefenseStat();
+		double GBaseSPDEF = G.getSpecialDefenseStat();
+		double GBaseSPE = G.getSpeedStat();
+		
 		Roserade R = PokemonFactory.createRoserade();
+		double RBaseATK = R.getAttackStat();
+		double RBaseSPATK = R.getSpecialAttackStat();
+		double RBaseDEF = R.getDefenseStat();
+		double RBaseSPDEF = R.getSpecialDefenseStat();
+		double RBaseSPE = R.getSpeedStat();
+		
 		Milotic MI = PokemonFactory.createMilotic();
+		double MIBaseATK = MI.getAttackStat();
+		double MIBaseSPATK = MI.getSpecialAttackStat();
+		double MIBaseDEF = MI.getDefenseStat();
+		double MIBaseSPDEF = MI.getSpecialDefenseStat();
+		double MIBaseSPE = MI.getSpeedStat();
+		
 		Lucario L = PokemonFactory.createLucario();
+		double LBaseATK = L.getAttackStat();
+		double LBaseSPATK = L.getSpecialAttackStat();
+		double LBaseDEF = L.getDefenseStat();
+		double LBaseSPDEF = L.getSpecialDefenseStat();
+		double LBaseSPE = L.getSpeedStat();
+		
 		Togekiss T = PokemonFactory.createTogekiss();
+		double TBaseATK = T.getAttackStat();
+		double TBaseSPATK = T.getSpecialAttackStat();
+		double TBaseDEF = T.getDefenseStat();
+		double TBaseSPDEF = T.getSpecialDefenseStat();
+		double TBaseSPE = T.getSpeedStat();
+		
 		Spiritomb SP = PokemonFactory.createSpiritomb();
+		double SPBaseATK = SP.getAttackStat();
+		double SPBaseSPATK = SP.getSpecialAttackStat();
+		double SPBaseDEF = SP.getDefenseStat();
+		double SPBaseSPDEF = SP.getSpecialDefenseStat();
+		double SPBaseSPE = SP.getSpeedStat();
+		
 		Staraptor ST = PokemonFactory.createStaraptor();
+		double STBaseATK = ST.getAttackStat();
+		double STBaseSPATK = ST.getSpecialAttackStat();
+		double STBaseDEF = ST.getDefenseStat();
+		double STBaseSPDEF = ST.getSpecialDefenseStat();
+		double STBaseSPE = ST.getSpeedStat();
+		
 		Abomasnow A = PokemonFactory.createAbomasnow();
+		double ABaseATK = A.getAttackStat();
+		double ABaseSPATK = A.getSpecialAttackStat();
+		double ABaseDEF = A.getDefenseStat();
+		double ABaseSPDEF = A.getSpecialDefenseStat();
+		double ABaseSPE = A.getSpeedStat();
+	
 		Chandelure C = PokemonFactory.createChandelure();
+		double CBaseATK = C.getAttackStat();
+		double CBaseSPATK = C.getSpecialAttackStat();
+		double CBaseDEF = C.getDefenseStat();
+		double CBaseSPDEF = C.getSpecialDefenseStat();
+		double CBaseSPE = C.getSpeedStat();
+		
 		Metagross ME = PokemonFactory.createMetagross();
+		double MEBaseATK = ME.getAttackStat();
+		double MEBaseSPATK = ME.getSpecialAttackStat();
+		double MEBaseDEF = ME.getDefenseStat();
+		double MEBaseSPDEF = ME.getSpecialDefenseStat();
+		double MEBaseSPE = ME.getSpeedStat();
 		
 		List<Pokemon> humanTeam = new ArrayList<>();
         humanTeam.add(SW);
@@ -70,8 +141,21 @@ public class PokemonRunner {
 		System.out.println(R + "\n");
 		System.out.println(G + "\n");
 		
-		System.out.println("Which Pokemon would you like to send out first? (Enter a number 1-6 for your choice): ");
-		int answerForInitialChoice = initialChoice.nextInt();
+		int firstChoice;
+		while (true) {
+			System.out.println("Which Pokemon would you like to send out first? (Enter a number 1-6 for your choice): ");
+			int answerForInitialChoice = initialChoice.nextInt();
+			
+			if (answerForInitialChoice > 6 || answerForInitialChoice <= 0) {
+				System.out.println("Invalid input.");
+			}
+			
+			else {
+				firstChoice = answerForInitialChoice;
+				break;
+			}
+			
+		}
 		
 		//List of priority in the battle function goes as follows:
 		//1. Computers turn decision
@@ -82,22 +166,23 @@ public class PokemonRunner {
 		//6. If both Pokemon are set to attack, by comparing the speed stat for which is higher, determine whether the computer or human players Pokemon attacks first. However, a Pokemon can't attack if it has no HP left so check for that before each attack but especially the one who will attack second.
 		
 		
+		
 		//Initializing the start of the battle.
 		//Setting up which Pokemon enters first
-		HumanPlayer humanPlayer = new HumanPlayer(humanTeam.get(answerForInitialChoice - 1));
-		humanPlayer.setMyPokemon(humanTeam.get(answerForInitialChoice - 1));
+		HumanPlayer humanPlayer = new HumanPlayer(humanTeam.get(firstChoice - 1));
+		humanPlayer.setMyPokemon(humanTeam.get(firstChoice - 1));
 		
 		ComputerPlayer computerPlayer = new ComputerPlayer(computerTeam.get(0));
 		computerPlayer.setMyPokemon(computerTeam.get(0));
 		
-		int humanCurrentPokemon = answerForInitialChoice - 1;
+		int humanCurrentPokemon = firstChoice - 1;
 		int computerCurrentPokemon = 0;
 		int humanFaintedCounter = 0;
 		int computerFaintedCounter = 0;
 		
 		//Setting up items
 		Potion computerPotions = new Potion(computerTeam.get(0));
-		Item humanPotions = new Potion(humanTeam.get(answerForInitialChoice - 1));
+		Item humanPotions = new Potion(humanTeam.get(firstChoice - 1));
 		computerPlayer.setPotionCount(3);
 		humanPlayer.setPotionCount(3);
 		
@@ -129,6 +214,49 @@ public class PokemonRunner {
 				    if (ansSwitchChoice >= 1 && ansSwitchChoice <= humanTeam.size()) {
 				        Pokemon selectedPokemon = humanTeam.get(ansSwitchChoice - 1);
 				        if (selectedPokemon.getHitPoints() > 0 && selectedPokemon != humanTeam.get(humanCurrentPokemon)) {
+				        	if (humanCurrentPokemon == 0) {
+				        		humanTeam.get(humanCurrentPokemon).setAttackStat(SWBaseATK);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialAttackStat(SWBaseSPATK);
+				        		humanTeam.get(humanCurrentPokemon).setDefenseStat(SWBaseDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialDefenseStat(SWBaseSPDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(SWBaseSPE);
+				        	}
+				        	else if (humanCurrentPokemon == 1) {
+				        		humanTeam.get(humanCurrentPokemon).setAttackStat(JBaseATK);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialAttackStat(JBaseSPATK);
+				        		humanTeam.get(humanCurrentPokemon).setDefenseStat(JBaseDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialDefenseStat(JBaseSPDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(JBaseSPE);
+				        	}
+				        	else if (humanCurrentPokemon == 2) {
+				        		humanTeam.get(humanCurrentPokemon).setAttackStat(STBaseATK);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialAttackStat(STBaseSPATK);
+				        		humanTeam.get(humanCurrentPokemon).setDefenseStat(STBaseDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialDefenseStat(STBaseSPDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(STBaseSPE);
+				        	}
+				        	else if (humanCurrentPokemon == 3) {
+				        		humanTeam.get(humanCurrentPokemon).setAttackStat(ABaseATK);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialAttackStat(ABaseSPATK);
+				        		humanTeam.get(humanCurrentPokemon).setDefenseStat(ABaseDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialDefenseStat(ABaseSPDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(ABaseSPE);
+				        	}
+				        	else if (humanCurrentPokemon == 4) {
+				        		humanTeam.get(humanCurrentPokemon).setAttackStat(CBaseATK);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialAttackStat(CBaseSPATK);
+				        		humanTeam.get(humanCurrentPokemon).setDefenseStat(CBaseDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialDefenseStat(CBaseSPDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(CBaseSPE);
+				        	}
+				        	else if (humanCurrentPokemon == 5) {
+				        		humanTeam.get(humanCurrentPokemon).setAttackStat(CBaseATK);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialAttackStat(CBaseSPATK);
+				        		humanTeam.get(humanCurrentPokemon).setDefenseStat(CBaseDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialDefenseStat(CBaseSPDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(CBaseSPE);
+				        	}
+				        	
 				        	System.out.println("Enough " + humanTeam.get(humanCurrentPokemon).getName() + " come back!");
 				        	humanCurrentPokemon = ansSwitchChoice - 1;
 				            System.out.println("Go " + humanTeam.get(ansSwitchChoice - 1).getName() + "!");
@@ -137,7 +265,7 @@ public class PokemonRunner {
 				        } 
 				        
 				        else if (selectedPokemon == humanTeam.get(humanCurrentPokemon)) {
-				            System.out.println("You can't switch to the same Pokemon. Choose a different one.");
+				            System.out.println("You can't switch to the same Pokemon. Please choose a different one.");
 				        } 
 				        
 				        else {
@@ -254,7 +382,7 @@ public class PokemonRunner {
 			else if (humanChoice < 3 && computerChoice >= 2) {
 				computerPlayer.computerAction(computerChoice, computerTeam.get(computerCurrentPokemon), humanTeam.get(humanCurrentPokemon), computerPotions);
 				
-				if (humanTeam.get(computerCurrentPokemon).getHitPoints() <= 0) {
+				if (humanTeam.get(humanCurrentPokemon).getHitPoints() <= 0) {
 					System.out.println(humanTeam.get(humanCurrentPokemon).getName() + " has fainted!");
 					humanTeam.get(humanCurrentPokemon).setStatus("Fainted");
 				}
@@ -319,6 +447,49 @@ public class PokemonRunner {
 				    if (ansSwitchChoice >= 1 && ansSwitchChoice <= humanTeam.size()) {
 				        Pokemon selectedPokemon = humanTeam.get(ansSwitchChoice - 1);
 				        if (selectedPokemon.getHitPoints() > 0 && selectedPokemon != humanTeam.get(humanCurrentPokemon)) {
+				        	if (humanCurrentPokemon == 0) {
+				        		humanTeam.get(humanCurrentPokemon).setAttackStat(SWBaseATK);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialAttackStat(SWBaseSPATK);
+				        		humanTeam.get(humanCurrentPokemon).setDefenseStat(SWBaseDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialDefenseStat(SWBaseSPDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(SWBaseSPE);
+				        	}
+				        	else if (humanCurrentPokemon == 1) {
+				        		humanTeam.get(humanCurrentPokemon).setAttackStat(JBaseATK);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialAttackStat(JBaseSPATK);
+				        		humanTeam.get(humanCurrentPokemon).setDefenseStat(JBaseDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialDefenseStat(JBaseSPDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(JBaseSPE);
+				        	}
+				        	else if (humanCurrentPokemon == 2) {
+				        		humanTeam.get(humanCurrentPokemon).setAttackStat(STBaseATK);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialAttackStat(STBaseSPATK);
+				        		humanTeam.get(humanCurrentPokemon).setDefenseStat(STBaseDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialDefenseStat(STBaseSPDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(STBaseSPE);
+				        	}
+				        	else if (humanCurrentPokemon == 3) {
+				        		humanTeam.get(humanCurrentPokemon).setAttackStat(ABaseATK);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialAttackStat(ABaseSPATK);
+				        		humanTeam.get(humanCurrentPokemon).setDefenseStat(ABaseDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialDefenseStat(ABaseSPDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(ABaseSPE);
+				        	}
+				        	else if (humanCurrentPokemon == 4) {
+				        		humanTeam.get(humanCurrentPokemon).setAttackStat(CBaseATK);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialAttackStat(CBaseSPATK);
+				        		humanTeam.get(humanCurrentPokemon).setDefenseStat(CBaseDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialDefenseStat(CBaseSPDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(CBaseSPE);
+				        	}
+				        	else if (humanCurrentPokemon == 5) {
+				        		humanTeam.get(humanCurrentPokemon).setAttackStat(CBaseATK);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialAttackStat(CBaseSPATK);
+				        		humanTeam.get(humanCurrentPokemon).setDefenseStat(CBaseDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpecialDefenseStat(CBaseSPDEF);
+				        		humanTeam.get(humanCurrentPokemon).setSpeedStat(CBaseSPE);
+				        	}
+				        	
 				        	humanCurrentPokemon = ansSwitchChoice - 1;
 				            System.out.println("Go " + humanTeam.get(ansSwitchChoice - 1).getName() + "!");
 				            humanPlayer.setMyPokemon(humanTeam.get(humanCurrentPokemon));
