@@ -17,8 +17,7 @@ public class Staraptor extends Pokemon{
 	
 	//Performs the attack on the opposing Pokemon based on the index.
 	@Override
-	public void attack(Pokemon other, int attackIndex) {
-		String battleCry9, PokemonInfo9;
+	public void attack(Pokemon myPokemon, Pokemon other, int attackIndex) {
 		List<String> moves9 = new ArrayList<>();
 		List<String> attackTypes9 = new ArrayList<>();
 		List<Integer> basePowers9 = new ArrayList<>();
@@ -28,33 +27,27 @@ public class Staraptor extends Pokemon{
 				moves9.add("Brave Bird");
 				attackTypes9.add("Flying");
 				basePowers9.add(120);
-				moveDescriptions9.add("Flying Type, Physical: Staraptor tucks in its wings and charges from a low altitude!");
+				moveDescriptions9.add("Flying Type, Physical: Staraptor used Brave Bird!");
 				Attack BraveBird = new Attack(moveDescriptions9.get(0), 1, 15, attackTypes9.get(0), basePowers9.get(0), "Physical");
 				
 				moves9.add("Facade");
 				attackTypes9.add("Normal");
 				basePowers9.add(70);
-				moveDescriptions9.add("Normal Type, Physical: Staraptor attacks by bashing the target!");
+				moveDescriptions9.add("Normal Type, Physical: Staraptor used Facade!");
 				Attack Facade = new Attack(moveDescriptions9.get(1), 1, 20, attackTypes9.get(1), basePowers9.get(1), "Physical");
 				
 				moves9.add("Close Combat");
 				attackTypes9.add("Fighting");
 				basePowers9.add(120);
-				moveDescriptions9.add("Fighting Type, Physical: Staraptor fights the foe in close without guarding itself!");
+				moveDescriptions9.add("Fighting Type, Physical: Staraptor used Close Combat!");
 				Attack CloseCombat = new Attack(moveDescriptions9.get(2), 1, 5, attackTypes9.get(2), basePowers9.get(2), "Physical");
 				
 				//Code this attack specifically
 				moves9.add("Endeavor");
 				attackTypes9.add("Normal");
 				basePowers9.add(0);
-				moveDescriptions9.add("Normal Type, Physical: Staraptor attacks by cutting down the foe's HP to equal the user's HP!");
+				moveDescriptions9.add("Normal Type, Physical: Staraptor used Endeavor!");
 				Attack Endeavor = new Attack(moveDescriptions9.get(3), 1, 15, attackTypes9.get(3), basePowers9.get(3), "Physical");
-				
-				PokemonInfo9 = "Staraptor never stops attacking even if it is injured. It fusses over the shape of its comb.";
-				battleCry9 = "Bird Up!";
-				
-				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Staraptor Star = new Staraptor(192, 192, "Healthy", "Staraptor", "Normal", "Flying", moves9, battleCry9, 189, 134, 112, 123, 167, PokemonInfo9);
 				
 				int damageDealt;
 				int remainingHP;
@@ -62,9 +55,10 @@ public class Staraptor extends Pokemon{
 				if (attackIndex == 1) {
 					System.out.println(moveDescriptions9.get(0));
 					//This could be the key to the computer calculating damage before the turn starts. Check if this works in the runner maybe
-					damageDealt = BraveBird.getDamage(BraveBird, Star, other);
+					damageDealt = BraveBird.getDamage(BraveBird, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
+					
 					if (BraveBird.getDamageMultiplier(attackTypes9.get(0), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
@@ -75,10 +69,14 @@ public class Staraptor extends Pokemon{
 						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+					double tempRecoil = damageDealt * (1.0/3);
+					int recoilDamage = (int)(tempRecoil + .5);
+					myPokemon.setHitPoints(myPokemon.getHitPoints() - recoilDamage);
+					System.out.println("Staraptor takes " + recoilDamage + " damage in recoil!");
 				}
 				else if (attackIndex == 2) {
 					System.out.println(moveDescriptions9.get(1));
-					damageDealt = Facade.getDamage(Facade, Star, other);
+					damageDealt = Facade.getDamage(Facade, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (Facade.getDamageMultiplier(attackTypes9.get(1), other) >= 2) {
@@ -94,9 +92,12 @@ public class Staraptor extends Pokemon{
 				}
 				else if (attackIndex == 3) {
 					System.out.println(moveDescriptions9.get(2));
-					damageDealt = CloseCombat.getDamage(CloseCombat, Star, other);
+					damageDealt = CloseCombat.getDamage(CloseCombat, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
+					myPokemon.setDefenseStat(myPokemon.getDefenseStat() * 0.75);
+					myPokemon.setSpecialDefenseStat(myPokemon.getSpecialDefenseStat() * 0.75);
+					
 					if (CloseCombat.getDamageMultiplier(attackTypes9.get(2), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
@@ -107,6 +108,7 @@ public class Staraptor extends Pokemon{
 						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+					System.out.println("Staraptor's Defense and Special Defense dropped from closing the distance!");
 				}
 				else if (attackIndex == 4) {
 					System.out.println(moveDescriptions9.get(3));
@@ -116,19 +118,18 @@ public class Staraptor extends Pokemon{
 						System.out.println(other.getName() + " takes 0 damage!");
 					}
 					
-					else if (Star.getHitPoints() < other.getHitPoints()) {
-						other.setHitPoints(Star.getHitPoints());
-						System.out.println("Staraptor and the target now have the same hp!");
+					else if (myPokemon.getHitPoints() < other.getHitPoints()) {
+						other.setHitPoints(myPokemon.getHitPoints());
+						System.out.println("Staraptor and the target now have the same amount of hp!");
 					}
 					
-					else if (Star.getHitPoints() >= other.getHitPoints()) {
+					else if (myPokemon.getHitPoints() >= other.getHitPoints()) {
 						System.out.println("The move failed since the target had less hp!");
 					}	
 				}
 	}
 	
 	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
-		String battleCry9, PokemonInfo9;
 		List<String> moves9 = new ArrayList<>();
 		List<String> attackTypes9 = new ArrayList<>();
 		List<Integer> basePowers9 = new ArrayList<>();
@@ -160,16 +161,10 @@ public class Staraptor extends Pokemon{
 				moveDescriptions9.add("Normal Type, Physical: Staraptor attacks by cutting down the foe's HP to equal the user's HP!");
 				Attack Endeavor = new Attack(moveDescriptions9.get(3), 1, 15, attackTypes9.get(3), basePowers9.get(3), "Physical");
 				
-				PokemonInfo9 = "Staraptor never stops attacking even if it is injured. It fusses over the shape of its comb.";
-				battleCry9 = "Bird Up!";
-				
-				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Staraptor Star = new Staraptor(192, 192, "Healthy", "Staraptor", "Normal", "Flying", moves9, battleCry9, 189, 134, 112, 123, 167, PokemonInfo9);
-				
-				int damageDealt1 = BraveBird.getDamage(BraveBird, Star, other);
-				int damageDealt2 = Facade.getDamage(Facade, Star, other);
-				int damageDealt3 = CloseCombat.getDamage(CloseCombat, Star, other);
-				int damageDealt4 = Endeavor.getDamage(Endeavor, Star, other);
+				int damageDealt1 = BraveBird.getDamage(BraveBird, myPokemon, other);
+				int damageDealt2 = Facade.getDamage(Facade, myPokemon, other);
+				int damageDealt3 = CloseCombat.getDamage(CloseCombat, myPokemon, other);
+				int damageDealt4 = Endeavor.getDamage(Endeavor, myPokemon, other);
 				
 				List<Integer> damageList = new ArrayList<>();
 				damageList.add(damageDealt1);
