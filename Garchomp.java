@@ -17,8 +17,7 @@ public class Garchomp extends Pokemon{
 	
 	//Performs the attack on the opposing Pokemon based on the index.
 	@Override
-	public void attack(Pokemon other, int attackIndex) {
-		String battleCry3, PokemonInfo3;
+	public void attack(Pokemon myPokemon, Pokemon other, int attackIndex) {
 		List<String> moves3 = new ArrayList<>();
 		List<String> attackTypes3 = new ArrayList<>();
 		List<Integer> basePowers3 = new ArrayList<>();
@@ -28,32 +27,26 @@ public class Garchomp extends Pokemon{
 				moves3.add("Dragon Claw");
 				attackTypes3.add("Dragon");
 				basePowers3.add(80);
-				moveDescriptions3.add("Dragon Type, Physical: Garchomp slashes the foe with its huge sharp claws!");
+				moveDescriptions3.add("Dragon Type, Physical: Garchomp used Dragon Claw!");
 				Attack DragonClaw = new Attack(moveDescriptions3.get(0), 1, 15, attackTypes3.get(0), basePowers3.get(0), "Physical");
 				
 				moves3.add("Fire Fang");
 				attackTypes3.add("Fire");
 				basePowers3.add(65);
-				moveDescriptions3.add("Fire Type, Physical: Garchomp bites with flame-cloaked fangs!");
+				moveDescriptions3.add("Fire Type, Physical: Garchomp used Fire Fang!");
 				Attack FireFang = new Attack(moveDescriptions3.get(1), 1, 15, attackTypes3.get(1), basePowers3.get(1), "Physical");
 				
 				moves3.add("Earthquake");
 				attackTypes3.add("Ground");
 				basePowers3.add(100);
-				moveDescriptions3.add("Ground Type, Physical: Garchomp causes a massive earthquake to damage the opposing Pokemon!");
+				moveDescriptions3.add("Ground Type, Physical: Garchomp used Earthquake!");
 				Attack Earthquake = new Attack(moveDescriptions3.get(2), 1, 10, attackTypes3.get(2), basePowers3.get(2), "Physical");
 				
 				moves3.add("Rock Slide");
 				attackTypes3.add("Rock");
 				basePowers3.add(75);
-				moveDescriptions3.add("Rock Type, Physical: Garchomp hurls Large boulders at the opposing Pokemon!");
+				moveDescriptions3.add("Rock Type, Physical: Garchomp used Rock Slide!");
 				Attack RockSlide = new Attack(moveDescriptions3.get(3), 1, 15, attackTypes3.get(3), basePowers3.get(3), "Physical");
-				
-				PokemonInfo3 = "When Garchomp folds up its body and extends its wings, it looks like a jet plane. It flies at sonic speed.";
-				battleCry3 = "Roar!";
-				
-				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Garchomp GRCMP = new Garchomp(215, 215, "Healthy", "Garchomp", "Dragon", "Ground", moves3, battleCry3, 200, 161, 145, 150, 169, PokemonInfo3);
 				
 				int damageDealt;
 				int remainingHP;
@@ -61,7 +54,7 @@ public class Garchomp extends Pokemon{
 				if (attackIndex == 1) {
 					System.out.println(moveDescriptions3.get(0));
 					//This could be the key to the computer calculating damage before the turn starts. Check if this works in the runner maybe
-					damageDealt = DragonClaw.getDamage(DragonClaw, GRCMP, other);
+					damageDealt = DragonClaw.getDamage(DragonClaw, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (DragonClaw.getDamageMultiplier(attackTypes3.get(0), other) >= 2) {
@@ -77,7 +70,7 @@ public class Garchomp extends Pokemon{
 				}
 				else if (attackIndex == 2) {
 					System.out.println(moveDescriptions3.get(1));
-					damageDealt = FireFang.getDamage(FireFang, GRCMP, other);
+					damageDealt = FireFang.getDamage(FireFang, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (FireFang.getDamageMultiplier(attackTypes3.get(1), other) >= 2) {
@@ -93,7 +86,7 @@ public class Garchomp extends Pokemon{
 				}
 				else if (attackIndex == 3) {
 					System.out.println(moveDescriptions3.get(2));
-					damageDealt = Earthquake.getDamage(Earthquake, GRCMP, other);
+					damageDealt = Earthquake.getDamage(Earthquake, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (Earthquake.getDamageMultiplier(attackTypes3.get(2), other) >= 2) {
@@ -109,7 +102,7 @@ public class Garchomp extends Pokemon{
 				}
 				else if (attackIndex == 4) {
 					System.out.println(moveDescriptions3.get(3));
-					damageDealt = RockSlide.getDamage(RockSlide, GRCMP, other);
+					damageDealt = RockSlide.getDamage(RockSlide, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (RockSlide.getDamageMultiplier(attackTypes3.get(3), other) >= 2) {
@@ -126,7 +119,6 @@ public class Garchomp extends Pokemon{
 	}
 	
 	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
-		String battleCry3, PokemonInfo3;
 		List<String> moves3 = new ArrayList<>();
 		List<String> attackTypes3 = new ArrayList<>();
 		List<Integer> basePowers3 = new ArrayList<>();
@@ -157,16 +149,10 @@ public class Garchomp extends Pokemon{
 				moveDescriptions3.add("Rock Type, Physical: Garchomp hurls Large boulders at the opposing Pokemon!");
 				Attack RockSlide = new Attack(moveDescriptions3.get(3), 1, 15, attackTypes3.get(3), basePowers3.get(3), "Physical");
 				
-				PokemonInfo3 = "When Garchomp folds up its body and extends its wings, it looks like a jet plane. It flies at sonic speed.";
-				battleCry3 = "Roar!";
-				
-				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Garchomp GRCMP = new Garchomp(215, 215, "Healthy", "Garchomp", "Dragon", "Ground", moves3, battleCry3, 200, 161, 145, 150, 169, PokemonInfo3);
-				
-				int damageDealt1 = DragonClaw.getDamage(DragonClaw, GRCMP, other);
-				int damageDealt2 = FireFang.getDamage(FireFang, GRCMP, other);
-				int damageDealt3 = Earthquake.getDamage(Earthquake, GRCMP, other);
-				int damageDealt4 = RockSlide.getDamage(RockSlide, GRCMP, other);
+				int damageDealt1 = DragonClaw.getDamage(DragonClaw, myPokemon, other);
+				int damageDealt2 = FireFang.getDamage(FireFang, myPokemon, other);
+				int damageDealt3 = Earthquake.getDamage(Earthquake, myPokemon, other);
+				int damageDealt4 = RockSlide.getDamage(RockSlide, myPokemon, other);
 				
 				List<Integer> damageList = new ArrayList<>();
 				damageList.add(damageDealt1);
