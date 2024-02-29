@@ -17,8 +17,7 @@ public class Roserade extends Pokemon{
 	
 	//Performs the attack on the opposing Pokemon based on the index.
 	@Override
-	public void attack(Pokemon other, int attackIndex) {
-		String battleCry4, PokemonInfo4;
+	public void attack(Pokemon myPokemon, Pokemon other, int attackIndex) {
 		List<String> moves4 = new ArrayList<>();
 		List<String> attackTypes4 = new ArrayList<>();
 		List<Integer> basePowers4 = new ArrayList<>();
@@ -28,32 +27,26 @@ public class Roserade extends Pokemon{
 				moves4.add("Energy Ball");
 				attackTypes4.add("Grass");
 				basePowers4.add(80);
-				moveDescriptions4.add("Grass Type, Special: Roserade draws power from nature and fires it at the foe!");
+				moveDescriptions4.add("Grass Type, Special: Roserade used Energy Ball!");
 				Attack EnergyBall = new Attack(moveDescriptions4.get(0), 1, 10, attackTypes4.get(0), basePowers4.get(0), "Special");
 				
 				moves4.add("Sludge Bomb");
 				attackTypes4.add("Poison");
 				basePowers4.add(90);
-				moveDescriptions4.add("Poison Type, Special: Roserade attacks by hurling filthy sludge at the foe!");
+				moveDescriptions4.add("Poison Type, Special: Roserade used Sludge Bomb!");
 				Attack SludgeBomb = new Attack(moveDescriptions4.get(1), 1, 10, attackTypes4.get(1), basePowers4.get(1), "Special");
 				
 				moves4.add("Dazzling Gleam");
 				attackTypes4.add("Fairy");
 				basePowers4.add(80);
-				moveDescriptions4.add("Fairy Type, Special: Roserade damages opposing Pokémon by emitting a powerful flash!");
+				moveDescriptions4.add("Fairy Type, Special: Roserade used Dazzling Gleam!");
 				Attack DazzlingGleam = new Attack(moveDescriptions4.get(2), 1, 10, attackTypes4.get(2), basePowers4.get(2), "Special");
 				
-				moves4.add("Extasensory");
+				moves4.add("Extrasensory");
 				attackTypes4.add("Psychic");
 				basePowers4.add(80);
-				moveDescriptions4.add("Psychic type, Special: Roserade attacks with an odd, unseeable power!");
+				moveDescriptions4.add("Psychic type, Special: Roserade used Extrasensory!");
 				Attack Extrasensory = new Attack(moveDescriptions4.get(3), 1, 20, attackTypes4.get(3), basePowers4.get(3), "Special");
-				
-				PokemonInfo4 = "With the movements of a dancer, Roserade strikes with whips that are densely lined with poison thorns.";
-				battleCry4 = "Rose!";
-				
-				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Roserade Rose = new Roserade(167, 167, "Healthy", "Roserade", "Grass", "Poison", moves4, battleCry4, 134, 128, 194, 172, 156, PokemonInfo4);
 				
 				int damageDealt;
 				int remainingHP;
@@ -61,7 +54,7 @@ public class Roserade extends Pokemon{
 				if (attackIndex == 1) {
 					System.out.println(moveDescriptions4.get(0));
 					//This could be the key to the computer calculating damage before the turn starts. Check if this works in the runner maybe
-					damageDealt = EnergyBall.getDamage(EnergyBall, Rose, other);
+					damageDealt = EnergyBall.getDamage(EnergyBall, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (EnergyBall.getDamageMultiplier(attackTypes4.get(0), other) >= 2) {
@@ -77,7 +70,7 @@ public class Roserade extends Pokemon{
 				}
 				else if (attackIndex == 2) {
 					System.out.println(moveDescriptions4.get(1));
-					damageDealt = SludgeBomb.getDamage(SludgeBomb, Rose, other);
+					damageDealt = SludgeBomb.getDamage(SludgeBomb, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (SludgeBomb.getDamageMultiplier(attackTypes4.get(1), other) >= 2) {
@@ -93,7 +86,7 @@ public class Roserade extends Pokemon{
 				}
 				else if (attackIndex == 3) {
 					System.out.println(moveDescriptions4.get(2));
-					damageDealt = DazzlingGleam.getDamage(DazzlingGleam, Rose, other);
+					damageDealt = DazzlingGleam.getDamage(DazzlingGleam, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (DazzlingGleam.getDamageMultiplier(attackTypes4.get(2), other) >= 2) {
@@ -109,7 +102,7 @@ public class Roserade extends Pokemon{
 				}
 				else if (attackIndex == 4) {
 					System.out.println(moveDescriptions4.get(3));
-					damageDealt = Extrasensory.getDamage(Extrasensory, Rose, other);
+					damageDealt = Extrasensory.getDamage(Extrasensory, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (Extrasensory.getDamageMultiplier(attackTypes4.get(3), other) >= 2) {
@@ -126,7 +119,6 @@ public class Roserade extends Pokemon{
 	}
 	
 	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
-		String battleCry4, PokemonInfo4;
 		List<String> moves4 = new ArrayList<>();
 		List<String> attackTypes4 = new ArrayList<>();
 		List<Integer> basePowers4 = new ArrayList<>();
@@ -157,16 +149,10 @@ public class Roserade extends Pokemon{
 				moveDescriptions4.add("Psychic type, Special: Roserade attacks with an odd, unseeable power!");
 				Attack Extrasensory = new Attack(moveDescriptions4.get(3), 1, 20, attackTypes4.get(3), basePowers4.get(3), "Special");
 				
-				PokemonInfo4 = "With the movements of a dancer, Roserade strikes with whips that are densely lined with poison thorns.";
-				battleCry4 = "Rose!";
-				
-				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Roserade Rose = new Roserade(167, 167, "Healthy", "Roserade", "Grass", "Poison", moves4, battleCry4, 134, 128, 194, 172, 156, PokemonInfo4);
-				
-				int damageDealt1 = EnergyBall.getDamage(EnergyBall, Rose, other);
-				int damageDealt2 = SludgeBomb.getDamage(SludgeBomb, Rose, other);
-				int damageDealt3 = DazzlingGleam.getDamage(DazzlingGleam, Rose, other);
-				int damageDealt4 = Extrasensory.getDamage(Extrasensory, Rose, other);
+				int damageDealt1 = EnergyBall.getDamage(EnergyBall, myPokemon, other);
+				int damageDealt2 = SludgeBomb.getDamage(SludgeBomb, myPokemon, other);
+				int damageDealt3 = DazzlingGleam.getDamage(DazzlingGleam, myPokemon, other);
+				int damageDealt4 = Extrasensory.getDamage(Extrasensory, myPokemon, other);
 				
 				List<Integer> damageList = new ArrayList<>();
 				damageList.add(damageDealt1);
