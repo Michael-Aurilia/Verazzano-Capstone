@@ -17,8 +17,7 @@ public class Abomasnow extends Pokemon{
 	
 	//Performs the attack on the opposing Pokemon based on the index.
 	@Override
-	public void attack(Pokemon other, int attackIndex) {
-		String battleCry10, PokemonInfo10;
+	public void attack(Pokemon myPokemon, Pokemon other, int attackIndex) {
 		List<String> moves10 = new ArrayList<>();
 		List<String> attackTypes10 = new ArrayList<>();
 		List<Integer> basePowers10 = new ArrayList<>();
@@ -28,32 +27,26 @@ public class Abomasnow extends Pokemon{
 				moves10.add("Energy Ball");
 				attackTypes10.add("Grass");
 				basePowers10.add(80);
-				moveDescriptions10.add("Grass Type, Special: Abomasnow draws power from nature and fires it at the foe!");
+				moveDescriptions10.add("Grass Type, Special: Abomasnow used Energy Ball!");
 				Attack EnergyBall = new Attack(moveDescriptions10.get(0), 1, 10, attackTypes10.get(0), basePowers10.get(0), "Special");
 				
 				moves10.add("Blizzard");
 				attackTypes10.add("Ice");
 				basePowers10.add(110);
-				moveDescriptions10.add("Ice Type, Special: Abomasnow summons howling blizzard to strike the foe!");
+				moveDescriptions10.add("Ice Type, Special: Abomasnow used Blizzard!");
 				Attack Blizzard = new Attack(moveDescriptions10.get(1), 1, 5, attackTypes10.get(1), basePowers10.get(1), "Special");
 				
 				moves10.add("Wood Hammer");
 				attackTypes10.add("Grass");
 				basePowers10.add(120);
-				moveDescriptions10.add("Grass Type, Physical: Abomasnow slams its rugged body into the foe to attack!");
+				moveDescriptions10.add("Grass Type, Physical: Abomasnow used Wood Hammer!");
 				Attack WoodHammer = new Attack(moveDescriptions10.get(2), 1, 15, attackTypes10.get(2), basePowers10.get(2), "Physical");
 				
 				moves10.add("Ice Punch");
 				attackTypes10.add("Ice");
 				basePowers10.add(75);
-				moveDescriptions10.add("Dark Type, Physical: Abomasnow punches the foe with an icy fist!");
+				moveDescriptions10.add("Dark Type, Physical: Abomasnow used Ice Punch!");
 				Attack IcePunch = new Attack(moveDescriptions10.get(3), 1, 15, attackTypes10.get(3), basePowers10.get(3), "Physical");
-				
-				PokemonInfo10 = "Abomasnow lives a quiet life on mountains that are perpetually covered in snow. It hides itself by whipping up blizzards.";
-				battleCry10 = "Roar!";
-				
-				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Abomasnow Snow = new Abomasnow(167, 167, "Healthy", "Abomasnow", "Grass", "Ice", moves10, battleCry10, 117, 156, 216, 156, 145, PokemonInfo10);
 				
 				int damageDealt;
 				int remainingHP;
@@ -61,7 +54,7 @@ public class Abomasnow extends Pokemon{
 				if (attackIndex == 1) {
 					System.out.println(moveDescriptions10.get(0));
 					//This could be the key to the computer calculating damage before the turn starts. Check if this works in the runner maybe
-					damageDealt = EnergyBall.getDamage(EnergyBall, Snow, other);
+					damageDealt = EnergyBall.getDamage(EnergyBall, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (EnergyBall.getDamageMultiplier(attackTypes10.get(0), other) >= 2) {
@@ -77,7 +70,7 @@ public class Abomasnow extends Pokemon{
 				}
 				else if (attackIndex == 2) {
 					System.out.println(moveDescriptions10.get(1));
-					damageDealt = Blizzard.getDamage(Blizzard, Snow, other);
+					damageDealt = Blizzard.getDamage(Blizzard, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (Blizzard.getDamageMultiplier(attackTypes10.get(1), other) >= 2) {
@@ -93,7 +86,7 @@ public class Abomasnow extends Pokemon{
 				}
 				else if (attackIndex == 3) {
 					System.out.println(moveDescriptions10.get(2));
-					damageDealt = WoodHammer.getDamage(WoodHammer, Snow, other);
+					damageDealt = WoodHammer.getDamage(WoodHammer, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (WoodHammer.getDamageMultiplier(attackTypes10.get(2), other) >= 2) {
@@ -106,10 +99,14 @@ public class Abomasnow extends Pokemon{
 						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+					double tempRecoil = damageDealt * 0.33;
+					int recoilDamage = (int)(tempRecoil + .5);
+					myPokemon.setHitPoints(myPokemon.getHitPoints() - recoilDamage);
+					System.out.println("Abomasnow takes " + recoilDamage + " damage in recoil!");
 				}
 				else if (attackIndex == 4) {
 					System.out.println(moveDescriptions10.get(3));
-					damageDealt = IcePunch.getDamage (IcePunch, Snow, other);
+					damageDealt = IcePunch.getDamage (IcePunch, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (IcePunch.getDamageMultiplier(attackTypes10.get(3), other) >= 2) {
@@ -126,7 +123,6 @@ public class Abomasnow extends Pokemon{
 	}
 	
 	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
-		String battleCry10, PokemonInfo10;
 		List<String> moves10 = new ArrayList<>();
 		List<String> attackTypes10 = new ArrayList<>();
 		List<Integer> basePowers10 = new ArrayList<>();
@@ -157,16 +153,10 @@ public class Abomasnow extends Pokemon{
 				moveDescriptions10.add("Dark Type, Physical: Abomasnow punches the foe with an icy fist!");
 				Attack IcePunch = new Attack(moveDescriptions10.get(3), 1, 15, attackTypes10.get(3), basePowers10.get(3), "Physical");
 				
-				PokemonInfo10 = "Abomasnow lives a quiet life on mountains that are perpetually covered in snow. It hides itself by whipping up blizzards.";
-				battleCry10 = "Roar!";
-				
-				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Abomasnow Snow = new Abomasnow(167, 167, "Healthy", "Abomasnow", "Grass", "Ice", moves10, battleCry10, 117, 156, 216, 156, 145, PokemonInfo10);
-				
-				int damageDealt1 = EnergyBall.getDamage(EnergyBall, Snow, other);
-				int damageDealt2 = Blizzard.getDamage(Blizzard, Snow, other);
-				int damageDealt3 = WoodHammer.getDamage(WoodHammer, Snow, other);
-				int damageDealt4 = IcePunch.getDamage(IcePunch, Snow, other);
+				int damageDealt1 = EnergyBall.getDamage(EnergyBall, myPokemon, other);
+				int damageDealt2 = Blizzard.getDamage(Blizzard, myPokemon, other);
+				int damageDealt3 = WoodHammer.getDamage(WoodHammer, myPokemon, other);
+				int damageDealt4 = IcePunch.getDamage(IcePunch, myPokemon, other);
 				
 				List<Integer> damageList = new ArrayList<>();
 				damageList.add(damageDealt1);
