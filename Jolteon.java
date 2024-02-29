@@ -17,8 +17,7 @@ public class Jolteon extends Pokemon{
 	
 	//Performs the attack on the opposing Pokemon based on the index.
 	@Override
-	public void attack(Pokemon other, int attackIndex) {
-		String battleCry2, PokemonInfo2;
+	public void attack(Pokemon myPokemon, Pokemon other, int attackIndex) {
 		List<String> moves2 = new ArrayList<>();
 		List<String> attackTypes2 = new ArrayList<>();
 		List<Integer> basePowers2 = new ArrayList<>();
@@ -28,40 +27,33 @@ public class Jolteon extends Pokemon{
 		moves2.add("Thunderbolt");
 		attackTypes2.add("Electric");
 		basePowers2.add(90);
-		moveDescriptions2.add("Electric Type, Special: Jolteon unleahes a strong electric blast to crash down on the opposing Pokemon!");
+		moveDescriptions2.add("Electric Type, Special: Jolteon Thundebolt!");
 		Attack Thunderbolt = new Attack(moveDescriptions2.get(0), 1, 15, attackTypes2.get(0), basePowers2.get(0), "Special");
 		
 		moves2.add("Hyper Voice");
 		attackTypes2.add("Normal");
 		basePowers2.add(90);
-		moveDescriptions2.add("Normal Type, Special: Jolteon lets loose a horribly echoing shout!");
+		moveDescriptions2.add("Normal Type, Special: Jolteon used Hyper Voice!");
 		Attack HyperVoice = new Attack(moveDescriptions2.get(1), 1, 10, attackTypes2.get(1), basePowers2.get(1), "Special");
 		
 		moves2.add("Shadow Ball");
 		attackTypes2.add("Ghost");
 		basePowers2.add(80);
-		moveDescriptions2.add("Ghost Type, Special: Jolteon hurls a shadowy blob at the opposing Pokemon!");
+		moveDescriptions2.add("Ghost Type, Special: Jolteon used Shadow Ball!");
 		Attack ShadowBall = new Attack(moveDescriptions2.get(2), 1, 15, attackTypes2.get(2), basePowers2.get(2), "Special");
 		
 		moves2.add("Double Kick");
 		attackTypes2.add("Fighting");
 		basePowers2.add(60);
-		moveDescriptions2.add("Fighting Type, Physical: The opposing Pokemon is quickly kicked twice in succession by Jolteon!");
+		moveDescriptions2.add("Fighting Type, Physical: Jolteon used Double Kick!");
 		Attack DoubleKick = new Attack(moveDescriptions2.get(3), 1, 30, attackTypes2.get(3), basePowers2.get(3), "Physical");
-		
-		PokemonInfo2 = "It accumulates negative ions in the atmosphere to blast out 10000-volt lightning bolts.";
-		battleCry2 = "Jolteeee!";
-		
-		//Creates a seperate jolteon object that really is only needed for the attack stat and type of Jolteon.
-		//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, Info
-		Jolteon J1 = new Jolteon(172, 172, "Healthy", "Jolteon", "Electric", "Null", moves2, battleCry2, 128, 152, 178, 161, 200, PokemonInfo2);
 		
 		int damageDealt;
 		int remainingHP;
 		
 		if (attackIndex == 1) {
 			System.out.println(moveDescriptions2.get(0));
-			damageDealt = Thunderbolt.getDamage(Thunderbolt, J1, other);
+			damageDealt = Thunderbolt.getDamage(Thunderbolt, myPokemon, other);
 			remainingHP = other.getHitPoints() - damageDealt;
 			other.setHitPoints(remainingHP);
 			if (Thunderbolt.getDamageMultiplier(attackTypes2.get(0), other) >= 2) {
@@ -77,7 +69,7 @@ public class Jolteon extends Pokemon{
 		}
 		else if (attackIndex == 2) {
 			System.out.println(moveDescriptions2.get(1));
-			damageDealt = HyperVoice.getDamage(HyperVoice, J1, other);
+			damageDealt = HyperVoice.getDamage(HyperVoice, myPokemon, other);
 			remainingHP = other.getHitPoints() - damageDealt;
 			other.setHitPoints(remainingHP);
 			if (HyperVoice.getDamageMultiplier(attackTypes2.get(1), other) >= 2) {
@@ -93,7 +85,7 @@ public class Jolteon extends Pokemon{
 		}
 		else if (attackIndex == 3) {
 			System.out.println(moveDescriptions2.get(2));
-			damageDealt = ShadowBall.getDamage(ShadowBall, J1, other);
+			damageDealt = ShadowBall.getDamage(ShadowBall, myPokemon, other);
 			remainingHP = other.getHitPoints() - damageDealt;
 			other.setHitPoints(remainingHP);
 			if (ShadowBall.getDamageMultiplier(attackTypes2.get(2), other) >= 2) {
@@ -109,7 +101,7 @@ public class Jolteon extends Pokemon{
 		}
 		else if (attackIndex == 4) {
 			System.out.println(moveDescriptions2.get(3));
-			damageDealt = DoubleKick.getDamage(DoubleKick, J1, other);
+			damageDealt = DoubleKick.getDamage(DoubleKick, myPokemon, other);
 			remainingHP = other.getHitPoints() - damageDealt;
 			other.setHitPoints(remainingHP);
 			if (DoubleKick.getDamageMultiplier(attackTypes2.get(3), other) >= 2) {
@@ -126,7 +118,6 @@ public class Jolteon extends Pokemon{
 	}
 	
 	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
-		String battleCry2, PokemonInfo2;
 		List<String> moves2 = new ArrayList<>();
 		List<String> attackTypes2 = new ArrayList<>();
 		List<Integer> basePowers2 = new ArrayList<>();
@@ -157,17 +148,10 @@ public class Jolteon extends Pokemon{
 		moveDescriptions2.add("Fighting Type, Physical: The opposing Pokemon is quickly kicked twice in succession by Jolteon!");
 		Attack DoubleKick = new Attack(moveDescriptions2.get(3), 1, 30, attackTypes2.get(3), basePowers2.get(3), "Physical");
 		
-		PokemonInfo2 = "It accumulates negative ions in the atmosphere to blast out 10000-volt lightning bolts.";
-		battleCry2 = "Jolteeee!";
-		
-		//Creates a seperate jolteon object that really is only needed for the attack stat and type of Jolteon.
-		//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, Info
-		Jolteon J1 = new Jolteon(172, 172, "Healthy", "Jolteon", "Electric", "Null", moves2, battleCry2, 128, 152, 178, 161, 200, PokemonInfo2);
-		
-		int damageDealt1 = Thunderbolt.getDamage(Thunderbolt, J1, other);
-		int damageDealt2 = HyperVoice.getDamage(HyperVoice, J1, other);
-		int damageDealt3 = ShadowBall.getDamage(ShadowBall, J1, other);
-		int damageDealt4 = DoubleKick.getDamage(DoubleKick, J1, other);
+		int damageDealt1 = Thunderbolt.getDamage(Thunderbolt, myPokemon, other);
+		int damageDealt2 = HyperVoice.getDamage(HyperVoice, myPokemon, other);
+		int damageDealt3 = ShadowBall.getDamage(ShadowBall, myPokemon, other);
+		int damageDealt4 = DoubleKick.getDamage(DoubleKick, myPokemon, other);
 		
 		List<Integer> damageList = new ArrayList<>();
 		damageList.add(damageDealt1);
