@@ -1,4 +1,3 @@
-//This file needs large changes: AI implementation?(Computer always targets weaknesses or does the highest amount of damage), Same changes as HumanPlayer too.
 import java.util.List;
 
 public class ComputerPlayer extends Player{
@@ -53,19 +52,19 @@ public class ComputerPlayer extends Player{
 		}
 		
 		else if (choice == 2) {
-			myPokemon.attack(other, 1);
+			myPokemon.attack(myPokemon, other, 1);
 		}
 		
 		else if (choice == 3) {
-			myPokemon.attack(other, 2);
+			myPokemon.attack(myPokemon, other, 2);
 		}
 		
 		else if (choice == 4) {
-			myPokemon.attack(other, 3);
+			myPokemon.attack(myPokemon, other, 3);
 		}
 		
 		else if (choice == 5) {
-			myPokemon.attack(other, 4);
+			myPokemon.attack(myPokemon, other, 4);
 		}
 	}
 
