@@ -17,8 +17,7 @@ public class Swampert extends Pokemon{
 	
 	//Performs the attack on the opposing Pokemon based on the index.
 	@Override
-	public void attack(Pokemon other, int attackIndex) {
-		String battleCry1, PokemonInfo1;
+	public void attack(Pokemon myPokemon, Pokemon other, int attackIndex) {
 		List<String> moves1 = new ArrayList<>();
 		List<String> attackTypes1 = new ArrayList<>();
 		List<Integer> basePowers1 = new ArrayList<>();
@@ -28,32 +27,26 @@ public class Swampert extends Pokemon{
 		moves1.add("Liquidation");
 		attackTypes1.add("Water");
 		basePowers1.add(85);
-		moveDescriptions1.add("Water Type, Physical: Swampert slams into the target using a full-force blast of water!");
+		moveDescriptions1.add("Water Type, Physical: Swampert used Liquidation!");
 		Attack Liquidation = new Attack(moveDescriptions1.get(0), 1, 15, attackTypes1.get(0), basePowers1.get(0), "Physical");
 		
-		moves1.add("Ice Beam");
+		moves1.add("Ice Punch");
 		attackTypes1.add("Ice");
-		basePowers1.add(90);
-		moveDescriptions1.add("Ice Type, Special: Swampert fires a freezing beam of ice at the opposing Pokemon!");
-		Attack IceBeam = new Attack(moveDescriptions1.get(1), 1, 15, attackTypes1.get(1), basePowers1.get(1), "Special");
+		basePowers1.add(75);
+		moveDescriptions1.add("Ice Type, Physical: Swampert used Ice Punch!");
+		Attack IcePunch = new Attack(moveDescriptions1.get(1), 1, 15, attackTypes1.get(1), basePowers1.get(1), "Physical");
 		
 		moves1.add("Earthquake");
 		attackTypes1.add("Ground");
 		basePowers1.add(100);
-		moveDescriptions1.add("Ground Type, Physical: Swampert causes a massive earthquake to damage the opposing Pokemon!");
+		moveDescriptions1.add("Ground Type, Physical: Swampert used Earthquake!");
 		Attack Earthquake = new Attack(moveDescriptions1.get(2), 1, 10, attackTypes1.get(2), basePowers1.get(2), "Physical");
 		
 		moves1.add("Rock Slide");
 		attackTypes1.add("Rock");
 		basePowers1.add(75);
-		moveDescriptions1.add("Rock Type, Physical: Swampert hurls Large boulders at the opposing Pokemon!");
+		moveDescriptions1.add("Rock Type, Physical: Swampert used Rock Slide!");
 		Attack RockSlide = new Attack(moveDescriptions1.get(3), 1, 15, attackTypes1.get(3), basePowers1.get(3), "Physical");
-		
-		PokemonInfo1 = "Swampert is very strong. It has enough power to easily drag a boulder weighing more than a ton. This Pokémon also has powerful vision that lets it see even in murky water.";
-		battleCry1 = "Swaaamp!";
-		
-		//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-		Swampert SWPRT = new Swampert(207, 207, "Healthy", "Swampert", "Water", "Ground", moves1, battleCry1, 178, 156, 150, 172, 143, PokemonInfo1);
 		
 		int damageDealt;
 		int remainingHP;
@@ -61,7 +54,7 @@ public class Swampert extends Pokemon{
 		if (attackIndex == 1) {
 			System.out.println(moveDescriptions1.get(0));
 			//This could be the key to the computer calculating damage before the turn starts. Check if this works in the runner maybe
-			damageDealt = Liquidation.getDamage(Liquidation, SWPRT, other);
+			damageDealt = Liquidation.getDamage(Liquidation, myPokemon, other);
 			remainingHP = other.getHitPoints() - damageDealt;
 			other.setHitPoints(remainingHP);
 			if (Liquidation.getDamageMultiplier(attackTypes1.get(0), other) >= 2) {
@@ -77,23 +70,23 @@ public class Swampert extends Pokemon{
 		}
 		else if (attackIndex == 2) {
 			System.out.println(moveDescriptions1.get(1));
-			damageDealt = IceBeam.getDamage(IceBeam, SWPRT, other);
+			damageDealt = IcePunch.getDamage(IcePunch, myPokemon, other);
 			remainingHP = other.getHitPoints() - damageDealt;
 			other.setHitPoints(remainingHP);
-			if (IceBeam.getDamageMultiplier(attackTypes1.get(1), other) >= 2) {
+			if (IcePunch.getDamageMultiplier(attackTypes1.get(1), other) >= 2) {
 				System.out.println("It's super effective!");
 			}
-			else if (IceBeam.getDamageMultiplier(attackTypes1.get(1), other) == 0) {
+			else if (IcePunch.getDamageMultiplier(attackTypes1.get(1), other) == 0) {
 				System.out.println("The move had no effect.");
 			}
-			else if (IceBeam.getDamageMultiplier(attackTypes1.get(1), other) <= 0.5) {
+			else if (IcePunch.getDamageMultiplier(attackTypes1.get(1), other) <= 0.5) {
 				System.out.println("It's not very effective...");
 			}
 			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 		}
 		else if (attackIndex == 3) {
 			System.out.println(moveDescriptions1.get(2));
-			damageDealt = Earthquake.getDamage(Earthquake, SWPRT, other);
+			damageDealt = Earthquake.getDamage(Earthquake, myPokemon, other);
 			remainingHP = other.getHitPoints() - damageDealt;
 			other.setHitPoints(remainingHP);
 			if (Earthquake.getDamageMultiplier(attackTypes1.get(2), other) >= 2) {
@@ -109,7 +102,7 @@ public class Swampert extends Pokemon{
 		}
 		else if (attackIndex == 4) {
 			System.out.println(moveDescriptions1.get(3));
-			damageDealt = RockSlide.getDamage(RockSlide, SWPRT, other);
+			damageDealt = RockSlide.getDamage(RockSlide, myPokemon, other);
 			remainingHP = other.getHitPoints() - damageDealt;
 			other.setHitPoints(remainingHP);
 			if (RockSlide.getDamageMultiplier(attackTypes1.get(3), other) >= 2) {
@@ -126,7 +119,6 @@ public class Swampert extends Pokemon{
 	}
 	
 	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
-		String battleCry1, PokemonInfo1;
 		List<String> moves1 = new ArrayList<>();
 		List<String> attackTypes1 = new ArrayList<>();
 		List<Integer> basePowers1 = new ArrayList<>();
@@ -139,11 +131,11 @@ public class Swampert extends Pokemon{
 		moveDescriptions1.add("Water Type, Physical: Swampert slams into the target using a full-force blast of water!");
 		Attack Liquidation = new Attack(moveDescriptions1.get(0), 1, 15, attackTypes1.get(0), basePowers1.get(0), "Physical");
 		
-		moves1.add("Ice Beam");
+		moves1.add("Ice Punch");
 		attackTypes1.add("Ice");
-		basePowers1.add(90);
-		moveDescriptions1.add("Ice Type, Special: Swampert fires a freezing beam of ice at the opposing Pokemon!");
-		Attack IceBeam = new Attack(moveDescriptions1.get(1), 1, 15, attackTypes1.get(1), basePowers1.get(1), "Special");
+		basePowers1.add(75);
+		moveDescriptions1.add("Ice Type, Special: Swampert punches the opposing Pokemon with an ice covered fist!");
+		Attack IcePunch = new Attack(moveDescriptions1.get(1), 1, 15, attackTypes1.get(1), basePowers1.get(1), "Physical");
 		
 		moves1.add("Earthquake");
 		attackTypes1.add("Ground");
@@ -157,16 +149,10 @@ public class Swampert extends Pokemon{
 		moveDescriptions1.add("Rock Type, Physical: Swampert hurls Large boulders at the opposing Pokemon!");
 		Attack RockSlide = new Attack(moveDescriptions1.get(3), 1, 15, attackTypes1.get(3), basePowers1.get(3), "Physical");
 		
-		PokemonInfo1 = "Swampert is very strong. It has enough power to easily drag a boulder weighing more than a ton. This Pokémon also has powerful vision that lets it see even in murky water.";
-		battleCry1 = "Swaaamp!";
-		
-		//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-		Swampert SWPRT = new Swampert(207, 207, "Healthy", "Swampert", "Water", "Ground", moves1, battleCry1, 178, 156, 150, 172, 143, PokemonInfo1);
-		
-		int damageDealt1 = Liquidation.getDamage(Liquidation, SWPRT, other);
-		int damageDealt2 = IceBeam.getDamage(IceBeam, SWPRT, other);
-		int damageDealt3 = Earthquake.getDamage(Earthquake, SWPRT, other);
-		int damageDealt4 = RockSlide.getDamage(RockSlide, SWPRT, other);
+		int damageDealt1 = Liquidation.getDamage(Liquidation, myPokemon, other);
+		int damageDealt2 = IcePunch.getDamage(IcePunch, myPokemon, other);
+		int damageDealt3 = Earthquake.getDamage(Earthquake, myPokemon, other);
+		int damageDealt4 = RockSlide.getDamage(RockSlide, myPokemon, other);
 		
 		List<Integer> damageList = new ArrayList<>();
 		damageList.add(damageDealt1);
@@ -213,5 +199,4 @@ public class Swampert extends Pokemon{
 		s+= "Info: " + info + "\n";
 		return s;
 	}
-
 }
