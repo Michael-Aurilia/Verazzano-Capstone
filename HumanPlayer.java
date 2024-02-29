@@ -1,5 +1,4 @@
-//This file needs a good amount of changes: Having multiple different Pokemon and switching Pokemon in a turn is most important, No running away, Add new menu for multiple items
-//Make multiple itemCounts for each different item the player can use
+//This file needs some changes: Add new menu for multiple items, Make multiple itemCounts for each different item the player can use
 import java.util.Scanner;
 import java.util.List;
 
@@ -93,19 +92,19 @@ public class HumanPlayer extends Player{
 		}
 		
 		else if (choice == 3) {
-			myPokemon.attack(other, 1);
+			myPokemon.attack(myPokemon, other, 1);
 		}
 		
 		else if (choice == 4) {
-			myPokemon.attack(other, 2);
+			myPokemon.attack(myPokemon, other, 2);
 		}
 		
 		else if (choice == 5) {
-			myPokemon.attack(other, 3);
+			myPokemon.attack(myPokemon, other, 3);
 		}
 		
 		else if (choice == 6) {
-			myPokemon.attack(other, 4);
+			myPokemon.attack(myPokemon, other, 4);
 		}
 	}
 
