@@ -17,8 +17,7 @@ public class Chandelure extends Pokemon{
 	
 	//Performs the attack on the opposing Pokemon based on the index.
 	@Override
-	public void attack(Pokemon other, int attackIndex) {
-		String battleCry11, PokemonInfo11;
+	public void attack(Pokemon myPokemon, Pokemon other, int attackIndex) {
 		List<String> moves11 = new ArrayList<>();
 		List<String> attackTypes11 = new ArrayList<>();
 		List<Integer> basePowers11 = new ArrayList<>();
@@ -28,33 +27,27 @@ public class Chandelure extends Pokemon{
 				moves11.add("Shadow Ball");
 				attackTypes11.add("Ghost");
 				basePowers11.add(80);
-				moveDescriptions11.add("Ghost Type, Special: Chandelure hurls a shadowy blob at the opposing Pokemon!");
+				moveDescriptions11.add("Ghost Type, Special: Chandelure used Shadow Ball!");
 				Attack ShadowBall = new Attack(moveDescriptions11.get(0), 1, 15, attackTypes11.get(0), basePowers11.get(0), "Special");
 				
 				//Remember to implement stat changes
 				moves11.add("Overheat");
 				attackTypes11.add("Fire");
 				basePowers11.add(130);
-				moveDescriptions11.add("Fire Type, Special: Chandelure attacks the foe at full power! The attack's recoil sharply reduces the user's Sp. Atk stat.");
+				moveDescriptions11.add("Fire Type, Special: Chandelure used Overheat!");
 				Attack Overheat = new Attack(moveDescriptions11.get(1), 1, 5, attackTypes11.get(1), basePowers11.get(1), "Special");
 				
 				moves11.add("Psychic");
 				attackTypes11.add("Psychic");
 				basePowers11.add(90);
-				moveDescriptions11.add("Psychic Type, Special: Chandelure's foe is hit by a strong telekinetic force!");
+				moveDescriptions11.add("Psychic Type, Special: Chandelure used Psychic!");
 				Attack Psychic = new Attack(moveDescriptions11.get(2), 1, 10, attackTypes11.get(2), basePowers11.get(2), "Special");
 				
 				moves11.add("Flamethrower");
 				attackTypes11.add("Fire");
 				basePowers11.add(90);
-				moveDescriptions11.add("Fire type, Special: Chandelure foe is scorched with an intense blast of fire!");
+				moveDescriptions11.add("Fire type, Special: Chandelure used Flamethrower!");
 				Attack Flamethrower = new Attack(moveDescriptions11.get(3), 1, 15, attackTypes11.get(3), basePowers11.get(3), "Special");
-				
-				PokemonInfo11 = "Being consumed in Chandelure's flame burns up the spirit, leaving the body behind.";
-				battleCry11 = "Ssss!";
-				
-				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Chandelure Candle = new Chandelure(192, 192, "Healthy", "Chandelure", "Ghost", "Fire", moves11, battleCry11, 112, 161, 189, 183, 145, PokemonInfo11);
 				
 				int damageDealt;
 				int remainingHP;
@@ -62,7 +55,7 @@ public class Chandelure extends Pokemon{
 				if (attackIndex == 1) {
 					System.out.println(moveDescriptions11.get(0));
 					//This could be the key to the computer calculating damage before the turn starts. Check if this works in the runner maybe
-					damageDealt = ShadowBall.getDamage(ShadowBall, Candle, other);
+					damageDealt = ShadowBall.getDamage(ShadowBall, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (ShadowBall.getDamageMultiplier(attackTypes11.get(0), other) >= 2) {
@@ -78,9 +71,13 @@ public class Chandelure extends Pokemon{
 				}
 				else if (attackIndex == 2) {
 					System.out.println(moveDescriptions11.get(1));
-					damageDealt = Overheat.getDamage(Overheat, Candle, other);
+					//Accuracy Check here
+					
+					damageDealt = Overheat.getDamage(Overheat, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
+					myPokemon.setSpecialAttackStat(myPokemon.getSpecialAttackStat() * 0.5);
+					
 					if (Overheat.getDamageMultiplier(attackTypes11.get(1), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
@@ -91,10 +88,11 @@ public class Chandelure extends Pokemon{
 						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+					System.out.println("Chandelure's Special Attack Stat was halved from the recoil!");
 				}
 				else if (attackIndex == 3) {
 					System.out.println(moveDescriptions11.get(2));
-					damageDealt = Psychic.getDamage(Psychic, Candle, other);
+					damageDealt = Psychic.getDamage(Psychic, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (Psychic.getDamageMultiplier(attackTypes11.get(2), other) >= 2) {
@@ -110,7 +108,7 @@ public class Chandelure extends Pokemon{
 				}
 				else if (attackIndex == 4) {
 					System.out.println(moveDescriptions11.get(3));
-					damageDealt = Flamethrower.getDamage(Flamethrower, Candle, other);
+					damageDealt = Flamethrower.getDamage(Flamethrower, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (Flamethrower.getDamageMultiplier(attackTypes11.get(3), other) >= 2) {
@@ -127,7 +125,6 @@ public class Chandelure extends Pokemon{
 	}
 	
 	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
-		String battleCry11, PokemonInfo11;
 		List<String> moves11 = new ArrayList<>();
 		List<String> attackTypes11 = new ArrayList<>();
 		List<Integer> basePowers11 = new ArrayList<>();
@@ -159,16 +156,10 @@ public class Chandelure extends Pokemon{
 				moveDescriptions11.add("Fire type, Special: Chandelure foe is scorched with an intense blast of fire!");
 				Attack Flamethrower = new Attack(moveDescriptions11.get(3), 1, 15, attackTypes11.get(3), basePowers11.get(3), "Special");
 				
-				PokemonInfo11 = "Being consumed in Chandelure's flame burns up the spirit, leaving the body behind.";
-				battleCry11 = "Ssss!";
-				
-				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Chandelure Candle = new Chandelure(192, 192, "Healthy", "Chandelure", "Ghost", "Fire", moves11, battleCry11, 112, 161, 189, 183, 145, PokemonInfo11);
-				
-				int damageDealt1 = ShadowBall.getDamage(ShadowBall, Candle, other);
-				int damageDealt2 = Overheat.getDamage(Overheat, Candle, other);
-				int damageDealt3 = Psychic.getDamage(Psychic, Candle, other);
-				int damageDealt4 = Flamethrower.getDamage(Flamethrower, Candle, other);
+				int damageDealt1 = ShadowBall.getDamage(ShadowBall, myPokemon, other);
+				int damageDealt2 = Overheat.getDamage(Overheat, myPokemon, other);
+				int damageDealt3 = Psychic.getDamage(Psychic, myPokemon, other);
+				int damageDealt4 = Flamethrower.getDamage(Flamethrower, myPokemon, other);
 				
 				List<Integer> damageList = new ArrayList<>();
 				damageList.add(damageDealt1);
