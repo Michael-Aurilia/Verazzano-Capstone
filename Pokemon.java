@@ -15,7 +15,8 @@ public abstract class Pokemon implements Comparable<Pokemon>{
 	private List<String> attacks = new ArrayList<>();
 	private String battleCry;
 	
-	public abstract void attack(Pokemon other, int attackIndex);
+	public abstract void attack(Pokemon myPokemon, Pokemon other, int attackIndex);
+	public abstract List<Integer> getDamages(Pokemon myPokemon, Pokemon other);
 	public abstract void speak();
 	
 	public Pokemon() {
