@@ -17,8 +17,7 @@ public class Lucario extends Pokemon{
 	
 	//Performs the attack on the opposing Pokemon based on the index.
 	@Override
-	public void attack(Pokemon other, int attackIndex) {
-		String battleCry6, PokemonInfo6;
+	public void attack(Pokemon myPokemon, Pokemon other, int attackIndex) {
 		List<String> moves6 = new ArrayList<>();
 		List<String> attackTypes6 = new ArrayList<>();
 		List<Integer> basePowers6 = new ArrayList<>();
@@ -28,32 +27,26 @@ public class Lucario extends Pokemon{
 				moves6.add("Aura Sphere");
 				attackTypes6.add("Fighting");
 				basePowers6.add(80);
-				moveDescriptions6.add("Fighting Type, Special: Lucario looses a blast of aura power from deep within its body!");
+				moveDescriptions6.add("Fighting Type, Special: Lucario used Aura Sphere!");
 				Attack AuraSphere = new Attack(moveDescriptions6.get(0), 1, 20, attackTypes6.get(0), basePowers6.get(0), "Special");
 				
 				moves6.add("Flash Cannon");
 				attackTypes6.add("Steel");
 				basePowers6.add(80);
-				moveDescriptions6.add("Steel Type, Special: Lucario gathers all its light energy and releases it at once!");
+				moveDescriptions6.add("Steel Type, Special: Lucario used Flash Cannon!");
 				Attack FlashCannon = new Attack(moveDescriptions6.get(1), 1, 10, attackTypes6.get(1), basePowers6.get(1), "Special");
 				
 				moves6.add("Close Combat");
 				attackTypes6.add("Fighting");
 				basePowers6.add(120);
-				moveDescriptions6.add("Fighting Type, Physical: Lucario fights the foe in close without guarding itself!");
+				moveDescriptions6.add("Fighting Type, Physical: Lucario used Close Combat!");
 				Attack CloseCombat = new Attack(moveDescriptions6.get(2), 1, 5, attackTypes6.get(2), basePowers6.get(2), "Physical");
 				
 				moves6.add("Crunch");
 				attackTypes6.add("Dark");
 				basePowers6.add(80);
-				moveDescriptions6.add("Dark Type, Physical: Lucario crunches up the foe with sharp fangs!");
+				moveDescriptions6.add("Dark Type, Physical: Lucario used Crunch!");
 				Attack Crunch = new Attack(moveDescriptions6.get(3), 1, 15, attackTypes6.get(3), basePowers6.get(3), "Physical");
-				
-				PokemonInfo6 = "A well-trained Lucario can sense auras to identify and take in the feelings of creatures over half a mile away.";
-				battleCry6 = "Roar!";
-				
-				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Lucario LUC = new Lucario(177, 177, "Healthy", "Lucario", "Fighting", "Steel", moves6, battleCry6, 178, 134, 183, 134, 156, PokemonInfo6);
 				
 				int damageDealt;
 				int remainingHP;
@@ -61,7 +54,7 @@ public class Lucario extends Pokemon{
 				if (attackIndex == 1) {
 					System.out.println(moveDescriptions6.get(0));
 					//This could be the key to the computer calculating damage before the turn starts. Check if this works in the runner maybe
-					damageDealt = AuraSphere.getDamage(AuraSphere, LUC, other);
+					damageDealt = AuraSphere.getDamage(AuraSphere, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (AuraSphere.getDamageMultiplier(attackTypes6.get(0), other) >= 2) {
@@ -77,7 +70,7 @@ public class Lucario extends Pokemon{
 				}
 				else if (attackIndex == 2) {
 					System.out.println(moveDescriptions6.get(1));
-					damageDealt = FlashCannon.getDamage(FlashCannon, LUC, other);
+					damageDealt = FlashCannon.getDamage(FlashCannon, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (FlashCannon.getDamageMultiplier(attackTypes6.get(1), other) >= 2) {
@@ -93,9 +86,12 @@ public class Lucario extends Pokemon{
 				}
 				else if (attackIndex == 3) {
 					System.out.println(moveDescriptions6.get(2));
-					damageDealt = CloseCombat.getDamage(CloseCombat, LUC, other);
+					damageDealt = CloseCombat.getDamage(CloseCombat, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
+					myPokemon.setDefenseStat(myPokemon.getDefenseStat() * 0.75);
+					myPokemon.setSpecialDefenseStat(myPokemon.getSpecialDefenseStat() * 0.75);
+					
 					if (CloseCombat.getDamageMultiplier(attackTypes6.get(2), other) >= 2) {
 						System.out.println("It's super effective!");
 					}
@@ -106,10 +102,11 @@ public class Lucario extends Pokemon{
 						System.out.println("It's not very effective...");
 					}
 					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+					System.out.println("Lucario's Defense and Special Defense dropped from closing the distance!");
 				}
 				else if (attackIndex == 4) {
 					System.out.println(moveDescriptions6.get(3));
-					damageDealt = Crunch.getDamage(Crunch, LUC, other);
+					damageDealt = Crunch.getDamage(Crunch, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (Crunch.getDamageMultiplier(attackTypes6.get(3), other) >= 2) {
@@ -126,47 +123,40 @@ public class Lucario extends Pokemon{
 	}
 	
 	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
-		String battleCry6, PokemonInfo6;
 		List<String> moves6 = new ArrayList<>();
 		List<String> attackTypes6 = new ArrayList<>();
 		List<Integer> basePowers6 = new ArrayList<>();
 		List<String> moveDescriptions6 = new ArrayList<>();
 	
 		//Creates attacks for this Pokemon to use.
-				moves6.add("Aura Sphere");
-				attackTypes6.add("Fighting");
-				basePowers6.add(80);
-				moveDescriptions6.add("Fighting Type, Special: Lucario looses a blast of aura power from deep within its body!");
-				Attack AuraSphere = new Attack(moveDescriptions6.get(0), 1, 20, attackTypes6.get(0), basePowers6.get(0), "Special");
+		moves6.add("Aura Sphere");
+		attackTypes6.add("Fighting");
+		basePowers6.add(80);
+		moveDescriptions6.add("Fighting Type, Special: Lucario looses a blast of aura power from deep within its body!");
+		Attack AuraSphere = new Attack(moveDescriptions6.get(0), 1, 20, attackTypes6.get(0), basePowers6.get(0), "Special");
 				
-				moves6.add("Flash Cannon");
-				attackTypes6.add("Steel");
-				basePowers6.add(80);
-				moveDescriptions6.add("Steel Type, Special: Lucario gathers all its light energy and releases it at once!");
-				Attack FlashCannon = new Attack(moveDescriptions6.get(1), 1, 10, attackTypes6.get(1), basePowers6.get(1), "Special");
+		moves6.add("Flash Cannon");
+		attackTypes6.add("Steel");
+		basePowers6.add(80);
+		moveDescriptions6.add("Steel Type, Special: Lucario gathers all its light energy and releases it at once!");
+		Attack FlashCannon = new Attack(moveDescriptions6.get(1), 1, 10, attackTypes6.get(1), basePowers6.get(1), "Special");
 				
-				moves6.add("Close Combat");
-				attackTypes6.add("Fighting");
-				basePowers6.add(120);
-				moveDescriptions6.add("Fighting Type, Physical: Lucario fights the foe in close without guarding itself!");
-				Attack CloseCombat = new Attack(moveDescriptions6.get(2), 1, 5, attackTypes6.get(2), basePowers6.get(2), "Physical");
+		moves6.add("Close Combat");
+		attackTypes6.add("Fighting");
+		basePowers6.add(120);
+		moveDescriptions6.add("Fighting Type, Physical: Lucario fights the foe in close without guarding itself!");
+		Attack CloseCombat = new Attack(moveDescriptions6.get(2), 1, 5, attackTypes6.get(2), basePowers6.get(2), "Physical");
 				
-				moves6.add("Crunch");
-				attackTypes6.add("Dark");
-				basePowers6.add(80);
-				moveDescriptions6.add("Dark Type, Physical: Lucario crunches up the foe with sharp fangs!");
-				Attack Crunch = new Attack(moveDescriptions6.get(3), 1, 15, attackTypes6.get(3), basePowers6.get(3), "Physical");
-				
-				PokemonInfo6 = "A well-trained Lucario can sense auras to identify and take in the feelings of creatures over half a mile away.";
-				battleCry6 = "Roar!";
-				
-				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Lucario LUC = new Lucario(177, 177, "Healthy", "Lucario", "Fighting", "Steel", moves6, battleCry6, 178, 134, 183, 134, 156, PokemonInfo6);
+		moves6.add("Crunch");
+		attackTypes6.add("Dark");
+		basePowers6.add(80);
+		moveDescriptions6.add("Dark Type, Physical: Lucario crunches up the foe with sharp fangs!");
+		Attack Crunch = new Attack(moveDescriptions6.get(3), 1, 15, attackTypes6.get(3), basePowers6.get(3), "Physical");
 		
-		int damageDealt1 = AuraSphere.getDamage(AuraSphere, LUC, other);
-		int damageDealt2 = FlashCannon.getDamage(FlashCannon, LUC, other);
-		int damageDealt3 = CloseCombat.getDamage(CloseCombat, LUC, other);
-		int damageDealt4 = Crunch.getDamage(Crunch, LUC, other);
+		int damageDealt1 = AuraSphere.getDamage(AuraSphere, myPokemon, other);
+		int damageDealt2 = FlashCannon.getDamage(FlashCannon, myPokemon, other);
+		int damageDealt3 = CloseCombat.getDamage(CloseCombat, myPokemon, other);
+		int damageDealt4 = Crunch.getDamage(Crunch, myPokemon, other);
 		
 		List<Integer> damageList = new ArrayList<>();
 		damageList.add(damageDealt1);
