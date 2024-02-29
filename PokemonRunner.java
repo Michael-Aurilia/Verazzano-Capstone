@@ -191,6 +191,11 @@ public class PokemonRunner {
 		System.out.println("You send out " + humanTeam.get(humanCurrentPokemon).getName() + "!");
 		//Battle starts here!
 		while (true) {
+			int SOTHumanCurrentHP = humanTeam.get(humanCurrentPokemon).getHitPoints();
+			int SOTComputerCurrentHP = computerTeam.get(computerCurrentPokemon).getHitPoints();
+			int damageDealt = 0;
+			int recoilDamage = 0;
+			
 			System.out.println(humanTeam.get(humanCurrentPokemon).getName() + " " + humanTeam.get(humanCurrentPokemon).getHitPoints() + "/" + humanTeam.get(humanCurrentPokemon).getMaxHitPoints());
 			System.out.println(computerTeam.get(computerCurrentPokemon).getName() + " " + computerTeam.get(computerCurrentPokemon).getHitPoints() + "/" + computerTeam.get(computerCurrentPokemon).getMaxHitPoints());
 			
@@ -293,7 +298,8 @@ public class PokemonRunner {
 				
 				//Compare speed for turn order
 				if (humanTeam.get(humanCurrentPokemon).getSpeedStat() > computerTeam.get(computerCurrentPokemon).getSpeedStat()) {
-					humanPlayer.humanAction(humanChoice, humanTeam.get(humanCurrentPokemon), computerTeam.get(computerCurrentPokemon), humanTeam, humanPotions);
+					humanAttack(humanPlayer, humanChoice, humanTeam, computerTeam, humanCurrentPokemon, computerCurrentPokemon, 
+							SOTComputerCurrentHP, humanPotions, damageDealt, recoilDamage);
 					
 					//Checks if opposing Pokemon is still alive before readying their attack
 					if (computerTeam.get(computerCurrentPokemon).getHitPoints() <= 0) {
@@ -301,17 +307,31 @@ public class PokemonRunner {
 						computerTeam.get(computerCurrentPokemon).setStatus("Fainted");
 					}
 					
+					else if (humanTeam.get(humanCurrentPokemon).getHitPoints() <= 0) {
+						System.out.println(humanTeam.get(humanCurrentPokemon).getName() + " has fainted!");
+						humanTeam.get(humanCurrentPokemon).setStatus("Fainted");
+					}
+					
 					else {
-						computerPlayer.computerAction(computerChoice, computerTeam.get(computerCurrentPokemon), humanTeam.get(humanCurrentPokemon), computerPotions);
+						computerAttack(computerPlayer, computerChoice, humanTeam, computerTeam, humanCurrentPokemon, 
+								computerCurrentPokemon, SOTHumanCurrentHP, computerPotions);
+						
+						
 						if (humanTeam.get(humanCurrentPokemon).getHitPoints() <= 0) {
 							System.out.println(humanTeam.get(humanCurrentPokemon).getName() + " has fainted!");
 							humanTeam.get(humanCurrentPokemon).setStatus("Fainted");
+						}
+						
+						else if (computerTeam.get(computerCurrentPokemon).getHitPoints() <= 0) {
+							System.out.println(computerTeam.get(computerCurrentPokemon).getName() + " has fainted!");
+							computerTeam.get(computerCurrentPokemon).setStatus("Fainted");
 						}
 					}
 				}
 				
 				else if (humanTeam.get(humanCurrentPokemon).getSpeedStat() < computerTeam.get(computerCurrentPokemon).getSpeedStat()) {
-					computerPlayer.computerAction(computerChoice, computerTeam.get(computerCurrentPokemon), humanTeam.get(humanCurrentPokemon), computerPotions);
+					computerAttack(computerPlayer, computerChoice, humanTeam, computerTeam, humanCurrentPokemon, 
+							computerCurrentPokemon, SOTHumanCurrentHP, computerPotions);
 					
 					//Checks if opposing Pokemon is still alive before readying their attack
 					if (humanTeam.get(humanCurrentPokemon).getHitPoints() <= 0) {
@@ -319,11 +339,23 @@ public class PokemonRunner {
 						humanTeam.get(humanCurrentPokemon).setStatus("Fainted");
 					}
 					
+					else if (computerTeam.get(computerCurrentPokemon).getHitPoints() <= 0) {
+						System.out.println(computerTeam.get(computerCurrentPokemon).getName() + " has fainted!");
+						computerTeam.get(computerCurrentPokemon).setStatus("Fainted");
+					}
+					
 					else {
-						humanPlayer.humanAction(humanChoice, humanTeam.get(humanCurrentPokemon), computerTeam.get(computerCurrentPokemon), humanTeam, humanPotions);
+						humanAttack(humanPlayer, humanChoice, humanTeam, computerTeam, humanCurrentPokemon, computerCurrentPokemon, 
+								SOTComputerCurrentHP, humanPotions, damageDealt, recoilDamage);
+						
 						if (computerTeam.get(computerCurrentPokemon).getHitPoints() <= 0) {
 							System.out.println(computerTeam.get(computerCurrentPokemon).getName() + " has fainted!");
 							computerTeam.get(computerCurrentPokemon).setStatus("Fainted");
+						}
+						
+						else if (humanTeam.get(humanCurrentPokemon).getHitPoints() <= 0) {
+							System.out.println(humanTeam.get(humanCurrentPokemon).getName() + " has fainted!");
+							humanTeam.get(humanCurrentPokemon).setStatus("Fainted");
 						}
 					}
 				}
@@ -333,7 +365,8 @@ public class PokemonRunner {
 					int int_random = rand.nextInt(2);
 					
 					if (int_random == 0) {
-						humanPlayer.humanAction(humanChoice, humanTeam.get(humanCurrentPokemon), computerTeam.get(computerCurrentPokemon), humanTeam, humanPotions);
+						humanAttack(humanPlayer, humanChoice, humanTeam, computerTeam, humanCurrentPokemon, computerCurrentPokemon, 
+								SOTComputerCurrentHP, humanPotions, damageDealt, recoilDamage);
 						
 						//Checks if opposing Pokemon is still alive before readying their attack
 						if (computerTeam.get(computerCurrentPokemon).getHitPoints() <= 0) {
@@ -341,17 +374,30 @@ public class PokemonRunner {
 							computerTeam.get(computerCurrentPokemon).setStatus("Fainted");
 						}
 						
+						else if (humanTeam.get(humanCurrentPokemon).getHitPoints() <= 0) {
+							System.out.println(humanTeam.get(humanCurrentPokemon).getName() + " has fainted!");
+							humanTeam.get(humanCurrentPokemon).setStatus("Fainted");
+						}
+						
 						else {
-							computerPlayer.computerAction(computerChoice, computerTeam.get(computerCurrentPokemon), humanTeam.get(humanCurrentPokemon), computerPotions);
+							computerAttack(computerPlayer, computerChoice, humanTeam, computerTeam, humanCurrentPokemon, 
+									computerCurrentPokemon, SOTHumanCurrentHP, computerPotions);
+							
 							if (humanTeam.get(humanCurrentPokemon).getHitPoints() <= 0) {
 								System.out.println(humanTeam.get(humanCurrentPokemon).getName() + " has fainted!");
 								humanTeam.get(humanCurrentPokemon).setStatus("Fainted");
+							}
+							
+							else if (computerTeam.get(computerCurrentPokemon).getHitPoints() <= 0) {
+								System.out.println(computerTeam.get(computerCurrentPokemon).getName() + " has fainted!");
+								computerTeam.get(computerCurrentPokemon).setStatus("Fainted");
 							}
 						}
 					}
 					
 					else if (int_random == 1) {
-						computerPlayer.computerAction(computerChoice, computerTeam.get(computerCurrentPokemon), humanTeam.get(humanCurrentPokemon), computerPotions);
+						computerAttack(computerPlayer, computerChoice, humanTeam, computerTeam, humanCurrentPokemon, 
+								computerCurrentPokemon, SOTHumanCurrentHP, computerPotions);
 						
 						//Checks if opposing Pokemon is still alive before readying their attack
 						if (humanTeam.get(humanCurrentPokemon).getHitPoints() <= 0) {
@@ -359,11 +405,23 @@ public class PokemonRunner {
 							humanTeam.get(humanCurrentPokemon).setStatus("Fainted");
 						}
 						
+						else if (computerTeam.get(computerCurrentPokemon).getHitPoints() <= 0) {
+							System.out.println(computerTeam.get(computerCurrentPokemon).getName() + " has fainted!");
+							computerTeam.get(computerCurrentPokemon).setStatus("Fainted");
+						}
+						
 						else {
-							humanPlayer.humanAction(humanChoice, humanTeam.get(humanCurrentPokemon), computerTeam.get(computerCurrentPokemon), humanTeam, humanPotions);
+							humanAttack(humanPlayer, humanChoice, humanTeam, computerTeam, humanCurrentPokemon, computerCurrentPokemon, 
+									SOTComputerCurrentHP, humanPotions, damageDealt, recoilDamage);
+							
 							if (computerTeam.get(computerCurrentPokemon).getHitPoints() <= 0) {
 								System.out.println(computerTeam.get(computerCurrentPokemon).getName() + " has fainted!");
 								computerTeam.get(computerCurrentPokemon).setStatus("Fainted");
+							}
+							
+							else if (humanTeam.get(humanCurrentPokemon).getHitPoints() <= 0) {
+								System.out.println(humanTeam.get(humanCurrentPokemon).getName() + " has fainted!");
+								humanTeam.get(humanCurrentPokemon).setStatus("Fainted");
 							}
 						}
 					}
@@ -371,20 +429,34 @@ public class PokemonRunner {
 			}
 			//Only human attacks
 			else if (humanChoice >= 3 && computerChoice == 1) {
-				humanPlayer.humanAction(humanChoice, humanTeam.get(humanCurrentPokemon), computerTeam.get(computerCurrentPokemon), humanTeam, humanPotions);
+				humanAttack(humanPlayer, humanChoice, humanTeam, computerTeam, humanCurrentPokemon, computerCurrentPokemon, 
+						SOTComputerCurrentHP, humanPotions, damageDealt, recoilDamage);
 				
 				if (computerTeam.get(computerCurrentPokemon).getHitPoints() <= 0) {
 					System.out.println(computerTeam.get(computerCurrentPokemon).getName() + " has fainted!");
 					computerTeam.get(computerCurrentPokemon).setStatus("Fainted");
 				}
+				
+				else if (humanTeam.get(humanCurrentPokemon).getHitPoints() <= 0) {
+					System.out.println(humanTeam.get(humanCurrentPokemon).getName() + " has fainted!");
+					humanTeam.get(humanCurrentPokemon).setStatus("Fainted");
+				}
 			}
 			
+			//Only Computer attacks
 			else if (humanChoice < 3 && computerChoice >= 2) {
-				computerPlayer.computerAction(computerChoice, computerTeam.get(computerCurrentPokemon), humanTeam.get(humanCurrentPokemon), computerPotions);
+				computerAttack(computerPlayer, computerChoice, humanTeam, computerTeam, humanCurrentPokemon, 
+						computerCurrentPokemon, SOTHumanCurrentHP, computerPotions);
 				
+				//Checks if opposing Pokemon is still alive before readying their attack
 				if (humanTeam.get(humanCurrentPokemon).getHitPoints() <= 0) {
 					System.out.println(humanTeam.get(humanCurrentPokemon).getName() + " has fainted!");
 					humanTeam.get(humanCurrentPokemon).setStatus("Fainted");
+				}
+				
+				else if (computerTeam.get(computerCurrentPokemon).getHitPoints() <= 0) {
+					System.out.println(computerTeam.get(computerCurrentPokemon).getName() + " has fainted!");
+					computerTeam.get(computerCurrentPokemon).setStatus("Fainted");
 				}
 			}
 			
@@ -557,4 +629,15 @@ public class PokemonRunner {
 		computerName.close();
 		switchChoice.close();
 	}
+
+public static void humanAttack(HumanPlayer humanPlayer, int humanChoice, List<Pokemon> humanTeam, List<Pokemon> computerTeam, int humanCurrentPokemon, int computerCurrentPokemon, 
+	int SOTComputerCurrentHP, Item humanPotions, int damageDealt, int recoilDamage) {
+	humanPlayer.humanAction(humanChoice, humanTeam.get(humanCurrentPokemon), computerTeam.get(computerCurrentPokemon), humanTeam, humanPotions);
+}
+
+public static void computerAttack(ComputerPlayer computerPlayer, int computerChoice, List<Pokemon> humanTeam, List<Pokemon> computerTeam, int humanCurrentPokemon, 
+		int computerCurrentPokemon, int SOTHumanCurrentHP, Item computerPotions) {
+	
+	computerPlayer.computerAction(computerChoice, computerTeam.get(computerCurrentPokemon), humanTeam.get(humanCurrentPokemon), computerPotions);
+}
 }
