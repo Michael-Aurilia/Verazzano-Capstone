@@ -17,8 +17,7 @@ public class Metagross extends Pokemon{
 	
 	//Performs the attack on the opposing Pokemon based on the index.
 	@Override
-	public void attack(Pokemon other, int attackIndex) {
-		String battleCry12, PokemonInfo12;
+	public void attack(Pokemon myPokemon, Pokemon other, int attackIndex) {
 		List<String> moves12 = new ArrayList<>();
 		List<String> attackTypes12 = new ArrayList<>();
 		List<Integer> basePowers12 = new ArrayList<>();
@@ -28,32 +27,26 @@ public class Metagross extends Pokemon{
 				moves12.add("Psychic");
 				attackTypes12.add("Psychic");
 				basePowers12.add(90);
-				moveDescriptions12.add("Psychic Type, Special: Metagross' foe is hit by a strong telekinetic force!");
+				moveDescriptions12.add("Psychic Type, Special: Metagross used Psychic!");
 				Attack Psychic = new Attack(moveDescriptions12.get(0), 1, 10, attackTypes12.get(0), basePowers12.get(0), "Special");
 				
 				moves12.add("Flash Cannon");
 				attackTypes12.add("Steel");
 				basePowers12.add(80);
-				moveDescriptions12.add("Steel Type, Special: Metagross gathers all its light energy and releases it at once!");
+				moveDescriptions12.add("Steel Type, Special: Metagross used Flash Cannon!");
 				Attack FlashCannon = new Attack(moveDescriptions12.get(1), 1, 10, attackTypes12.get(1), basePowers12.get(1), "Special");
 				
 				moves12.add("Zen Headbutt");
 				attackTypes12.add("Psychic");
 				basePowers12.add(80);
-				moveDescriptions12.add("Psychic Type, Physical: Metagross focuses its willpower to its head and rams the foe!");
+				moveDescriptions12.add("Psychic Type, Physical: Metagross used Zen Headbutt!");
 				Attack ZenHeadbutt = new Attack(moveDescriptions12.get(2), 1, 15, attackTypes12.get(2), basePowers12.get(2), "Physical");
 				
 				moves12.add("Meteor Mash");
 				attackTypes12.add("Steel");
 				basePowers12.add(90);
-				moveDescriptions12.add("Steel Type, Physical: Metagross' foe is hit with a hard punch fired like a meteor!");
+				moveDescriptions12.add("Steel Type, Physical: Metagross used Meteor Mash!");
 				Attack MeteorMash = new Attack(moveDescriptions12.get(3), 1, 10, attackTypes12.get(3), basePowers12.get(3), "Physical");
-				
-				PokemonInfo12 = "Metagross folds its four legs when flying. Its four brains are said to be superior to a supercomputer.";
-				battleCry12 = "Roar!";
-				
-				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Metagross Meta = new Metagross(187, 187, "Healthy", "Metagross", "Steel", "Psychic", moves12, battleCry12, 205, 200, 161, 156, 134, PokemonInfo12);
 				
 				int damageDealt;
 				int remainingHP;
@@ -61,7 +54,7 @@ public class Metagross extends Pokemon{
 				if (attackIndex == 1) {
 					System.out.println(moveDescriptions12.get(0));
 					//This could be the key to the computer calculating damage before the turn starts. Check if this works in the runner maybe
-					damageDealt = Psychic.getDamage(Psychic, Meta, other);
+					damageDealt = Psychic.getDamage(Psychic, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (Psychic.getDamageMultiplier(attackTypes12.get(0), other) >= 2) {
@@ -77,7 +70,7 @@ public class Metagross extends Pokemon{
 				}
 				else if (attackIndex == 2) {
 					System.out.println(moveDescriptions12.get(1));
-					damageDealt = FlashCannon.getDamage(FlashCannon, Meta, other);
+					damageDealt = FlashCannon.getDamage(FlashCannon, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (FlashCannon.getDamageMultiplier(attackTypes12.get(1), other) >= 2) {
@@ -93,7 +86,7 @@ public class Metagross extends Pokemon{
 				}
 				else if (attackIndex == 3) {
 					System.out.println(moveDescriptions12.get(2));
-					damageDealt = ZenHeadbutt.getDamage(ZenHeadbutt, Meta, other);
+					damageDealt = ZenHeadbutt.getDamage(ZenHeadbutt, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (ZenHeadbutt.getDamageMultiplier(attackTypes12.get(2), other) >= 2) {
@@ -109,7 +102,7 @@ public class Metagross extends Pokemon{
 				}
 				else if (attackIndex == 4) {
 					System.out.println(moveDescriptions12.get(3));
-					damageDealt = MeteorMash.getDamage(MeteorMash, Meta, other);
+					damageDealt = MeteorMash.getDamage(MeteorMash, myPokemon, other);
 					remainingHP = other.getHitPoints() - damageDealt;
 					other.setHitPoints(remainingHP);
 					if (MeteorMash.getDamageMultiplier(attackTypes12.get(3), other) >= 2) {
@@ -126,7 +119,6 @@ public class Metagross extends Pokemon{
 	}
 	
 	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
-		String battleCry12, PokemonInfo12;
 		List<String> moves12 = new ArrayList<>();
 		List<String> attackTypes12 = new ArrayList<>();
 		List<Integer> basePowers12 = new ArrayList<>();
@@ -157,16 +149,10 @@ public class Metagross extends Pokemon{
 				moveDescriptions12.add("Steel Type, Physical: Metagross' foe is hit with a hard punch fired like a meteor!");
 				Attack MeteorMash = new Attack(moveDescriptions12.get(3), 1, 10, attackTypes12.get(3), basePowers12.get(3), "Physical");
 				
-				PokemonInfo12 = "Metagross folds its four legs when flying. Its four brains are said to be superior to a supercomputer.";
-				battleCry12 = "Roar!";
-				
-				//HP, Type1, Type2, moves, battlecry, atk, def, spAtk, spDef, spe, Info
-				Metagross Meta = new Metagross(187, 187, "Healthy", "Metagross", "Steel", "Psychic", moves12, battleCry12, 205, 200, 161, 156, 134, PokemonInfo12);
-				
-				int damageDealt1 = Psychic.getDamage(Psychic, Meta, other);
-				int damageDealt2 = FlashCannon.getDamage(FlashCannon, Meta, other);
-				int damageDealt3 = ZenHeadbutt.getDamage(ZenHeadbutt, Meta, other);
-				int damageDealt4 = MeteorMash.getDamage(MeteorMash, Meta, other);
+				int damageDealt1 = Psychic.getDamage(Psychic, myPokemon, other);
+				int damageDealt2 = FlashCannon.getDamage(FlashCannon, myPokemon, other);
+				int damageDealt3 = ZenHeadbutt.getDamage(ZenHeadbutt, myPokemon, other);
+				int damageDealt4 = MeteorMash.getDamage(MeteorMash, myPokemon, other);
 				
 				List<Integer> damageList = new ArrayList<>();
 				damageList.add(damageDealt1);
