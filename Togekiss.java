@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 
 public class Togekiss extends Pokemon{
 	//Extra variable.
@@ -10,7 +12,7 @@ public class Togekiss extends Pokemon{
 	}
 	
 	//Takes info from the abstract Pokemon class to define Togekiss
-	public Togekiss(int hp, int mhp, String status, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+	public Togekiss(int hp, int mhp, String status, String name, String type1, String type2, List<Attack> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
 		super(hp, mhp, status, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
@@ -18,149 +20,97 @@ public class Togekiss extends Pokemon{
 	//Performs the attack on the opposing Pokemon based on the index.
 	@Override
 	public void attack(Pokemon myPokemon, Pokemon other, int attackIndex) {
-		List<String> moves7 = new ArrayList<>();
-		List<String> attackTypes7 = new ArrayList<>();
-		List<Integer> basePowers7 = new ArrayList<>();
-		List<String> moveDescriptions7 = new ArrayList<>();
-	
-		//Creates attacks for this Pokemon to use.
-				moves7.add("Air Slash");
-				attackTypes7.add("Flying");
-				basePowers7.add(75);
-				moveDescriptions7.add("Flying Type, Special: Togekiss used Air Slash!");
-				Attack AirSlash = new Attack(moveDescriptions7.get(0), 1, 15, attackTypes7.get(0), basePowers7.get(0), "Special");
+		int damageDealt;
+		int remainingHP;
 				
-				moves7.add("Tri Attack");
-				attackTypes7.add("Normal");
-				basePowers7.add(80);
-				moveDescriptions7.add("Normal Type, Special: Togekiss used Tri-Attack!");
-				Attack TriAttack = new Attack(moveDescriptions7.get(1), 1, 10, attackTypes7.get(1), basePowers7.get(1), "Special");
-				
-				moves7.add("Dazzling Gleam");
-				attackTypes7.add("Fairy");
-				basePowers7.add(80);
-				moveDescriptions7.add("Fairy Type, Special: Togekiss used Dazzling Gleam!");
-				Attack DazzlingGleam = new Attack(moveDescriptions7.get(2), 1, 10, attackTypes7.get(2), basePowers7.get(2), "Special");
-				
-				moves7.add("Flamethrower");
-				attackTypes7.add("Fire");
-				basePowers7.add(90);
-				moveDescriptions7.add("Fire type, Special: Togekiss used Flamethrower!");
-				Attack Flamethrower = new Attack(moveDescriptions7.get(3), 1, 15, attackTypes7.get(3), basePowers7.get(3), "Special");
-				
-				int damageDealt;
-				int remainingHP;
-				
-				if (attackIndex == 1) {
-					System.out.println(moveDescriptions7.get(0));
-					//This could be the key to the computer calculating damage before the turn starts. Check if this works in the runner maybe
-					damageDealt = AirSlash.getDamage(AirSlash, myPokemon, other);
-					remainingHP = other.getHitPoints() - damageDealt;
-					other.setHitPoints(remainingHP);
-					if (AirSlash.getDamageMultiplier(attackTypes7.get(0), other) >= 2) {
-						System.out.println("It's super effective!");
-					}
-					else if (AirSlash.getDamageMultiplier(attackTypes7.get(0), other) == 0) {
-						System.out.println("The move had no effect.");
-					}
-					else if (AirSlash.getDamageMultiplier(attackTypes7.get(0), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
-					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+		if (attackIndex == 1) {
+			System.out.println("Togekiss used Air Slash!");
+			damageDealt = myPokemon.getAttacks().get(0).getDamage(myPokemon.getAttacks().get(0), myPokemon, other);
+			remainingHP = other.getHitPoints() - damageDealt;
+			other.setHitPoints(remainingHP);
+			if (myPokemon.getAttacks().get(0).getDamageMultiplier(myPokemon.getAttacks().get(0).getAttackType(), other) >= 2) {
+				System.out.println("It's super effective!");
+			}
+			else if (myPokemon.getAttacks().get(0).getDamageMultiplier(myPokemon.getAttacks().get(0).getAttackType(), other) == 0) {
+				System.out.println("The move had no effect.");
+			}
+			else if (myPokemon.getAttacks().get(0).getDamageMultiplier(myPokemon.getAttacks().get(0).getAttackType(), other) <= 0.5) {
+				System.out.println("It's not very effective...");
+			}
+			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+		}
+		else if (attackIndex == 2) {
+			System.out.println("Togekiss used Tri Attack!");
+			damageDealt = myPokemon.getAttacks().get(1).getDamage(myPokemon.getAttacks().get(1), myPokemon, other);
+			remainingHP = other.getHitPoints() - damageDealt;
+			other.setHitPoints(remainingHP);
+			if (myPokemon.getAttacks().get(1).getDamageMultiplier(myPokemon.getAttacks().get(1).getAttackType(), other) >= 2) {
+				System.out.println("It's super effective!");
+			}
+			else if (myPokemon.getAttacks().get(1).getDamageMultiplier(myPokemon.getAttacks().get(1).getAttackType(), other) == 0) {
+				System.out.println("The move had no effect.");
+			}
+			else if (myPokemon.getAttacks().get(1).getDamageMultiplier(myPokemon.getAttacks().get(1).getAttackType(), other) <= 0.5) {
+				System.out.println("It's not very effective...");
+			}
+			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+		}
+		else if (attackIndex == 3) {
+			System.out.println("Togekiss used Dazzling Gleam!");
+			damageDealt = myPokemon.getAttacks().get(2).getDamage(myPokemon.getAttacks().get(2), myPokemon, other);
+			remainingHP = other.getHitPoints() - damageDealt;
+			other.setHitPoints(remainingHP);
+			if (myPokemon.getAttacks().get(2).getDamageMultiplier(myPokemon.getAttacks().get(2).getAttackType(), other) >= 2) {
+				System.out.println("It's super effective!");
+			}
+			else if (myPokemon.getAttacks().get(2).getDamageMultiplier(myPokemon.getAttacks().get(2).getAttackType(), other) == 0) {
+				System.out.println("The move had no effect.");
+			}
+			else if (myPokemon.getAttacks().get(2).getDamageMultiplier(myPokemon.getAttacks().get(2).getAttackType(), other) <= 0.5) {
+				System.out.println("It's not very effective...");
+			}
+			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+		}
+		else if (attackIndex == 4) {
+			System.out.println("Togekiss used Flamethrower!");
+			damageDealt = myPokemon.getAttacks().get(3).getDamage(myPokemon.getAttacks().get(3), myPokemon, other);
+			remainingHP = other.getHitPoints() - damageDealt;
+			other.setHitPoints(remainingHP);
+			if (myPokemon.getAttacks().get(3).getDamageMultiplier(myPokemon.getAttacks().get(3).getAttackType(), other) >= 2) {
+				System.out.println("It's super effective!");
+			}
+			else if (myPokemon.getAttacks().get(3).getDamageMultiplier(myPokemon.getAttacks().get(3).getAttackType(), other) == 0) {
+				System.out.println("The move had no effect.");
+			}
+			else if (myPokemon.getAttacks().get(3).getDamageMultiplier(myPokemon.getAttacks().get(3).getAttackType(), other) <= 0.5) {
+				System.out.println("It's not very effective...");
+			}
+			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+			if (damageDealt > 0 && other.getHitPoints() > 0) {
+				Random random = new Random();
+				      int burnCheck = random.nextInt(10);
+				      if (other.getHitPoints() > 0 && burnCheck == 0 && other.getType1() != "Fire" && other.getType2() != "Fire") {
+					other.setStatus("Burned");
+					System.out.println(other.getName() + " was burned!");
+					other.setAttackStat(other.getAttackStat() / 2);
 				}
-				else if (attackIndex == 2) {
-					System.out.println(moveDescriptions7.get(1));
-					damageDealt = TriAttack.getDamage(TriAttack, myPokemon, other);
-					remainingHP = other.getHitPoints() - damageDealt;
-					other.setHitPoints(remainingHP);
-					if (TriAttack.getDamageMultiplier(attackTypes7.get(1), other) >= 2) {
-						System.out.println("It's super effective!");
-					}
-					else if (TriAttack.getDamageMultiplier(attackTypes7.get(1), other) == 0) {
-						System.out.println("The move had no effect.");
-					}
-					else if (TriAttack.getDamageMultiplier(attackTypes7.get(1), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
-					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
-				}
-				else if (attackIndex == 3) {
-					System.out.println(moveDescriptions7.get(2));
-					damageDealt = DazzlingGleam.getDamage(DazzlingGleam, myPokemon, other);
-					remainingHP = other.getHitPoints() - damageDealt;
-					other.setHitPoints(remainingHP);
-					if (DazzlingGleam.getDamageMultiplier(attackTypes7.get(2), other) >= 2) {
-						System.out.println("It's super effective!");
-					}
-					else if (DazzlingGleam.getDamageMultiplier(attackTypes7.get(2), other) == 0) {
-						System.out.println("The move had no effect.");
-					}
-					else if (DazzlingGleam.getDamageMultiplier(attackTypes7.get(2), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
-					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
-				}
-				else if (attackIndex == 4) {
-					System.out.println(moveDescriptions7.get(3));
-					damageDealt = Flamethrower.getDamage(Flamethrower, myPokemon, other);
-					remainingHP = other.getHitPoints() - damageDealt;
-					other.setHitPoints(remainingHP);
-					if (Flamethrower.getDamageMultiplier(attackTypes7.get(3), other) >= 2) {
-						System.out.println("It's super effective!");
-					}
-					else if (Flamethrower.getDamageMultiplier(attackTypes7.get(3), other) == 0) {
-						System.out.println("The move had no effect.");
-					}
-					else if (Flamethrower.getDamageMultiplier(attackTypes7.get(3), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
-					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
-				}
+			}
+		}
 	}
 	
 	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
-		List<String> moves7 = new ArrayList<>();
-		List<String> attackTypes7 = new ArrayList<>();
-		List<Integer> basePowers7 = new ArrayList<>();
-		List<String> moveDescriptions7 = new ArrayList<>();
-	
-		//Creates attacks for this Pokemon to use.
-				moves7.add("Air Slash");
-				attackTypes7.add("Flying");
-				basePowers7.add(75);
-				moveDescriptions7.add("Flying Type, Special: Togekiss attacks with a blade of air that slices even the sky!");
-				Attack AirSlash = new Attack(moveDescriptions7.get(0), 1, 15, attackTypes7.get(0), basePowers7.get(0), "Special");
+		int damageDealt1 = myPokemon.getAttacks().get(0).getDamage(myPokemon.getAttacks().get(0), myPokemon, other);
+		int damageDealt2 = myPokemon.getAttacks().get(1).getDamage(myPokemon.getAttacks().get(1), myPokemon, other);
+		int damageDealt3 = myPokemon.getAttacks().get(2).getDamage(myPokemon.getAttacks().get(2), myPokemon, other);
+		int damageDealt4 = myPokemon.getAttacks().get(3).getDamage(myPokemon.getAttacks().get(3), myPokemon, other);
 				
-				moves7.add("Tri Attack");
-				attackTypes7.add("Normal");
-				basePowers7.add(80);
-				moveDescriptions7.add("Normal Type, Special: Togekiss strikes with a simultaneous three-beam attack!");
-				Attack TriAttack = new Attack(moveDescriptions7.get(1), 1, 10, attackTypes7.get(1), basePowers7.get(1), "Special");
+		List<Integer> damageList = new ArrayList<>();
+		damageList.add(damageDealt1);
+		damageList.add(damageDealt2);
+		damageList.add(damageDealt3);
+		damageList.add(damageDealt4);
 				
-				moves7.add("Dazzling Gleam");
-				attackTypes7.add("Fairy");
-				basePowers7.add(80);
-				moveDescriptions7.add("Fairy Type, Special: Togekiss damages opposing Pokémon by emitting a powerful flash!");
-				Attack DazzlingGleam = new Attack(moveDescriptions7.get(2), 1, 10, attackTypes7.get(2), basePowers7.get(2), "Special");
-				
-				moves7.add("Flamethrower");
-				attackTypes7.add("Fire");
-				basePowers7.add(90);
-				moveDescriptions7.add("Fire type, Special: Togekiss' foe is scorched with an intense blast of fire!");
-				Attack Flamethrower = new Attack(moveDescriptions7.get(3), 1, 15, attackTypes7.get(3), basePowers7.get(3), "Special");
-				
-				int damageDealt1 = AirSlash.getDamage(AirSlash, myPokemon, other);
-				int damageDealt2 = TriAttack.getDamage(TriAttack, myPokemon, other);
-				int damageDealt3 = DazzlingGleam.getDamage(DazzlingGleam, myPokemon, other);
-				int damageDealt4 = Flamethrower.getDamage(Flamethrower, myPokemon, other);
-				
-				List<Integer> damageList = new ArrayList<>();
-				damageList.add(damageDealt1);
-				damageList.add(damageDealt2);
-				damageList.add(damageDealt3);
-				damageList.add(damageDealt4);
-				
-				return damageList;
+		return damageList;
 	}
 
 	@Override
