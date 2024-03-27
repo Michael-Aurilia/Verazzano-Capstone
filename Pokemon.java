@@ -12,7 +12,7 @@ public abstract class Pokemon implements Comparable<Pokemon>{
 	private String name;
 	private String type1;
 	private String type2;
-	private List<String> attacks = new ArrayList<>();
+	private List<Attack> attacks = new ArrayList<>();
 	private String battleCry;
 	
 	public abstract void attack(Pokemon myPokemon, Pokemon other, int attackIndex);
@@ -21,8 +21,8 @@ public abstract class Pokemon implements Comparable<Pokemon>{
 	
 	public Pokemon() {
 		name = "Missingno";
-		type1 = "Normal";
-		setType2("Normal");
+		type1 = "Null";
+		type2 = "Null";
 		hitPoints = 139;
 		attackStat = 187;
 		defenseStat = 0;
@@ -30,7 +30,7 @@ public abstract class Pokemon implements Comparable<Pokemon>{
 	}
 	
 	//This constructor gives each Pokemon it's stats.
-	public Pokemon(int hp, int mhp, String status, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe) {
+	public Pokemon(int hp, int mhp, String status, String name, String type1, String type2, List<Attack> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe) {
 		super();
 		setHitPoints(hp);
 		setMaxHitPoints(mhp);
@@ -56,7 +56,6 @@ public abstract class Pokemon implements Comparable<Pokemon>{
 		return maxHitPoints;
 	}
 	
-
 	public int getHitPoints() {
 		return hitPoints;
 	}
@@ -81,11 +80,11 @@ public abstract class Pokemon implements Comparable<Pokemon>{
 		this.type1 = type1;
 	}
 
-	public List<String> getAttacks() {
+	public List<Attack> getAttacks() {
 		return attacks;
 	}
 
-	public void setAttacks(List<String> attacks) {
+	public void setAttacks(List<Attack> attacks) {
 		this.attacks = attacks;
 	}
 
@@ -160,6 +159,7 @@ public abstract class Pokemon implements Comparable<Pokemon>{
 		s+= "First type: " + type1 + "\n";
 		s+= "Second type: " + type2 + "\n";
 		s+= "HP: " + hitPoints + "\n";
+		s+= "Status: " + status + "\n";
 		s+= "Attack stat: " + attackStat + "\n";
 		s+= "Spcial Attack stat: " + specialAttackStat + "\n";
 		s+= "Defense stat: " + defenseStat + "\n";
