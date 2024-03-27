@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Abomasnow extends Pokemon{
 	//Extra variable.
@@ -10,7 +11,7 @@ public class Abomasnow extends Pokemon{
 	}
 	
 	//Takes info from the abstract Pokemon class to define Lucario
-	public Abomasnow(int hp, int mhp, String status, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+	public Abomasnow(int hp, int mhp, String status, String name, String type1, String type2, List<Attack> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
 		super(hp, mhp, status, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
@@ -18,153 +19,102 @@ public class Abomasnow extends Pokemon{
 	//Performs the attack on the opposing Pokemon based on the index.
 	@Override
 	public void attack(Pokemon myPokemon, Pokemon other, int attackIndex) {
-		List<String> moves10 = new ArrayList<>();
-		List<String> attackTypes10 = new ArrayList<>();
-		List<Integer> basePowers10 = new ArrayList<>();
-		List<String> moveDescriptions10 = new ArrayList<>();
-	
-		//Creates attacks for this Pokemon to use.
-				moves10.add("Energy Ball");
-				attackTypes10.add("Grass");
-				basePowers10.add(80);
-				moveDescriptions10.add("Grass Type, Special: Abomasnow used Energy Ball!");
-				Attack EnergyBall = new Attack(moveDescriptions10.get(0), 1, 10, attackTypes10.get(0), basePowers10.get(0), "Special");
+		int damageDealt;
+		int remainingHP;
 				
-				moves10.add("Blizzard");
-				attackTypes10.add("Ice");
-				basePowers10.add(110);
-				moveDescriptions10.add("Ice Type, Special: Abomasnow used Blizzard!");
-				Attack Blizzard = new Attack(moveDescriptions10.get(1), 1, 5, attackTypes10.get(1), basePowers10.get(1), "Special");
-				
-				moves10.add("Wood Hammer");
-				attackTypes10.add("Grass");
-				basePowers10.add(120);
-				moveDescriptions10.add("Grass Type, Physical: Abomasnow used Wood Hammer!");
-				Attack WoodHammer = new Attack(moveDescriptions10.get(2), 1, 15, attackTypes10.get(2), basePowers10.get(2), "Physical");
-				
-				moves10.add("Ice Punch");
-				attackTypes10.add("Ice");
-				basePowers10.add(75);
-				moveDescriptions10.add("Dark Type, Physical: Abomasnow used Ice Punch!");
-				Attack IcePunch = new Attack(moveDescriptions10.get(3), 1, 15, attackTypes10.get(3), basePowers10.get(3), "Physical");
-				
-				int damageDealt;
-				int remainingHP;
-				
-				if (attackIndex == 1) {
-					System.out.println(moveDescriptions10.get(0));
-					//This could be the key to the computer calculating damage before the turn starts. Check if this works in the runner maybe
-					damageDealt = EnergyBall.getDamage(EnergyBall, myPokemon, other);
-					remainingHP = other.getHitPoints() - damageDealt;
-					other.setHitPoints(remainingHP);
-					if (EnergyBall.getDamageMultiplier(attackTypes10.get(0), other) >= 2) {
-						System.out.println("It's super effective!");
-					}
-					else if (EnergyBall.getDamageMultiplier(attackTypes10.get(0), other) == 0) {
-						System.out.println("The move had no effect.");
-					}
-					else if (EnergyBall.getDamageMultiplier(attackTypes10.get(0), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
-					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+		if (attackIndex == 1) {
+			System.out.println("Abomasnow used Energy Ball!");
+			damageDealt = myPokemon.getAttacks().get(0).getDamage(myPokemon.getAttacks().get(0), myPokemon, other);
+			remainingHP = other.getHitPoints() - damageDealt;
+			other.setHitPoints(remainingHP);
+			if (myPokemon.getAttacks().get(0).getDamageMultiplier(myPokemon.getAttacks().get(0).getAttackType(), other) >= 2) {
+				System.out.println("It's super effective!");
+			}
+			else if (myPokemon.getAttacks().get(0).getDamageMultiplier(myPokemon.getAttacks().get(0).getAttackType(), other) == 0) {
+				System.out.println("The move had no effect.");
+			}
+			else if (myPokemon.getAttacks().get(0).getDamageMultiplier(myPokemon.getAttacks().get(0).getAttackType(), other) <= 0.5) {
+				System.out.println("It's not very effective...");
+			}
+			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+			if (damageDealt > 0 && other.getHitPoints() > 0) {
+				Random random = new Random();
+				int spDEFDropChance = random.nextInt(5) + 1;
+				if (spDEFDropChance == 1) {
+					other.setSpecialDefenseStat(other.getSpecialDefenseStat() * 0.75);
+					System.out.println(other.getName() + "'s Special Defense was dropped by one stage!");
 				}
-				else if (attackIndex == 2) {
-					System.out.println(moveDescriptions10.get(1));
-					damageDealt = Blizzard.getDamage(Blizzard, myPokemon, other);
-					remainingHP = other.getHitPoints() - damageDealt;
-					other.setHitPoints(remainingHP);
-					if (Blizzard.getDamageMultiplier(attackTypes10.get(1), other) >= 2) {
-						System.out.println("It's super effective!");
-					}
-					else if (Blizzard.getDamageMultiplier(attackTypes10.get(1), other) == 0) {
-						System.out.println("The move had no effect.");
-					}
-					else if (Blizzard.getDamageMultiplier(attackTypes10.get(1), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
-					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
-				}
-				else if (attackIndex == 3) {
-					System.out.println(moveDescriptions10.get(2));
-					damageDealt = WoodHammer.getDamage(WoodHammer, myPokemon, other);
-					remainingHP = other.getHitPoints() - damageDealt;
-					other.setHitPoints(remainingHP);
-					if (WoodHammer.getDamageMultiplier(attackTypes10.get(2), other) >= 2) {
-						System.out.println("It's super effective!");
-					}
-					else if (WoodHammer.getDamageMultiplier(attackTypes10.get(2), other) == 0) {
-						System.out.println("The move had no effect.");
-					}
-					else if (WoodHammer.getDamageMultiplier(attackTypes10.get(2), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
-					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
-					double tempRecoil = damageDealt * 0.33;
-					int recoilDamage = (int)(tempRecoil + .5);
-					myPokemon.setHitPoints(myPokemon.getHitPoints() - recoilDamage);
-					System.out.println("Abomasnow takes " + recoilDamage + " damage in recoil!");
-				}
-				else if (attackIndex == 4) {
-					System.out.println(moveDescriptions10.get(3));
-					damageDealt = IcePunch.getDamage (IcePunch, myPokemon, other);
-					remainingHP = other.getHitPoints() - damageDealt;
-					other.setHitPoints(remainingHP);
-					if (IcePunch.getDamageMultiplier(attackTypes10.get(3), other) >= 2) {
-						System.out.println("It's super effective!");
-					}
-					else if (IcePunch.getDamageMultiplier(attackTypes10.get(3), other) == 0) {
-						System.out.println("The move had no effect.");
-					}
-					else if (IcePunch.getDamageMultiplier(attackTypes10.get(3), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
-					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
-				}
+			}
+		}
+		else if (attackIndex == 2) {
+			System.out.println("Abomasnow used Blizzard!");
+			damageDealt = myPokemon.getAttacks().get(1).getDamage(myPokemon.getAttacks().get(1), myPokemon, other);
+			remainingHP = other.getHitPoints() - damageDealt;
+			other.setHitPoints(remainingHP);
+			if (myPokemon.getAttacks().get(1).getDamageMultiplier(myPokemon.getAttacks().get(1).getAttackType(), other) >= 2) {
+				System.out.println("It's super effective!");
+			}
+			else if (myPokemon.getAttacks().get(1).getDamageMultiplier(myPokemon.getAttacks().get(1).getAttackType(), other) == 0) {
+				System.out.println("The move had no effect.");
+			}
+			else if (myPokemon.getAttacks().get(1).getDamageMultiplier(myPokemon.getAttacks().get(1).getAttackType(), other) <= 0.5) {
+				System.out.println("It's not very effective...");
+			}
+			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+		}
+		else if (attackIndex == 3) {
+			System.out.println("Abomasnow used Wood Hammer!");
+			damageDealt = myPokemon.getAttacks().get(2).getDamage(myPokemon.getAttacks().get(2), myPokemon, other);
+			remainingHP = other.getHitPoints() - damageDealt;
+			other.setHitPoints(remainingHP);
+			if (myPokemon.getAttacks().get(2).getDamageMultiplier(myPokemon.getAttacks().get(2).getAttackType(), other) >= 2) {
+				System.out.println("It's super effective!");
+			}
+			else if (myPokemon.getAttacks().get(2).getDamageMultiplier(myPokemon.getAttacks().get(2).getAttackType(), other) == 0) {
+				System.out.println("The move had no effect.");
+			}
+			else if (myPokemon.getAttacks().get(2).getDamageMultiplier(myPokemon.getAttacks().get(2).getAttackType(), other) <= 0.5) {
+				System.out.println("It's not very effective...");
+			}
+			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+			if (damageDealt > 0) {
+				double tempRecoil = damageDealt * 0.33;
+				int recoilDamage = (int)(tempRecoil + .5);
+				myPokemon.setHitPoints(myPokemon.getHitPoints() - recoilDamage);
+				System.out.println("Abomasnow takes " + recoilDamage + " damage in recoil!");
+			}
+		}
+		else if (attackIndex == 4) {
+			System.out.println("Abomasnow used Ice Punch!");
+			damageDealt = myPokemon.getAttacks().get(3).getDamage(myPokemon.getAttacks().get(3), myPokemon, other);
+			remainingHP = other.getHitPoints() - damageDealt;
+			other.setHitPoints(remainingHP);
+			if (myPokemon.getAttacks().get(3).getDamageMultiplier(myPokemon.getAttacks().get(3).getAttackType(), other) >= 2) {
+				System.out.println("It's super effective!");
+			}
+			else if (myPokemon.getAttacks().get(3).getDamageMultiplier(myPokemon.getAttacks().get(3).getAttackType(), other) == 0) {
+				System.out.println("The move had no effect.");
+			}
+			else if (myPokemon.getAttacks().get(3).getDamageMultiplier(myPokemon.getAttacks().get(3).getAttackType(), other) <= 0.5) {
+				System.out.println("It's not very effective...");
+			}
+			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+		}
 	}
 	
 	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
-		List<String> moves10 = new ArrayList<>();
-		List<String> attackTypes10 = new ArrayList<>();
-		List<Integer> basePowers10 = new ArrayList<>();
-		List<String> moveDescriptions10 = new ArrayList<>();
-	
-		//Creates attacks for this Pokemon to use.
-				moves10.add("Energy Ball");
-				attackTypes10.add("Grass");
-				basePowers10.add(80);
-				moveDescriptions10.add("Grass Type, Special: Abomasnow draws power from nature and fires it at the foe!");
-				Attack EnergyBall = new Attack(moveDescriptions10.get(0), 1, 10, attackTypes10.get(0), basePowers10.get(0), "Special");
+		int damageDealt1 = myPokemon.getAttacks().get(0).getDamage(myPokemon.getAttacks().get(0), myPokemon, other);
+		int damageDealt2 = myPokemon.getAttacks().get(1).getDamage(myPokemon.getAttacks().get(1), myPokemon, other);
+		int damageDealt3 = myPokemon.getAttacks().get(2).getDamage(myPokemon.getAttacks().get(2), myPokemon, other);
+		int damageDealt4 = myPokemon.getAttacks().get(3).getDamage(myPokemon.getAttacks().get(3), myPokemon, other);
 				
-				moves10.add("Blizzard");
-				attackTypes10.add("Ice");
-				basePowers10.add(110);
-				moveDescriptions10.add("Ice Type, Special: Abomasnow summons howling blizzard to strike the foe!");
-				Attack Blizzard = new Attack(moveDescriptions10.get(1), 1, 5, attackTypes10.get(1), basePowers10.get(1), "Special");
+		List<Integer> damageList = new ArrayList<>();
+		damageList.add(damageDealt1);
+		damageList.add(damageDealt2);
+		damageList.add(damageDealt3);
+		damageList.add(damageDealt4);
 				
-				moves10.add("Wood Hammer");
-				attackTypes10.add("Grass");
-				basePowers10.add(120);
-				moveDescriptions10.add("Grass Type, Physical: Abomasnow slams its rugged body into the foe to attack!");
-				Attack WoodHammer = new Attack(moveDescriptions10.get(2), 1, 15, attackTypes10.get(2), basePowers10.get(2), "Physical");
-				
-				moves10.add("Ice Punch");
-				attackTypes10.add("Ice");
-				basePowers10.add(75);
-				moveDescriptions10.add("Dark Type, Physical: Abomasnow punches the foe with an icy fist!");
-				Attack IcePunch = new Attack(moveDescriptions10.get(3), 1, 15, attackTypes10.get(3), basePowers10.get(3), "Physical");
-				
-				int damageDealt1 = EnergyBall.getDamage(EnergyBall, myPokemon, other);
-				int damageDealt2 = Blizzard.getDamage(Blizzard, myPokemon, other);
-				int damageDealt3 = WoodHammer.getDamage(WoodHammer, myPokemon, other);
-				int damageDealt4 = IcePunch.getDamage(IcePunch, myPokemon, other);
-				
-				List<Integer> damageList = new ArrayList<>();
-				damageList.add(damageDealt1);
-				damageList.add(damageDealt2);
-				damageList.add(damageDealt3);
-				damageList.add(damageDealt4);
-				
-				return damageList;
+		return damageList;
 	}
 
 	@Override
