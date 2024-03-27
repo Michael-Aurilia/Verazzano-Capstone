@@ -464,6 +464,58 @@ public class PokemonRunner {
 				System.out.println("Neither Pokemon attacked this turn!");
 			}
 			
+			//Status effects go here
+			if (humanTeam.get(humanCurrentPokemon).getStatus() == "Burned") {
+				double tempMaxHP = humanTeam.get(humanCurrentPokemon).getMaxHitPoints();
+				double burnDamage = tempMaxHP * (1.0/16.0);
+				int burn = (int)(burnDamage + .5);
+				System.out.println(burn);
+				humanTeam.get(humanCurrentPokemon).setHitPoints(humanTeam.get(humanCurrentPokemon).getHitPoints() - burn);
+				System.out.println(humanTeam.get(humanCurrentPokemon).getName() + " was hurt by its burn!");
+				
+				if (humanTeam.get(humanCurrentPokemon).getHitPoints() <= 0) {
+					System.out.println(humanTeam.get(humanCurrentPokemon).getName() + " has fainted!");
+					humanTeam.get(humanCurrentPokemon).setStatus("Fainted");
+				}
+			}
+			if (computerTeam.get(computerCurrentPokemon).getStatus() == "Burned") {
+				double tempMaxHP = computerTeam.get(computerCurrentPokemon).getMaxHitPoints();
+				double burnDamage = tempMaxHP * (1.0/16.0);
+				int burn = (int)(burnDamage + .5);
+				computerTeam.get(computerCurrentPokemon).setHitPoints(computerTeam.get(computerCurrentPokemon).getHitPoints() - burn);
+				System.out.println(computerTeam.get(computerCurrentPokemon).getName() + " was hurt by its burn!");
+				
+				if (computerTeam.get(computerCurrentPokemon).getHitPoints() <= 0) {
+					System.out.println(computerTeam.get(computerCurrentPokemon).getName() + " has fainted!");
+					computerTeam.get(computerCurrentPokemon).setStatus("Fainted");
+				}
+			}
+			
+			if (humanTeam.get(humanCurrentPokemon).getStatus() == "Poisoned") {
+				double tempMaxHP = humanTeam.get(humanCurrentPokemon).getMaxHitPoints();
+				double poisonDamage = tempMaxHP * (1.0/8.0);
+				int poison = (int)(poisonDamage + .5);
+				humanTeam.get(humanCurrentPokemon).setHitPoints(humanTeam.get(humanCurrentPokemon).getHitPoints() - poison);
+				System.out.println(humanTeam.get(humanCurrentPokemon).getName() + " was hurt by the poison!");
+				
+				if (humanTeam.get(humanCurrentPokemon).getHitPoints() <= 0) {
+					System.out.println(humanTeam.get(humanCurrentPokemon).getName() + " has fainted!");
+					humanTeam.get(humanCurrentPokemon).setStatus("Fainted");
+				}
+			}
+			if (computerTeam.get(computerCurrentPokemon).getStatus() == "Poisoned") {
+				double tempMaxHP = computerTeam.get(computerCurrentPokemon).getMaxHitPoints();
+				double poisonDamage = tempMaxHP * (1.0/8.0);
+				int poison = (int)(poisonDamage + .5);
+				computerTeam.get(computerCurrentPokemon).setHitPoints(computerTeam.get(computerCurrentPokemon).getHitPoints() - poison);
+				System.out.println(computerTeam.get(computerCurrentPokemon).getName() + " was hurt by the poison!");
+				
+				if (computerTeam.get(computerCurrentPokemon).getHitPoints() <= 0) {
+					System.out.println(computerTeam.get(computerCurrentPokemon).getName() + " has fainted!");
+					computerTeam.get(computerCurrentPokemon).setStatus("Fainted");
+				}
+			}
+			
 			//CPU switches to next Pokemon if current Pokemon has fainted
 			if (computerTeam.get(computerCurrentPokemon).getHitPoints() <= 0 && computerCurrentPokemon != 5) {
 				if (computerCurrentPokemon == 0) {
