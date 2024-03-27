@@ -26,8 +26,7 @@ import java.lang.Math;
 */
 
 public class Attack {
-	private String attackDescription;
-	private int powerPointsCost = 1;
+	private String attackName;
 	private int movePowerPoints;
 	private String attackType;
 	private int baseDamage;
@@ -37,16 +36,15 @@ public class Attack {
 	static String[][] grid = new String[19][19];
 	
 	public Attack() {
-		attackDescription = "The user Has no moves left and struggles!";
-		powerPointsCost = 0;
+		attackName = "The user Has no moves left and struggles!";
 		attackType = "Null";
 		baseDamage = 50;
 	}
 	
-	public Attack(String ad, int ppCost, int mpp, String at, int bd, String ac) {
-		setAttackDescription(ad);
+	public Attack(String an, int mpp, String at, int bd, String ac) {
+		setAttackName(an);
 		setAttackType(at);
-		setPowerPointsCost(ppCost);
+		
 		setmovePowerPoints(mpp);
 		setBaseDamage(bd);
 		setAttackCategory(ac);
@@ -157,12 +155,12 @@ public class Attack {
 	}
 	
 	//Mutators.
-	public String getAttackDescription() {
-		return attackDescription;
+	public String getAttackName() {
+		return attackName;
 	}
 
-	public void setAttackDescription(String attackDescription) {
-		this.attackDescription = attackDescription;
+	public void setAttackName(String attackName) {
+		this.attackName = attackName;
 	}
 
 	public String getAttackType() {
@@ -172,15 +170,6 @@ public class Attack {
 	public void setAttackType(String attackType) {
 		this.attackType = attackType;
 	}
-
-	public int getPowerPointsCost() {
-		return powerPointsCost;
-	}
-
-	public void setPowerPointsCost(int powerPointsCost) {
-		this.powerPointsCost = powerPointsCost;
-	}
-
 	public int getBaseDamage() {
 		return baseDamage;
 	}
@@ -203,5 +192,15 @@ public class Attack {
 
 	public void setmovePowerPoints(int movePowerPoints) {
 		this.movePowerPoints = movePowerPoints;
+	}
+	
+	public String toString() {
+		String s = "";
+		s+= " Attack name: " + attackName + "\n";
+		s+= "Attack type: " + attackType + "\n";
+		s+= "Base Power: " + baseDamage + "\n";
+		s+= "Attack Category: " + attackCategory + "\n";
+		s+= "Move Power Points: " + movePowerPoints + "\n";
+		return s;
 	}
 }
