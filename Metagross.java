@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Metagross extends Pokemon{
 	//Extra variable.
@@ -10,7 +11,7 @@ public class Metagross extends Pokemon{
 	}
 	
 	//Takes info from the abstract Pokemon class to define Lucario
-	public Metagross(int hp, int mhp, String status, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+	public Metagross(int hp, int mhp, String status, String name, String type1, String type2, List<Attack> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
 		super(hp, mhp, status, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
@@ -18,149 +19,112 @@ public class Metagross extends Pokemon{
 	//Performs the attack on the opposing Pokemon based on the index.
 	@Override
 	public void attack(Pokemon myPokemon, Pokemon other, int attackIndex) {
-		List<String> moves12 = new ArrayList<>();
-		List<String> attackTypes12 = new ArrayList<>();
-		List<Integer> basePowers12 = new ArrayList<>();
-		List<String> moveDescriptions12 = new ArrayList<>();
-	
-		//Creates attacks for this Pokemon to use.
-				moves12.add("Psychic");
-				attackTypes12.add("Psychic");
-				basePowers12.add(90);
-				moveDescriptions12.add("Psychic Type, Special: Metagross used Psychic!");
-				Attack Psychic = new Attack(moveDescriptions12.get(0), 1, 10, attackTypes12.get(0), basePowers12.get(0), "Special");
+		int damageDealt;
+		int remainingHP;
 				
-				moves12.add("Flash Cannon");
-				attackTypes12.add("Steel");
-				basePowers12.add(80);
-				moveDescriptions12.add("Steel Type, Special: Metagross used Flash Cannon!");
-				Attack FlashCannon = new Attack(moveDescriptions12.get(1), 1, 10, attackTypes12.get(1), basePowers12.get(1), "Special");
-				
-				moves12.add("Zen Headbutt");
-				attackTypes12.add("Psychic");
-				basePowers12.add(80);
-				moveDescriptions12.add("Psychic Type, Physical: Metagross used Zen Headbutt!");
-				Attack ZenHeadbutt = new Attack(moveDescriptions12.get(2), 1, 15, attackTypes12.get(2), basePowers12.get(2), "Physical");
-				
-				moves12.add("Meteor Mash");
-				attackTypes12.add("Steel");
-				basePowers12.add(90);
-				moveDescriptions12.add("Steel Type, Physical: Metagross used Meteor Mash!");
-				Attack MeteorMash = new Attack(moveDescriptions12.get(3), 1, 10, attackTypes12.get(3), basePowers12.get(3), "Physical");
-				
-				int damageDealt;
-				int remainingHP;
-				
-				if (attackIndex == 1) {
-					System.out.println(moveDescriptions12.get(0));
-					//This could be the key to the computer calculating damage before the turn starts. Check if this works in the runner maybe
-					damageDealt = Psychic.getDamage(Psychic, myPokemon, other);
-					remainingHP = other.getHitPoints() - damageDealt;
-					other.setHitPoints(remainingHP);
-					if (Psychic.getDamageMultiplier(attackTypes12.get(0), other) >= 2) {
-						System.out.println("It's super effective!");
-					}
-					else if (Psychic.getDamageMultiplier(attackTypes12.get(0), other) == 0) {
-						System.out.println("The move had no effect.");
-					}
-					else if (Psychic.getDamageMultiplier(attackTypes12.get(0), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
-					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+		if (attackIndex == 1) {
+			System.out.println("Metagross used Psychic!");
+			damageDealt = myPokemon.getAttacks().get(0).getDamage(myPokemon.getAttacks().get(0), myPokemon, other);
+			remainingHP = other.getHitPoints() - damageDealt;
+			other.setHitPoints(remainingHP);
+			if (myPokemon.getAttacks().get(0).getDamageMultiplier(myPokemon.getAttacks().get(0).getAttackType(), other) >= 2) {
+				System.out.println("It's super effective!");
+			}
+			else if (myPokemon.getAttacks().get(0).getDamageMultiplier(myPokemon.getAttacks().get(0).getAttackType(), other) == 0) {
+				System.out.println("The move had no effect.");
+			}
+			else if (myPokemon.getAttacks().get(0).getDamageMultiplier(myPokemon.getAttacks().get(0).getAttackType(), other) <= 0.5) {
+				System.out.println("It's not very effective...");
+			}
+			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+			if (damageDealt > 0 && other.getHitPoints() > 0) {
+				Random random = new Random();
+				      int SPDEFDownCheck = random.nextInt(10);
+				      if (other.getHitPoints() > 0 && SPDEFDownCheck == 0) {
+				       other.setSpecialDefenseStat(other.getSpecialDefenseStat() * 0.75);
+				       System.out.println(other.getName() + "'s Special Defense was droppeed by one stage!");
 				}
-				else if (attackIndex == 2) {
-					System.out.println(moveDescriptions12.get(1));
-					damageDealt = FlashCannon.getDamage(FlashCannon, myPokemon, other);
-					remainingHP = other.getHitPoints() - damageDealt;
-					other.setHitPoints(remainingHP);
-					if (FlashCannon.getDamageMultiplier(attackTypes12.get(1), other) >= 2) {
-						System.out.println("It's super effective!");
-					}
-					else if (FlashCannon.getDamageMultiplier(attackTypes12.get(1), other) == 0) {
-						System.out.println("The move had no effect.");
-					}
-					else if (FlashCannon.getDamageMultiplier(attackTypes12.get(1), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
-					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+			}
+		}
+		else if (attackIndex == 2) {
+			System.out.println("Metagross used Flash Cannon!");
+			damageDealt = myPokemon.getAttacks().get(1).getDamage(myPokemon.getAttacks().get(1), myPokemon, other);
+			remainingHP = other.getHitPoints() - damageDealt;
+			other.setHitPoints(remainingHP);
+			if (myPokemon.getAttacks().get(1).getDamageMultiplier(myPokemon.getAttacks().get(1).getAttackType(), other) >= 2) {
+				System.out.println("It's super effective!");
+			}
+			else if (myPokemon.getAttacks().get(1).getDamageMultiplier(myPokemon.getAttacks().get(1).getAttackType(), other) == 0) {
+				System.out.println("The move had no effect.");
+			}
+			else if (myPokemon.getAttacks().get(1).getDamageMultiplier(myPokemon.getAttacks().get(1).getAttackType(), other) <= 0.5) {
+				System.out.println("It's not very effective...");
+			}
+			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+			if (damageDealt > 0 && other.getHitPoints() > 0) {
+				Random random = new Random();
+				      int SPDEFDownCheck = random.nextInt(10);
+				      if (other.getHitPoints() > 0 && SPDEFDownCheck == 0) {
+				       other.setSpecialDefenseStat(other.getSpecialDefenseStat() * 0.75);
+				       System.out.println(other.getName() + "'s Special Defense was droppeed by one stage!");
 				}
-				else if (attackIndex == 3) {
-					System.out.println(moveDescriptions12.get(2));
-					damageDealt = ZenHeadbutt.getDamage(ZenHeadbutt, myPokemon, other);
-					remainingHP = other.getHitPoints() - damageDealt;
-					other.setHitPoints(remainingHP);
-					if (ZenHeadbutt.getDamageMultiplier(attackTypes12.get(2), other) >= 2) {
-						System.out.println("It's super effective!");
-					}
-					else if (ZenHeadbutt.getDamageMultiplier(attackTypes12.get(2), other) == 0) {
-						System.out.println("The move had no effect.");
-					}
-					else if (ZenHeadbutt.getDamageMultiplier(attackTypes12.get(2), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
-					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
-				}
-				else if (attackIndex == 4) {
-					System.out.println(moveDescriptions12.get(3));
-					damageDealt = MeteorMash.getDamage(MeteorMash, myPokemon, other);
-					remainingHP = other.getHitPoints() - damageDealt;
-					other.setHitPoints(remainingHP);
-					if (MeteorMash.getDamageMultiplier(attackTypes12.get(3), other) >= 2) {
-						System.out.println("It's super effective!");
-					}
-					else if (MeteorMash.getDamageMultiplier(attackTypes12.get(3), other) == 0) {
-						System.out.println("The move had no effect.");
-					}
-					else if (MeteorMash.getDamageMultiplier(attackTypes12.get(3), other) <= 0.5) {
-						System.out.println("It's not very effective...");
-					}
-					System.out.println(other.getName() + " takes " + damageDealt + " damage!");
-				}
+			}
+		}
+		else if (attackIndex == 3) {
+			System.out.println("Metagross used Zen Headbutt!");
+			damageDealt = myPokemon.getAttacks().get(2).getDamage(myPokemon.getAttacks().get(2), myPokemon, other);
+			remainingHP = other.getHitPoints() - damageDealt;
+			other.setHitPoints(remainingHP);
+			if (myPokemon.getAttacks().get(2).getDamageMultiplier(myPokemon.getAttacks().get(2).getAttackType(), other) >= 2) {
+				System.out.println("It's super effective!");
+			}
+			else if (myPokemon.getAttacks().get(2).getDamageMultiplier(myPokemon.getAttacks().get(2).getAttackType(), other) == 0) {
+				System.out.println("The move had no effect.");
+			}
+			else if (myPokemon.getAttacks().get(2).getDamageMultiplier(myPokemon.getAttacks().get(2).getAttackType(), other) <= 0.5) {
+				System.out.println("It's not very effective...");
+			}
+			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+		}
+		else if (attackIndex == 4) {
+			System.out.println("Metagross used Meteor Mash!");
+			damageDealt = myPokemon.getAttacks().get(3).getDamage(myPokemon.getAttacks().get(3), myPokemon, other);
+			remainingHP = other.getHitPoints() - damageDealt;
+			other.setHitPoints(remainingHP);
+			if (myPokemon.getAttacks().get(3).getDamageMultiplier(myPokemon.getAttacks().get(3).getAttackType(), other) >= 2) {
+				System.out.println("It's super effective!");
+			}
+			else if (myPokemon.getAttacks().get(3).getDamageMultiplier(myPokemon.getAttacks().get(3).getAttackType(), other) == 0) {
+				System.out.println("The move had no effect.");
+			}
+			else if (myPokemon.getAttacks().get(3).getDamageMultiplier(myPokemon.getAttacks().get(3).getAttackType(), other) <= 0.5) {
+				System.out.println("It's not very effective...");
+			}
+			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+			if (damageDealt > 0) {
+				Random random = new Random();
+				int spDEFDropChance = random.nextInt(5) + 1;
+				if (spDEFDropChance == 1) {
+					other.setSpecialDefenseStat(myPokemon.getAttackStat() * 1.25);
+					System.out.println(other.getName() + "'s Attack stat was raised by one stage!");
+			    }
+			}
+		}
 	}
 	
 	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
-		List<String> moves12 = new ArrayList<>();
-		List<String> attackTypes12 = new ArrayList<>();
-		List<Integer> basePowers12 = new ArrayList<>();
-		List<String> moveDescriptions12 = new ArrayList<>();
-	
-		//Creates attacks for this Pokemon to use.
-				moves12.add("Psychic");
-				attackTypes12.add("Psychic");
-				basePowers12.add(90);
-				moveDescriptions12.add("Psychic Type, Special: Metagross' foe is hit by a strong telekinetic force!");
-				Attack Psychic = new Attack(moveDescriptions12.get(2), 1, 10, attackTypes12.get(2), basePowers12.get(2), "Special");
+		int damageDealt1 = myPokemon.getAttacks().get(0).getDamage(myPokemon.getAttacks().get(0), myPokemon, other);
+		int damageDealt2 = myPokemon.getAttacks().get(1).getDamage(myPokemon.getAttacks().get(1), myPokemon, other);
+		int damageDealt3 = myPokemon.getAttacks().get(2).getDamage(myPokemon.getAttacks().get(2), myPokemon, other);
+		int damageDealt4 = myPokemon.getAttacks().get(3).getDamage(myPokemon.getAttacks().get(3), myPokemon, other);
 				
-				moves12.add("Flash Cannon");
-				attackTypes12.add("Steel");
-				basePowers12.add(80);
-				moveDescriptions12.add("Steel Type, Special: Metagross gathers all its light energy and releases it at once!");
-				Attack FlashCannon = new Attack(moveDescriptions12.get(1), 1, 10, attackTypes12.get(1), basePowers12.get(1), "Special");
+		List<Integer> damageList = new ArrayList<>();
+		damageList.add(damageDealt1);
+		damageList.add(damageDealt2);
+		damageList.add(damageDealt3);
+		damageList.add(damageDealt4);
 				
-				moves12.add("Zen Headbutt");
-				attackTypes12.add("Psychic");
-				basePowers12.add(80);
-				moveDescriptions12.add("Psychic Type, Physical: Metagross focuses its willpower to its head and rams the foe!");
-				Attack ZenHeadbutt = new Attack(moveDescriptions12.get(2), 1, 15, attackTypes12.get(2), basePowers12.get(2), "Physical");
-				
-				moves12.add("Meteor Mash");
-				attackTypes12.add("Steel");
-				basePowers12.add(90);
-				moveDescriptions12.add("Steel Type, Physical: Metagross' foe is hit with a hard punch fired like a meteor!");
-				Attack MeteorMash = new Attack(moveDescriptions12.get(3), 1, 10, attackTypes12.get(3), basePowers12.get(3), "Physical");
-				
-				int damageDealt1 = Psychic.getDamage(Psychic, myPokemon, other);
-				int damageDealt2 = FlashCannon.getDamage(FlashCannon, myPokemon, other);
-				int damageDealt3 = ZenHeadbutt.getDamage(ZenHeadbutt, myPokemon, other);
-				int damageDealt4 = MeteorMash.getDamage(MeteorMash, myPokemon, other);
-				
-				List<Integer> damageList = new ArrayList<>();
-				damageList.add(damageDealt1);
-				damageList.add(damageDealt2);
-				damageList.add(damageDealt3);
-				damageList.add(damageDealt4);
-				
-				return damageList;
+		return damageList;
 	}
 
 	@Override
