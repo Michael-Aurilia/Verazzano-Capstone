@@ -64,15 +64,27 @@ public class HumanPlayer extends Player{
 	}
 
 	private int selectAttack(Pokemon myPokemon) {
-	    // Creates scanners to ask the player which attack they want to use and performs it based on their input.
-	    System.out.println("Which attack do you want to use?");
+	    //If the user has no usable moves, selecting attack gives nothing back
+		if (myPokemon.getAttacks().get(0).getmovePowerPoints() <= 0 && myPokemon.getAttacks().get(1).getmovePowerPoints() <= 0 
+	    		&& myPokemon.getAttacks().get(2).getmovePowerPoints() <= 0 && myPokemon.getAttacks().get(3).getmovePowerPoints() <= 0) {
+	    	return 2;
+	    }
+		
+		// Creates scanners to ask the player which attack they want to use and performs it based on their input.
+		System.out.println("Which attack do you want to use?");
 	    System.out.println(myPokemon.getAttacks());
 	    System.out.print("Enter 1, 2, 3, or 4: ");
 	    int answerForMoveChoice = moveChoice.nextInt();
 
-	    if (answerForMoveChoice >= 1 && answerForMoveChoice <= 4) {
-	        return answerForMoveChoice + 2; // Convert move choice to corresponding action code
+	    if (answerForMoveChoice >= 1 && answerForMoveChoice <= 4 && myPokemon.getAttacks().get(answerForMoveChoice - 1).getmovePowerPoints() > 0) {
+	    	return answerForMoveChoice + 2; // Convert move choice to corresponding action code
 	    } 
+	    else if (myPokemon.getAttacks().get(answerForMoveChoice - 1).getmovePowerPoints() <= 0) {
+	    	// Throws an error if a move is out of pp.
+	        System.out.println("The move you selected is out of pp. Select a different one.");
+	        // Recursive call
+	        return selectAttack(myPokemon);
+	    }
 	    else {
 	        // Throws an error if an invalid input is given.
 	        System.out.println("Invalid input given. Please type either 1, 2, 3, or 4.");
@@ -88,23 +100,27 @@ public class HumanPlayer extends Player{
 		}
 		
 		else if (choice == 2) {
-			System.out.print("");
+			System.out.print(myPokemon.getName() + " has no moves left and can't attack!");
 		}
 		
 		else if (choice == 3) {
 			myPokemon.attack(myPokemon, other, 1);
+			myPokemon.getAttacks().get(0).setmovePowerPoints(myPokemon.getAttacks().get(0).getmovePowerPoints() - 1);
 		}
 		
 		else if (choice == 4) {
 			myPokemon.attack(myPokemon, other, 2);
+			myPokemon.getAttacks().get(1).setmovePowerPoints(myPokemon.getAttacks().get(1).getmovePowerPoints() - 1);
 		}
 		
 		else if (choice == 5) {
 			myPokemon.attack(myPokemon, other, 3);
+			myPokemon.getAttacks().get(2).setmovePowerPoints(myPokemon.getAttacks().get(2).getmovePowerPoints() - 1);
 		}
 		
 		else if (choice == 6) {
 			myPokemon.attack(myPokemon, other, 4);
+			myPokemon.getAttacks().get(3).setmovePowerPoints(myPokemon.getAttacks().get(3).getmovePowerPoints() - 1);
 		}
 	}
 
