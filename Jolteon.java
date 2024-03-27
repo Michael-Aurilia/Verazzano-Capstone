@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Jolteon extends Pokemon{
 	//Extra variable.
@@ -10,7 +11,7 @@ public class Jolteon extends Pokemon{
 	}
 	
 	//Takes info from the abstract Pokemon class to define Jolteon
-	public Jolteon(int hp, int mhp, String status, String name, String type1, String type2, List<String> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
+	public Jolteon(int hp, int mhp, String status, String name, String type1, String type2, List<Attack> attacks, String bc, double atk, double def, double spAtk, double spDef, double spe, String info) {
 		super(hp, mhp, status, name, type1, type2, attacks, bc, atk, def, spAtk, spDef, spe);
 		setInfo(info);
 	}
@@ -18,99 +19,77 @@ public class Jolteon extends Pokemon{
 	//Performs the attack on the opposing Pokemon based on the index.
 	@Override
 	public void attack(Pokemon myPokemon, Pokemon other, int attackIndex) {
-		List<String> moves2 = new ArrayList<>();
-		List<String> attackTypes2 = new ArrayList<>();
-		List<Integer> basePowers2 = new ArrayList<>();
-		List<String> moveDescriptions2 = new ArrayList<>();
-		
-		//Creates attacks for this Pokemon to use.
-		moves2.add("Thunderbolt");
-		attackTypes2.add("Electric");
-		basePowers2.add(90);
-		moveDescriptions2.add("Electric Type, Special: Jolteon Thundebolt!");
-		Attack Thunderbolt = new Attack(moveDescriptions2.get(0), 1, 15, attackTypes2.get(0), basePowers2.get(0), "Special");
-		
-		moves2.add("Hyper Voice");
-		attackTypes2.add("Normal");
-		basePowers2.add(90);
-		moveDescriptions2.add("Normal Type, Special: Jolteon used Hyper Voice!");
-		Attack HyperVoice = new Attack(moveDescriptions2.get(1), 1, 10, attackTypes2.get(1), basePowers2.get(1), "Special");
-		
-		moves2.add("Shadow Ball");
-		attackTypes2.add("Ghost");
-		basePowers2.add(80);
-		moveDescriptions2.add("Ghost Type, Special: Jolteon used Shadow Ball!");
-		Attack ShadowBall = new Attack(moveDescriptions2.get(2), 1, 15, attackTypes2.get(2), basePowers2.get(2), "Special");
-		
-		moves2.add("Double Kick");
-		attackTypes2.add("Fighting");
-		basePowers2.add(60);
-		moveDescriptions2.add("Fighting Type, Physical: Jolteon used Double Kick!");
-		Attack DoubleKick = new Attack(moveDescriptions2.get(3), 1, 30, attackTypes2.get(3), basePowers2.get(3), "Physical");
-		
 		int damageDealt;
 		int remainingHP;
 		
 		if (attackIndex == 1) {
-			System.out.println(moveDescriptions2.get(0));
-			damageDealt = Thunderbolt.getDamage(Thunderbolt, myPokemon, other);
+			System.out.println("Jolteon used Thunderbolt!");
+			damageDealt = myPokemon.getAttacks().get(0).getDamage(myPokemon.getAttacks().get(0), myPokemon, other);
 			remainingHP = other.getHitPoints() - damageDealt;
 			other.setHitPoints(remainingHP);
-			if (Thunderbolt.getDamageMultiplier(attackTypes2.get(0), other) >= 2) {
+			if (myPokemon.getAttacks().get(0).getDamageMultiplier(myPokemon.getAttacks().get(0).getAttackType(), other) >= 2) {
 				System.out.println("It's super effective!");
 			}
-			else if (Thunderbolt.getDamageMultiplier(attackTypes2.get(0), other) == 0) {
+			else if (myPokemon.getAttacks().get(0).getDamageMultiplier(myPokemon.getAttacks().get(0).getAttackType(), other) == 0) {
 				System.out.println("The move had no effect.");
 			}
-			else if (Thunderbolt.getDamageMultiplier(attackTypes2.get(0), other) <= 0.5) {
+			else if (myPokemon.getAttacks().get(0).getDamageMultiplier(myPokemon.getAttacks().get(0).getAttackType(), other) <= 0.5) {
 				System.out.println("It's not very effective...");
 			}
 			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 		}
 		else if (attackIndex == 2) {
-			System.out.println(moveDescriptions2.get(1));
-			damageDealt = HyperVoice.getDamage(HyperVoice, myPokemon, other);
+			System.out.println("Jolton used Hyper Voice!");
+			damageDealt = myPokemon.getAttacks().get(1).getDamage(myPokemon.getAttacks().get(1), myPokemon, other);
 			remainingHP = other.getHitPoints() - damageDealt;
 			other.setHitPoints(remainingHP);
-			if (HyperVoice.getDamageMultiplier(attackTypes2.get(1), other) >= 2) {
+			if (myPokemon.getAttacks().get(1).getDamageMultiplier(myPokemon.getAttacks().get(1).getAttackType(), other) >= 2) {
 				System.out.println("It's super effective!");
 			}
-			else if (HyperVoice.getDamageMultiplier(attackTypes2.get(1), other) == 0) {
+			else if (myPokemon.getAttacks().get(1).getDamageMultiplier(myPokemon.getAttacks().get(1).getAttackType(), other) == 0) {
 				System.out.println("The move had no effect.");
 			}
-			else if (HyperVoice.getDamageMultiplier(attackTypes2.get(1), other) <= 0.5) {
+			else if (myPokemon.getAttacks().get(1).getDamageMultiplier(myPokemon.getAttacks().get(1).getAttackType(), other) <= 0.5) {
 				System.out.println("It's not very effective...");
 			}
 			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
 		}
 		else if (attackIndex == 3) {
-			System.out.println(moveDescriptions2.get(2));
-			damageDealt = ShadowBall.getDamage(ShadowBall, myPokemon, other);
+			System.out.println("Jolteon used Shadow Ball!");
+			damageDealt = myPokemon.getAttacks().get(2).getDamage(myPokemon.getAttacks().get(2), myPokemon, other);
 			remainingHP = other.getHitPoints() - damageDealt;
 			other.setHitPoints(remainingHP);
-			if (ShadowBall.getDamageMultiplier(attackTypes2.get(2), other) >= 2) {
+			if (myPokemon.getAttacks().get(2).getDamageMultiplier(myPokemon.getAttacks().get(2).getAttackType(), other) >= 2) {
 				System.out.println("It's super effective!");
 			}
-			else if (ShadowBall.getDamageMultiplier(attackTypes2.get(2), other) == 0) {
+			else if (myPokemon.getAttacks().get(2).getDamageMultiplier(myPokemon.getAttacks().get(2).getAttackType(), other) == 0) {
 				System.out.println("The move had no effect.");
 			}
-			else if (ShadowBall.getDamageMultiplier(attackTypes2.get(2), other) <= 0.5) {
+			else if (myPokemon.getAttacks().get(2).getDamageMultiplier(myPokemon.getAttacks().get(2).getAttackType(), other) <= 0.5) {
 				System.out.println("It's not very effective...");
 			}
 			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
+			if (damageDealt > 0 && other.getHitPoints() > 0) {
+				Random random = new Random();
+		        int spDEFDropChance = random.nextInt(5);
+		        if (spDEFDropChance == 0) {
+		        	other.setSpecialDefenseStat(other.getSpecialDefenseStat() * 0.75);
+		        	System.out.println(other.getName() + "'s Special Defense was droppeed by one stage!");
+		        }
+			}
 		}
 		else if (attackIndex == 4) {
-			System.out.println(moveDescriptions2.get(3));
-			damageDealt = DoubleKick.getDamage(DoubleKick, myPokemon, other);
+			System.out.println("Jolteon used Double Kick!");
+			damageDealt = myPokemon.getAttacks().get(3).getDamage(myPokemon.getAttacks().get(3), myPokemon, other);
 			remainingHP = other.getHitPoints() - damageDealt;
 			other.setHitPoints(remainingHP);
-			if (DoubleKick.getDamageMultiplier(attackTypes2.get(3), other) >= 2) {
+			if (myPokemon.getAttacks().get(3).getDamageMultiplier(myPokemon.getAttacks().get(3).getAttackType(), other) >= 2) {
 				System.out.println("It's super effective!");
 			}
-			else if (DoubleKick.getDamageMultiplier(attackTypes2.get(3), other) == 0) {
+			else if (myPokemon.getAttacks().get(3).getDamageMultiplier(myPokemon.getAttacks().get(3).getAttackType(), other) == 0) {
 				System.out.println("The move had no effect.");
 			}
-			else if (DoubleKick.getDamageMultiplier(attackTypes2.get(3), other) <= 0.5) {
+			else if (myPokemon.getAttacks().get(3).getDamageMultiplier(myPokemon.getAttacks().get(3).getAttackType(), other) <= 0.5) {
 				System.out.println("It's not very effective...");
 			}
 			System.out.println(other.getName() + " takes " + damageDealt + " damage!");
@@ -118,40 +97,10 @@ public class Jolteon extends Pokemon{
 	}
 	
 	public List<Integer> getDamages(Pokemon myPokemon, Pokemon other){
-		List<String> moves2 = new ArrayList<>();
-		List<String> attackTypes2 = new ArrayList<>();
-		List<Integer> basePowers2 = new ArrayList<>();
-		List<String> moveDescriptions2 = new ArrayList<>();
-		
-		//Creates attacks for this Pokemon to use.
-		moves2.add("Thunderbolt");
-		attackTypes2.add("Electric");
-		basePowers2.add(90);
-		moveDescriptions2.add("Electric Type, Special: Jolteon unleahes a strong electric blast to crash down on the opposing Pokemon!");
-		Attack Thunderbolt = new Attack(moveDescriptions2.get(0), 1, 15, attackTypes2.get(0), basePowers2.get(0), "Special");
-		
-		moves2.add("Hyper Voice");
-		attackTypes2.add("Normal");
-		basePowers2.add(90);
-		moveDescriptions2.add("Normal Type, Special: Jolteon lets loose a horribly echoing shout!");
-		Attack HyperVoice = new Attack(moveDescriptions2.get(1), 1, 10, attackTypes2.get(1), basePowers2.get(1), "Special");
-		
-		moves2.add("Shadow Ball");
-		attackTypes2.add("Ghost");
-		basePowers2.add(80);
-		moveDescriptions2.add("Ghost Type, Special: Jolteon hurls a shadowy blob at the opposing Pokemon!");
-		Attack ShadowBall = new Attack(moveDescriptions2.get(2), 1, 15, attackTypes2.get(2), basePowers2.get(2), "Special");
-		
-		moves2.add("Double Kick");
-		attackTypes2.add("Fighting");
-		basePowers2.add(60);
-		moveDescriptions2.add("Fighting Type, Physical: The opposing Pokemon is quickly kicked twice in succession by Jolteon!");
-		Attack DoubleKick = new Attack(moveDescriptions2.get(3), 1, 30, attackTypes2.get(3), basePowers2.get(3), "Physical");
-		
-		int damageDealt1 = Thunderbolt.getDamage(Thunderbolt, myPokemon, other);
-		int damageDealt2 = HyperVoice.getDamage(HyperVoice, myPokemon, other);
-		int damageDealt3 = ShadowBall.getDamage(ShadowBall, myPokemon, other);
-		int damageDealt4 = DoubleKick.getDamage(DoubleKick, myPokemon, other);
+		int damageDealt1 = myPokemon.getAttacks().get(0).getDamage(myPokemon.getAttacks().get(0), myPokemon, other);
+		int damageDealt2 = myPokemon.getAttacks().get(1).getDamage(myPokemon.getAttacks().get(1), myPokemon, other);
+		int damageDealt3 = myPokemon.getAttacks().get(2).getDamage(myPokemon.getAttacks().get(2), myPokemon, other);
+		int damageDealt4 = myPokemon.getAttacks().get(3).getDamage(myPokemon.getAttacks().get(3), myPokemon, other);
 		
 		List<Integer> damageList = new ArrayList<>();
 		damageList.add(damageDealt1);
