@@ -1,7 +1,7 @@
 # Verazzano-Capstone
 
 This is my capstone project for the Verazzano Honors program.
-The code is currently still just text based and a WIP but here is how to run the program if you want to test the current version:
+The code is a text based 6v6 Pokemon battle against a smart Computer Player that targets your Pokemon's weaknesses. Here is how to run the program if you want to play:
 
 1.) Download each of the included code files
 2.) Download a program to run java files
