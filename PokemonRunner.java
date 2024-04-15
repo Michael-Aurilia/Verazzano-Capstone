@@ -7,6 +7,7 @@ public class PokemonRunner {
 	public static void main(String args[]){
 		Scanner humanName = new Scanner(System.in);
 		Scanner computerName = new Scanner(System.in);
+		Scanner moreInfo = new Scanner(System.in);
 		Scanner initialChoice = new Scanner(System.in);
 		Scanner switchChoice = new Scanner(System.in);
 		
@@ -125,21 +126,53 @@ public class PokemonRunner {
 		
 		System.out.println("This is your team:" + "\n");
 		
-		System.out.println(SW + "\n");
-		System.out.println(J + "\n");
-		System.out.println(ST + "\n");
-		System.out.println(A + "\n");
-		System.out.println(C + "\n");
-		System.out.println(ME + "\n");
+		System.out.println("1. " + SW.getName());
+		System.out.println("2. " + J.getName());
+		System.out.println("3. " + ST.getName());
+		System.out.println("4. " + A.getName());
+		System.out.println("5. " + C.getName());
+		System.out.println("6. " + ME.getName());
 		
 		System.out.println("And this is the computers team that they will send out in this order:" + "\n");
 		
-		System.out.println(SP + "\n");
-		System.out.println(MI + "\n");
-		System.out.println(L + "\n");
-		System.out.println(T + "\n");
-		System.out.println(R + "\n");
-		System.out.println(G + "\n");
+		System.out.println("1. " + SP.getName());
+		System.out.println("2. " + MI.getName());
+		System.out.println("3. " + L.getName());
+		System.out.println("4. " + T.getName());
+		System.out.println("5. " + R.getName());
+		System.out.println("6. " + G.getName());
+		
+		while(true) {
+			System.out.println("Do you want more information on each of the Pokemon?(Y/N)");
+			String infoChoice = moreInfo.next();
+			if (infoChoice == "Y") {
+				System.out.println("This is your team:" + "\n");
+				
+				System.out.println("1. " + SW + "\n");
+				System.out.println("2. " + J + "\n");
+				System.out.println("3. " + ST + "\n");
+				System.out.println("4. " + A + "\n");
+				System.out.println("5. " + C + "\n");
+				System.out.println("6. " + ME + "\n");
+				
+				System.out.println("And this is the computers team that they will send out in this order:" + "\n");
+				
+				System.out.println("1. " + SP + "\n");
+				System.out.println("2. " + MI + "\n");
+				System.out.println("3. " + L + "\n");
+				System.out.println("4. " + T + "\n");
+				System.out.println("5. " + R + "\n");
+				System.out.println("6. " + G + "\n");
+				
+				break;
+			}
+			else if (infoChoice == "N") {
+				break;
+			}
+			else {
+				System.out.println("Invalid option");
+			}
+		}
 		
 		int firstChoice;
 		while (true) {
@@ -207,7 +240,7 @@ public class PokemonRunner {
 			int humanChoice = humanPlayer.humanChoice(humanTeam.get(humanCurrentPokemon), computerTeam.get(computerCurrentPokemon), humanTeam);
 			
 			//3.)
-			if (humanChoice == 2) {
+			if (humanChoice == 0) {
 				while (true) {
 					System.out.println("Choose a Pokemon to switch to:");
 				    for (int i = 0; i < humanTeam.size(); i++) {
@@ -285,7 +318,7 @@ public class PokemonRunner {
 			
 			//4.)
 			if (computerChoice == 1) {
-				computerPlayer.computerAction(1, computerTeam.get(computerCurrentPokemon), humanTeam.get(humanCurrentPokemon), computerPotions);
+				computerPlayer.computerAction(1, computerTeam.get(computerCurrentPokemon), humanTeam.get(humanCurrentPokemon), computerPotions, computerTeam);
 			}
 			
 			//5.)
@@ -469,7 +502,6 @@ public class PokemonRunner {
 				double tempMaxHP = humanTeam.get(humanCurrentPokemon).getMaxHitPoints();
 				double burnDamage = tempMaxHP * (1.0/16.0);
 				int burn = (int)(burnDamage + .5);
-				System.out.println(burn);
 				humanTeam.get(humanCurrentPokemon).setHitPoints(humanTeam.get(humanCurrentPokemon).getHitPoints() - burn);
 				System.out.println(humanTeam.get(humanCurrentPokemon).getName() + " was hurt by its burn!");
 				
@@ -680,6 +712,7 @@ public class PokemonRunner {
 		humanName.close();
 		computerName.close();
 		switchChoice.close();
+		moreInfo.close();
 	}
 
 public static void humanAttack(HumanPlayer humanPlayer, int humanChoice, List<Pokemon> humanTeam, List<Pokemon> computerTeam, int humanCurrentPokemon, int computerCurrentPokemon, 
@@ -690,6 +723,6 @@ public static void humanAttack(HumanPlayer humanPlayer, int humanChoice, List<Po
 public static void computerAttack(ComputerPlayer computerPlayer, int computerChoice, List<Pokemon> humanTeam, List<Pokemon> computerTeam, int humanCurrentPokemon, 
 		int computerCurrentPokemon, int SOTHumanCurrentHP, Item computerPotions) {
 	
-	computerPlayer.computerAction(computerChoice, computerTeam.get(computerCurrentPokemon), humanTeam.get(humanCurrentPokemon), computerPotions);
+	computerPlayer.computerAction(computerChoice, computerTeam.get(computerCurrentPokemon), humanTeam.get(humanCurrentPokemon), computerPotions, computerTeam);
 }
 }
