@@ -1,4 +1,3 @@
-//This file needs some changes: Add new menu for multiple items, Make multiple itemCounts for each different item the player can use
 import java.util.Scanner;
 import java.util.List;
 
@@ -6,6 +5,7 @@ public class HumanPlayer extends Player{
 	private int potionCount;
 	Scanner turnChoice = new Scanner(System.in);
 	Scanner moveChoice = new Scanner(System.in);
+	Scanner itemChoice = new Scanner(System.in);
 	private Pokemon myPokemon;
 	
 	public HumanPlayer(Pokemon myPokemon) {
@@ -24,15 +24,11 @@ public class HumanPlayer extends Player{
 
 	    // Attack
 	    if (answerForTurnChoice == 1) {
-	        return selectAttack(myPokemon);
+	        return selectAttack(myPokemon, other, team);
 	    }
 
 	    // Item
 	    else if (answerForTurnChoice == 2) {
-	        if (getPotionCount() == 0) {
-	        	System.out.println("You have no potions left!");
-	        	return humanChoice(myPokemon, other, team);
-	        }
 	    	return 1;
 	    }
 
@@ -51,7 +47,7 @@ public class HumanPlayer extends Player{
 	    	
 	    	else {
 	    		faintedCounter = 0;
-	    		return 2;
+	    		return 0;
 	    	}
 	    }
 
@@ -63,7 +59,7 @@ public class HumanPlayer extends Player{
 	    }
 	}
 
-	private int selectAttack(Pokemon myPokemon) {
+	private int selectAttack(Pokemon myPokemon, Pokemon other, List<Pokemon> team) {
 	    //If the user has no usable moves, selecting attack gives nothing back
 		if (myPokemon.getAttacks().get(0).getmovePowerPoints() <= 0 && myPokemon.getAttacks().get(1).getmovePowerPoints() <= 0 
 	    		&& myPokemon.getAttacks().get(2).getmovePowerPoints() <= 0 && myPokemon.getAttacks().get(3).getmovePowerPoints() <= 0) {
@@ -72,8 +68,19 @@ public class HumanPlayer extends Player{
 		
 		// Creates scanners to ask the player which attack they want to use and performs it based on their input.
 		System.out.println("Which attack do you want to use?");
-	    System.out.println(myPokemon.getAttacks());
-	    System.out.print("Enter 1, 2, 3, or 4: ");
+	    System.out.println("1. " + myPokemon.getAttacks().get(0).getAttackName());
+	    System.out.println(myPokemon.getAttacks().get(0).getAttackType() + "\n");
+	    
+	    System.out.println("2. " + myPokemon.getAttacks().get(1).getAttackName());
+	    System.out.println(myPokemon.getAttacks().get(1).getAttackType() + "\n");
+	    
+	    System.out.println("3. " + myPokemon.getAttacks().get(2).getAttackName());
+	    System.out.println(myPokemon.getAttacks().get(2).getAttackType() + "\n");
+	    
+	    System.out.println("4. " + myPokemon.getAttacks().get(3).getAttackName());
+	    System.out.println(myPokemon.getAttacks().get(3).getAttackType() + "\n");
+	    
+	    System.out.print("Enter 1, 2, 3, 4: (5 For more info on the moves, 6 to go back)");
 	    int answerForMoveChoice = moveChoice.nextInt();
 
 	    if (answerForMoveChoice >= 1 && answerForMoveChoice <= 4 && myPokemon.getAttacks().get(answerForMoveChoice - 1).getmovePowerPoints() > 0) {
@@ -83,19 +90,26 @@ public class HumanPlayer extends Player{
 	    	// Throws an error if a move is out of pp.
 	        System.out.println("The move you selected is out of pp. Select a different one.");
 	        // Recursive call
-	        return selectAttack(myPokemon);
+	        return selectAttack(myPokemon, other, team);
+	    }
+	    else if (answerForMoveChoice == 5) {
+	    	System.out.println(myPokemon.getAttacks());
+	    	return selectAttack(myPokemon, other, team);
+	    }
+	    else if (answerForMoveChoice == 6) {
+	    	return humanChoice(myPokemon, other, team);
 	    }
 	    else {
 	        // Throws an error if an invalid input is given.
 	        System.out.println("Invalid input given. Please type either 1, 2, 3, or 4.");
 	        // Recursive call
-	        return selectAttack(myPokemon);
+	        return selectAttack(myPokemon, other, team);
 	    }
 	}
 	
 	public void humanAction(int choice, Pokemon myPokemon, Pokemon other, List<Pokemon> team, Item potion) {
 		if (choice == 1) {
-			potion.useItem(myPokemon, myPokemon.getMaxHitPoints());
+			potion.useItem(myPokemon, team);
 			setPotionCount(getPotionCount() - 1);
 		}
 		
