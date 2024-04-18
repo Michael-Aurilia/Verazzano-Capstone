@@ -143,9 +143,9 @@ public class PokemonRunner {
 		System.out.println("6. " + G.getName());
 		
 		while(true) {
-			System.out.println("Do you want more information on each of the Pokemon?(Y/N)");
-			String infoChoice = moreInfo.next();
-			if (infoChoice == "Y") {
+			System.out.println("Do you want more information on each of the Pokemon?(1 yes, 2 no)");
+			int infoChoice = moreInfo.nextInt();
+			if (infoChoice == 1) {
 				System.out.println("This is your team:" + "\n");
 				
 				System.out.println("1. " + SW + "\n");
@@ -166,7 +166,7 @@ public class PokemonRunner {
 				
 				break;
 			}
-			else if (infoChoice == "N") {
+			else if (infoChoice == 2) {
 				break;
 			}
 			else {
