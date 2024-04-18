@@ -69,42 +69,43 @@ public class HumanPlayer extends Player{
 		// Creates scanners to ask the player which attack they want to use and performs it based on their input.
 		System.out.println("Which attack do you want to use?");
 	    System.out.println("1. " + myPokemon.getAttacks().get(0).getAttackName());
-	    System.out.println(myPokemon.getAttacks().get(0).getAttackType() + "\n");
+	    System.out.println(myPokemon.getAttacks().get(0).getAttackType());
+	    System.out.println(myPokemon.getAttacks().get(0).getmovePowerPoints() + "\n");
 	    
 	    System.out.println("2. " + myPokemon.getAttacks().get(1).getAttackName());
-	    System.out.println(myPokemon.getAttacks().get(1).getAttackType() + "\n");
+	    System.out.println(myPokemon.getAttacks().get(1).getAttackType());
+	    System.out.println(myPokemon.getAttacks().get(1).getmovePowerPoints() + "\n");
 	    
 	    System.out.println("3. " + myPokemon.getAttacks().get(2).getAttackName());
-	    System.out.println(myPokemon.getAttacks().get(2).getAttackType() + "\n");
+	    System.out.println(myPokemon.getAttacks().get(2).getAttackType());
+	    System.out.println(myPokemon.getAttacks().get(2).getmovePowerPoints() + "\n");
 	    
 	    System.out.println("4. " + myPokemon.getAttacks().get(3).getAttackName());
-	    System.out.println(myPokemon.getAttacks().get(3).getAttackType() + "\n");
+	    System.out.println(myPokemon.getAttacks().get(3).getAttackType());
+	    System.out.println(myPokemon.getAttacks().get(3).getmovePowerPoints() + "\n");
 	    
-	    System.out.print("Enter 1, 2, 3, 4: (5 For more info on the moves, 6 to go back)");
+	    System.out.print("Enter 1, 2, 3, 4: ");
 	    int answerForMoveChoice = moveChoice.nextInt();
 
-	    if (answerForMoveChoice >= 1 && answerForMoveChoice <= 4 && myPokemon.getAttacks().get(answerForMoveChoice - 1).getmovePowerPoints() > 0) {
-	    	return answerForMoveChoice + 2; // Convert move choice to corresponding action code
+	    if (answerForMoveChoice >= 1 && answerForMoveChoice <= 4) {
+	    	if( myPokemon.getAttacks().get(answerForMoveChoice - 1).getmovePowerPoints() > 0) {
+	    		return answerForMoveChoice + 2; // Convert move choice to corresponding action code
+	    }
+	    	else if (myPokemon.getAttacks().get(answerForMoveChoice - 1).getmovePowerPoints() <= 0) {
+		    	// Throws an error if a move is out of pp.
+		        System.out.println("The move you selected is out of pp. Select a different one.");
+		        // Recursive call
+		        return selectAttack(myPokemon, other, team);
+		    }
 	    } 
-	    else if (myPokemon.getAttacks().get(answerForMoveChoice - 1).getmovePowerPoints() <= 0) {
-	    	// Throws an error if a move is out of pp.
-	        System.out.println("The move you selected is out of pp. Select a different one.");
-	        // Recursive call
-	        return selectAttack(myPokemon, other, team);
-	    }
-	    else if (answerForMoveChoice == 5) {
-	    	System.out.println(myPokemon.getAttacks());
-	    	return selectAttack(myPokemon, other, team);
-	    }
-	    else if (answerForMoveChoice == 6) {
-	    	return humanChoice(myPokemon, other, team);
-	    }
+	    
 	    else {
 	        // Throws an error if an invalid input is given.
 	        System.out.println("Invalid input given. Please type either 1, 2, 3, or 4.");
 	        // Recursive call
 	        return selectAttack(myPokemon, other, team);
 	    }
+	    return 2;
 	}
 	
 	public void humanAction(int choice, Pokemon myPokemon, Pokemon other, List<Pokemon> team, Item potion) {
